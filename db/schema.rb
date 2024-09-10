@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_10_065641) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_11_003828) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,7 +44,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_10_065641) do
   create_table "travels", force: :cascade do |t|
     t.bigint "plan_id", null: false
     t.bigint "user_id", null: false
-    t.string "status"
+    t.string "status", default: "solicitado"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["plan_id"], name: "index_travels_on_plan_id"
@@ -62,7 +62,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_10_065641) do
     t.string "first_name"
     t.string "last_name"
     t.string "address"
-    t.string "birth_date"
+    t.date "birth_date"
     t.string "dni"
     t.string "occupation"
     t.string "phone"
