@@ -9,4 +9,27 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  # plans
+  get 'plans/my_plans', to: 'plans#my_plans', as: :my_plans
+  resources :plans do
+    resources :travels, shallow: true do
+      member do
+        patch :status
+      end
+    end
+  end
+  # patch 'plans/:id/travels/status', to: 'travels#change_status'
+  # travels
+  get 'travels/my_travels', to: 'travels#my_travels'
+  # Reviews routes
+  resources :travels, except: %i[new create] do
+    resources :reviews, only: %i[new create]
+  end
+
+  resources :users do
+    resources :reviews, only: %i[index show]
+  end
+
+  resources :reviews, only: %i[index edit update destroy]
 end
