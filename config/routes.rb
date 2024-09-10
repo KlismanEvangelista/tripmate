@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+<<<<<<< HEAD
+=======
+=begin
+  get 'plans/index'
+  get 'plans/new'
+  get 'plans/create'
+  get 'plans/show'
+  get 'plans/edit'
+  get 'plans/update'
+  get 'plans/destroy'
+=end
+>>>>>>> 9222a51 (to review)
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
