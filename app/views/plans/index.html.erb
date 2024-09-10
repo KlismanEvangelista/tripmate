@@ -22,7 +22,7 @@
         <%= plan.location %>
       </p>
       <div class="d-flex gap-2">
-        <%= link_to 'Editar', edit_plan_path(plan), class: "btn btn-primary" %>
+        <%= link_to 'Ver', plan_path(plan), class: "btn btn-primary" %>
         <%= link_to 'Eliminar', plan_path(plan), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
       </div>
     </div>
