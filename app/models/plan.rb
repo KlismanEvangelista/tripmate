@@ -9,9 +9,9 @@ class Plan < ApplicationRecord
   ]
 
   validates :name, :description, :location, :travelers_quantity, :start_date, :end_date, :start_point, presence: true
-  validates :start_date_cannot_be_in_the_past
-  validates :end_date_cannot_be_in_the_past
   validates :departament, inclusion: { in: DEPARTAMENTS, message: "%{value} no es un departamento válido" }
+  validate :start_date_cannot_be_in_the_past
+  validate :end_date_cannot_be_in_the_past
 
   private
 
