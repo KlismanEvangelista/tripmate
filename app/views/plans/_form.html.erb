@@ -1,0 +1,20 @@
+<%= simple_form_for(@plan) do |f| %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :location %>
+    <%= f.input :travelers_quantity %>
+    <%= f.input :start_date %>
+    <%= f.input :end_date %>
+    <%= f.input :departament %>
+    <%= f.input :start_point %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-primary" %>
+    <%= link_to 'Volver a planes', plans_path, class: "btn btn-success" %>
+  </div>
+
+  <br>
+<% end %>
