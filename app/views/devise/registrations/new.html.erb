@@ -1,73 +1,150 @@
-<h2>Sign up</h2>
-
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-   <div>
-        <%= f.input :first_name,
-                    required: true,
-                    input_html: { placeholder: "Nombres", class: "form-control" },
-                    label: false %>
-      </div>
-      <div>
-        <%= f.input :last_name,
-                    required: true,
-                    input_html: { placeholder: "Apellidos", class: "form-control" },
-                    label: false %>
+<div class="login-container d-flex align-items-center justify-content-center">
+  <div class="row login-box">
+    <div class="col-lg-6 d-none d-lg-block p-0">
+      <div class="login-image">
+        <%= image_tag 'https://i.pinimg.com/564x/80/ec/9f/80ec9f444ce7d62121f161662f6d43fb.jpg', class: 'img-fluid' %>
+        <div class="slogan">
+          <h1>TripMate</h1>
+          <p>«Un viaje se vive 3 veces: cuando lo soñamos, cuando lo vivimos y cuando lo recordamos.»</p>
+        </div>
       </div>
     </div>
-    <div>
-      <%= f.input :phone,
-                  input_html: { placeholder: "Número de teléfono", class: "form-control" },
-                  label: false %>
-    </div>
-     <div class="form-group">
-      <%= f.input :email,
-                  required: true,
-                  autofocus: true,
-                  input_html: { autocomplete: "email", placeholder: "Correo electrónico", class: "form-control" },
-                  label: false %>
-    </div>
-    <div>
-      <%= f.input :birth_date,
-                  input_html: { placeholder: "Fecha de nacimiento", class: "form-control" },
-                  label: false %>
-    </div>
-    <div>
-      <%= f.input :occupation,
-                  input_html: { placeholder: "Ocupación", class: "form-control" },
-                  label: false %>
-    </div>
-    <div>
-      <%= f.input :dni,
-                  input_html: { placeholder: "DNI", class: "form-control" },
-                  label: false %>
-    </div>
-    <div>
-      <%= f.input :address,
-                  input_html: { placeholder: "Dirección", class: "form-control" },
-                  label: false %>
-    </div>
-     <div class="form-group">
-      <%= f.input :password,
-                  required: true,
-                  hint: ("#{@minimum_password_length} caracteres mínimo" if @minimum_password_length),
-                  input_html: { autocomplete: "new-password", placeholder: "Contraseña", class: "form-control" },
-                  label: false %>
-    </div>
-    <div class="form-group">
-      <%= f.input :password_confirmation,
-                  required: true,
-                  input_html: { autocomplete: "new-password", placeholder: "Confirmar contraseña", class: "form-control" },
-                  label: false %>
-    </div>
 
+    <div class="col-lg-6 col-sm-12 login-form">
+      <div class="login-form-content">
+       <%= link_to "/", class: "container-logo" do %>
+          <%= image_tag "logo_tripmate.png", class: "logo" %>
+        <% end %>
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "form-horizontal", id: "login-form" }) do |f| %>
+
+            <!-- Sección de Datos Personales -->
+            <div id="personal-info" class="form-section">
+              <div class="row">
+                <div class="col-6">
+                  <%= f.input :first_name,
+                              required: true,
+                              input_html: { placeholder: "Nombres", class: "form-control", id: "first_name" },
+                              label: false %>
+                </div>
+                <div class="col-6">
+                  <%= f.input :last_name,
+                              required: true,
+                              input_html: { placeholder: "Apellidos", class: "form-control", id: "last_name" },
+                              label: false %>
+                </div>
+              </div>
+              <div>
+                <%= f.input :phone,
+                            required: true,
+                            input_html: { placeholder: "Número de teléfono", class: "form-control", id: "phone" },
+                            label: false %>
+              </div>
+              <div>
+                <%= f.input :email,
+                            required: true,
+                            autofocus: true,
+                            input_html: { autocomplete: "email", placeholder: "Correo electrónico", class: "form-control", id: "email" },
+                            label: false %>
+              </div>
+              <div class="form-group">
+                <%= f.input :password,
+                            required: true,
+                            hint: ("#{@minimum_password_length} caracteres mínimo" if @minimum_password_length),
+                            input_html: { autocomplete: "new-password", placeholder: "Contraseña", class: "form-control", id: "password" },
+                            label: false %>
+              </div>
+              <div class="form-group">
+                <%= f.input :password_confirmation,
+                            required: true,
+                            input_html: { autocomplete: "new-password", placeholder: "Confirmar contraseña", class: "form-control", id: "password_confirmation" },
+                            label: false %>
+              </div>
+              <div class="form-actions text-center">
+                <button type="button" class="btn btn-primary btn-block w-100 mb-3" id="next-button">Siguiente</button>
+              </div>
+            </div>
+
+            <!-- Sección de Detalles Adicionales -->
+            <div id="additional-info" class="form-section d-none">
+              <p>Detalles Adicionales</p>
+              <div>
+                <%= f.input :dni,
+                            required: true,
+                            input_html: { placeholder: "DNI", class: "form-control", id: "dni" },
+                            label: false %>
+              </div>
+              <div>
+                <%= f.input :occupation,
+                            required: true,
+                            input_html: { placeholder: "Ocupación", class: "form-control", id: "occupation" },
+                            label: false %>
+              </div>
+              <div>
+                <%= f.input :address,
+                            required: true,
+                            input_html: { placeholder: "Dirección", class: "form-control", id: "address" },
+                            label: false %>
+              </div>
+              <p>Fecha de nacimiento</p>
+              <div>
+                  <%= f.input :birth_date, as: :date,
+                              start_year: Date.today.year - 40,
+                              end_year: Date.today.year - 18,
+                              order: [:day, :month, :year],
+                              input_html: { class: "form-control", id: "birth_date" },
+                              label: false %>
+              </div>
+              <div class="form-actions text-center">
+                <%= f.button :submit, "Registrarse", class: "btn btn-primary btn-block w-100 mb-3", id: "submit-button" %>
+              </div>
+            </div>
+        <% end %>
+
+        <div class="register-now text-center">
+          <p>Ya tienes una cuenta? <%= link_to 'Inicia sesión', new_session_path(:user) %></p>
+        </div>
+
+      </div>
+    </div>
   </div>
+</div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
+<script>
+  document.getElementById('next-button').addEventListener('click', function() {
+    let isValid = true;
+    const requiredFieldsPersonal = document.querySelectorAll('#personal-info .form-control[required]');
 
-<%= render "devise/shared/links" %>
+    requiredFieldsPersonal.forEach(field => {
+      if (!field.value.trim()) {
+        isValid = false;
+        field.classList.add('is-invalid');
+      } else {
+        field.classList.remove('is-invalid');
+      }
+    });
+
+    if (isValid) {
+      document.getElementById('personal-info').classList.add('d-none');
+      document.getElementById('additional-info').classList.remove('d-none');
+    }
+  });
+
+  document.getElementById('login-form').addEventListener('submit', function(event) {
+    let isValid = true;
+    const requiredFieldsAdditional = document.querySelectorAll('#additional-info .form-control[required]');
+
+    requiredFieldsAdditional.forEach(field => {
+      if (!field.value.trim()) {
+        isValid = false;
+        field.classList.add('is-invalid');
+      } else {
+        field.classList.remove('is-invalid');
+      }
+    });
+
+    if (!isValid) {
+      event.preventDefault();
+      return
+    }
+  });
+</script>
