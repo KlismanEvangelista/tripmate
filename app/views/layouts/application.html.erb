@@ -11,10 +11,10 @@
     <!--bootstrap-->
   </head>
 
-  <body>
+  <body class="<%= 'background-deg' if (controller_name == 'sessions' && action_name == 'new') || (controller_name == 'registrations' && action_name == 'new') %>">
     <%= render "shared/navbar" %>
+    <%= yield %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= yield %>
   </body>
 </html>

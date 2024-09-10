@@ -1,13 +1,4 @@
 Rails.application.routes.draw do
-=begin
-  get 'plans/index'
-  get 'plans/new'
-  get 'plans/create'
-  get 'plans/show'
-  get 'plans/edit'
-  get 'plans/update'
-  get 'plans/destroy'
-=end
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -20,17 +11,14 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   # plans
-  get 'plans/my_plans', to: 'plans#my_plans', as: :my_plans
+  get 'my_plans', to: 'plans#my_plans', as: :my_plans
   resources :plans do
-    resources :travels, shallow: true do
-      member do
-        patch :status
-      end
-    end
+    resources :travels, only: %i[create]
   end
-  # patch 'plans/:id/travels/status', to: 'travels#change_status'
+  # patch 'plans/:id/travels/', to: 'travels#rejected'
   # travels
-  get 'travels/my_travels', to: 'travels#my_travels'
+  get 'my_requests', to: 'travels#my_requests', as: :my_requests
+  get 'my_travels', to: 'travels#my_travels', as: :my_travels
   # Reviews routes
   resources :travels, except: %i[new create] do
     resources :reviews, only: %i[new create]

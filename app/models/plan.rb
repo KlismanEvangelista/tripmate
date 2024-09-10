@@ -1,5 +1,6 @@
 class Plan < ApplicationRecord
   belongs_to :user
+  has_many :travels
 
   DEPARTAMENTS = [
     'Amazonas', 'Áncash', 'Apurímac', 'Arequipa', 'Ayacucho', 'Cajamarca',
