@@ -44,7 +44,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_10_065641) do
   create_table "travels", force: :cascade do |t|
     t.bigint "plan_id", null: false
     t.bigint "user_id", null: false
-    t.string "status"
+    t.string "status", default: "solicitado"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["plan_id"], name: "index_travels_on_plan_id"

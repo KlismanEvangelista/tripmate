@@ -3,7 +3,7 @@ class CreateTravels < ActiveRecord::Migration[7.1]
     create_table :travels do |t|
       t.references :plan, null: false, foreign_key: true
       t.references :user, null: false, foreign_key: true
-      t.string :status
+      t.string :status, default: "solicitado"
 
       t.timestamps
     end
