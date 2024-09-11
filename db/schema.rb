@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_11_003828) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_11_162259) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -38,13 +38,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_003828) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "travel_id", null: false
+    t.index ["travel_id"], name: "index_reviews_on_travel_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "travels", force: :cascade do |t|
     t.bigint "plan_id", null: false
     t.bigint "user_id", null: false
-    t.string "status", default: "solicitado"
+    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["plan_id"], name: "index_travels_on_plan_id"
@@ -71,6 +73,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_003828) do
   end
 
   add_foreign_key "plans", "users"
+  add_foreign_key "reviews", "travels"
   add_foreign_key "reviews", "users"
   add_foreign_key "travels", "plans"
   add_foreign_key "travels", "users"

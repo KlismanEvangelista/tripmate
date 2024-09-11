@@ -7,10 +7,11 @@ class ReviewsController < ApplicationController
   end
 
   def index
-    # if query
+    # reviews of a user to improve
     if params[:user_id].present?
       @reviews = @user.reviews
     else
+      # reviews made by the current user
       @reviews = Review.where(user_id: current_user)
     end
   end
