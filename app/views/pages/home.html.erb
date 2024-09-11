@@ -1,2 +1,46 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div id="home">
+  <div class="hero-section">
+    <video autoplay loop muted>
+      <source src="<%= asset_path('video.mp4') %>" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <div class="overlay"></div>
+
+    <div class="container content d-flex align-items-start flex-column">
+      <div>
+        <h1 class="bolder">Explora</h1>
+        <p class="subtitle">Explora y conecta con personas que comparten tus mismos destinos y experiencias</p>
+        <%= link_to 'Conoce más',  new_registration_path(:user), class: 'btn btn-outline btn-xl' %>
+      </div>
+      <div class="about">
+        <h4 class="bolder">NOSOTROS</h4>
+        <p>TripMate es una aplicación que conecta a personas que comparten destinos y experiencias similares. Descubre eventos locales, únete a grupos de interés y conoce a otros viajeros en tu área. ¡Explora y conecta con TripMate!.</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="departament">
+    <div class="container">
+      <h3 class="title text-center">Destinos</h3>
+      <p class="subtitle text-center">Selecciona un departamento y descubre lo que tenemos para ti ...</p>
+      <div class="row cards">
+        <% @locations.each do |location| %>
+          <div class="col-12  col-md-4 mb-4">
+            <div class="card-departament">
+              <img src="<%= asset_path("departaments/#{location['image']}") %>" class="card-img-top" alt="<%= location['name'] %>">
+              <div class="card-body">
+                <h5 class="card-title"><%= location['name'] %></h5>
+                <span class="badge bg-dark"><%= location['tours'] %> tours</span>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <a href="#" data-controller="scroll" data-scroll-target="scrollButton" class="scroll-to-top">
+    <i class="fa fa-arrow-up"></i>
+  </a>
+</div>

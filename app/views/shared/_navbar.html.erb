@@ -1,15 +1,16 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon <%= 'd-none' if (controller_name == 'sessions' && action_name == 'new') || (controller_name == 'registrations' && action_name == 'new') %>">
-  <div class="container container-fluid">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top
+    <%= 'd-none' if (controller_name == 'sessions' && action_name == 'new') || (controller_name == 'registrations' && action_name == 'new') %>"
+    data-controller="navbar" data-navbar-target="navbar">
+  <div class="container">
     <%= link_to "#", class: "navbar-brand" do %>
       <%= image_tag "logo_tripmate.png" %>
     <% end %>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
         <% if user_signed_in? %>
           <li class="nav-item active">
             <%= link_to "Home", "#", class: "nav-link" %>
@@ -29,10 +30,13 @@
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+            <%= link_to "Inicia Sesión", new_user_session_path, class: "btn btn-md me-2" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Registrate", new_registration_path(:user), class: "btn btn-outline  btn-md" %>
           </li>
         <% end %>
       </ul>
     </div>
   </div>
-</div>
+</nav>
