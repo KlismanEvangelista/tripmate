@@ -1,0 +1,24 @@
+<div class="container">
+  <h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
+  <% if @user == current_user %>
+    <div class="user-info">
+      <p><i class="fa-solid fa-address-card"></i>&nbsp<%= @user.dni %></p>
+      <p><i class="fa-solid fa-cake-candles"></i>&nbsp <%= @user.birth_date %></p>
+      <p><i class="fa-solid fa-briefcase"></i>&nbsp<%= @user.occupation %></p>
+      <p><i class="fa-solid fa-envelope"></i>&nbsp<%= @user.email %></p>
+      <p><i class="fa-solid fa-mobile"></i>&nbsp<%= @user.phone %></p>
+    </div>
+  <% end %>
+  <div class="user-raiting">
+    <h4>Rating </h4>
+    <div class="raiting">
+      <% @reviews.each do |review| %>
+      <%= review.title %>
+      <%= review.rating %>
+      <% link_to review_path(review) do %>
+        <i class="fa-solid fa-eye"></i>
+    <% end %>
+  <% end %>
+    </div>
+  </div>
+</div>

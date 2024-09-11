@@ -1,0 +1,10 @@
+<%= simple_form_for [travel, review] do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :title %>
+  <%= f.input :comment, as: :text %>
+  <%= f.input :rating, input_html: {
+    min: 0,
+    máx: 5
+     } %>
+  <%= f.submit 'Crear', class: 'btn btn-dark' %>
+<% end %>

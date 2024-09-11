@@ -3,12 +3,18 @@
 
 <div class="container">
   <div class="d-flex justify-content-end">
-    <%= link_to 'Agregar plan', new_plan_path, class: "btn btn-success" %>
+    <%= link_to 'Agregar plan', new_plan_path, class: "btn btn-success me-2" %>
+    <%= link_to 'Mis planes', my_plans_path(@plan), class: "btn btn-primary" %>
   </div>
   <br>
   <br>
   <% @plans.each do |plan| %>
     <div>
+      <% if plan.photos.attached? %>
+        <%= cl_image_tag plan.photos.first.key, height: 300, width: 400, crop: :fill %>
+      <% else %>
+        <%= image_tag "sinimagen.jpg", height: 300, width: 400 %>
+      <% end %>
       <p>
         <strong>Name:</strong>
         <%= plan.name %>
@@ -23,7 +29,7 @@
       </p>
       <div class="d-flex gap-2">
         <%= link_to 'Ver', plan_path(plan), class: "btn btn-primary" %>
-        <%= link_to 'Eliminar', plan_path(plan), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
+        <%#= link_to 'Eliminar', plan_path(plan), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
       </div>
     </div>
     <br>

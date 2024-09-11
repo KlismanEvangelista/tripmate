@@ -1,3 +1,32 @@
 <h1>Travels#my_travels</h1>
 <p>Find me in app/views/travels/my_travels.html.erb</p>
-<%= @my_travels.size %>
+
+  <% @my_travels.each do |t| %>
+    <div>
+      <p>
+        <strong>Nombre del plan:</strong>
+        <%= t.plan.name %>
+      </p>
+      <p>
+        <strong>description del plan:</strong>
+        <%= t.plan.description %>
+      </p>
+      <p>
+        <strong>Nombre del creador del plan:</strong>
+        <%= t.plan.user.first_name %>
+      </p>
+      <p>
+        <strong>Nombre del creador del plan:</strong>
+        <%= t.plan.user.dni %>
+      </p>
+      <p>
+        <strong>location del plan:</strong>
+        <%= t.plan.location %>
+      </p>
+      <p>
+        <strong>estado de la solicitud:</strong>
+        <%= t.status %>
+      </p>
+    </div>
+    <br>
+  <% end %>
