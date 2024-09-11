@@ -1,0 +1,14 @@
+<div class="cotainer">
+  <h1>Edit</h1>
+  <%= simple_form_for [@review] do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :title %>
+  <%= f.input :comment, as: :text %>
+  <%= f.input :rating, input_html: {
+    min: 0,
+    máx: 5
+     } %>
+  <%= f.submit 'Save', class: 'btn btn-dark' %>
+<% end %>
+
+</div>
