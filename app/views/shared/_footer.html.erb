@@ -1,0 +1,31 @@
+<footer class="footer py-4 bg-dark text-light">
+  <div class="container">
+    <div class="d-flex">
+      <div class="mb-4 flex-grow-1">
+        <div class="d-flex flex-column">
+          <%= link_to "/", class: "navbar-brand" do %>
+            <%= image_tag "logo_tripmate.png", height: "auto", width: 150%>
+          <% end %>
+          <small class="mt-2">“Conecta, comparte y explora con TripMate.”</small>
+        </div>
+      </div>
+      <div class="mb-4">
+        <h5 class="fw-bold">Síguenos en:</h5>
+        <ul class="list-inline mt-2">
+          <li class="list-inline-item">
+            <a href="https://facebook.com" target="_blank" class="text-light"><i class="fa-brands fa-facebook-f"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="https://twitter.com" target="_blank" class="text-light"><i class="fa-brands fa-twitter"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="https://instagram.com" target="_blank" class="text-light"><i class="fa-brands fa-instagram"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center">
+      <small class="mb-0">&copy; <%= Time.current.year %> TripMate ❤ Todos los derechos reservados.</small>
+    </div>
+  </div>
+</footer>

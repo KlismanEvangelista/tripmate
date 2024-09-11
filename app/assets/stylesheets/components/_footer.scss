@@ -1,0 +1,13 @@
+.footer {
+  margin-top: 48px;
+  .list-inline-item a{
+    display: flex;
+    padding: 10px 16px;
+    border-radius: 50%;
+    background-color: $primary;
+    height: 40px;
+    width: 40px;
+    align-items: center;
+    justify-content: center;
+  }
+}

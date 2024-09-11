@@ -1,0 +1,47 @@
+.btn {
+  border-radius: 26px;
+}
+.btn {
+  background-color: $primary;
+  border: 1px solid $primary;
+  border-radius: 50px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  &.shadowed {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  &.btn-xl {
+    padding: 16px 50px;
+  }
+  &.btn-md {
+    padding: 12px 40px;
+  }
+  &.btn-sm {
+    padding: 9px 20px;
+  }
+  &.btn-usm{
+    padding: 8px 14px;
+  }
+  &:hover, &:focus, &:active{
+    background-color: $primary-600;
+    border-color: $primary-600;
+    color: $gray;
+    opacity: 0.9;
+  }
+  &.btn-outline {
+    background-color: transparent;
+    border: 1px solid $primary-200;
+    box-shadow: none;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.427);
+      border-color: $primary;
+    }
+  }
+  &[disabled] {
+    background-color: gray;
+    cursor: not-allowed;
+    color: white;
+    border: none;
+  }
+}

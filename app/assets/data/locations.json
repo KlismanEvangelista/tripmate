@@ -1,0 +1,127 @@
+[
+  {
+    "name": "Amazonas",
+    "image": "amazonas.jpeg",
+    "tours": 8
+  },
+  {
+    "name": "Áncash",
+    "image": "ancash.avif",
+    "tours": 12
+  },
+  {
+    "name": "Apurímac",
+    "image": "apurimac.jpg",
+    "tours": 6
+  },
+  {
+    "name": "Arequipa",
+    "image": "arequipa.jpg",
+    "tours": 15
+  },
+  {
+    "name": "Ayacucho",
+    "image": "ayacucho.jpeg",
+    "tours": 7
+  },
+  {
+    "name": "Cajamarca",
+    "image": "cajamarca.jpg",
+    "tours": 9
+  },
+  {
+    "name": "Callao",
+    "image": "callao.jpg",
+    "tours": 5
+  },
+  {
+    "name": "Cusco",
+    "image": "cusco.jpg",
+    "tours": 20
+  },
+  {
+    "name": "Huancavelica",
+    "image": "huancavelica.jpg",
+    "tours": 4
+  },
+  {
+    "name": "Huánuco",
+    "image": "huanuco.jpg",
+    "tours": 8
+  },
+  {
+    "name": "Ica",
+    "image": "ica.webp",
+    "tours": 10
+  },
+  {
+    "name": "Junín",
+    "image": "junin.jpeg",
+    "tours": 11
+  },
+  {
+    "name": "La Libertad",
+    "image": "la_libertad.jpeg",
+    "tours": 13
+  },
+  {
+    "name": "Lambayeque",
+    "image": "lambayeque.jpg",
+    "tours": 9
+  },
+  {
+    "name": "Lima",
+    "image": "lima.jpg",
+    "tours": 25
+  },
+  {
+    "name": "Loreto",
+    "image": "loreto.jpg",
+    "tours": 7
+  },
+  {
+    "name": "Madre de Dios",
+    "image": "madre_de_dios.webp",
+    "tours": 3
+  },
+  {
+    "name": "Moquegua",
+    "image": "moquegua.jpg",
+    "tours": 5
+  },
+  {
+    "name": "Pasco",
+    "image": "pasco.jpg",
+    "tours": 4
+  },
+  {
+    "name": "Piura",
+    "image": "piura.jpg",
+    "tours": 14
+  },
+  {
+    "name": "Puno",
+    "image": "puno.avif",
+    "tours": 10
+  },
+  {
+    "name": "San Martín",
+    "image": "san_martin.jpg",
+    "tours": 6
+  },
+  {
+    "name": "Tacna",
+    "image": "tacna.jpg",
+    "tours": 8
+  },
+  {
+    "name": "Tumbes",
+    "image": "tumbes.webp",
+    "tours": 5
+  },
+  {
+    "name": "Ucayali",
+    "image": "ucayali.jpeg",
+    "tours": 7
+  }
+]
