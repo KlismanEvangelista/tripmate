@@ -3,26 +3,29 @@
 
 <div class="container">
 
-    <div>
-      <p>
-        <strong>Name:</strong>
-        <%= @plan.name %>
-      </p>
-      <p>
-        <strong>description:</strong>
-        <%= @plan.description %>
-      </p>
-      <p>
-        <strong>location:</strong>
-        <%= @plan.location %>
-      </p>
-      <div class="d-flex gap-2">
-        <%#= link_to 'Enviar solicitud', plan_travels_path, class: "btn btn-primary" %>
-        <%= button_to 'Enviar solicitud', plan_travels_path(@plan), method: :post, class: "btn btn-primary" %>
-        <%#= button_to 'Enviar solicitud', plan_travels_path, method: :post, params {key: value}%>
-        <%= link_to 'Volver a planes', plans_path, class: "btn btn-success" %>
-      </div>
+  <div>
+    <% @plan.photos.each do |photo| %>
+      <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+    <% end %>
+    <p>
+      <strong>Name:</strong>
+      <%= @plan.name %>
+    </p>
+    <p>
+      <strong>description:</strong>
+      <%= @plan.description %>
+    </p>
+    <p>
+      <strong>location:</strong>
+      <%= @plan.location %>
+    </p>
+    <div class="d-flex gap-2">
+      <%#= link_to 'Enviar solicitud', plan_travels_path, class: "btn btn-primary" %>
+      <%= button_to 'Enviar solicitud', plan_travels_path(@plan), method: :post, class: "btn btn-primary" %>
+      <%#= button_to 'Enviar solicitud', plan_travels_path, method: :post, params {key: value}%>
+      <%= link_to 'Volver a planes', plans_path, class: "btn btn-success" %>
     </div>
-    <br>
+  </div>
+  <br>
 
 </div>

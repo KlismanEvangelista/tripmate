@@ -10,6 +10,11 @@
   <br>
   <% @plans.each do |plan| %>
     <div>
+      <% if plan.photos.attached? %>
+        <%= cl_image_tag plan.photos.first.key, height: 300, width: 400, crop: :fill %>
+      <% else %>
+        <%= image_tag "sinimagen.jpg", height: 300, width: 400 %>
+      <% end %>
       <p>
         <strong>Name:</strong>
         <%= plan.name %>
