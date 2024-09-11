@@ -1,6 +1,8 @@
 class Plan < ApplicationRecord
   belongs_to :user
   has_many :travels, dependent: :destroy
+  has_many_attached :photos
+  # has_one_attached :photo
 
   DEPARTAMENTS = [
     'Amazonas', 'Áncash', 'Apurímac', 'Arequipa', 'Ayacucho', 'Cajamarca',
