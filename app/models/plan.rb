@@ -1,6 +1,6 @@
 class Plan < ApplicationRecord
   belongs_to :user
-  has_many :travels
+  has_many :travels, dependent: :destroy
 
   DEPARTAMENTS = [
     'Amazonas', 'Áncash', 'Apurímac', 'Arequipa', 'Ayacucho', 'Cajamarca',

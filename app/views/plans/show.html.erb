@@ -21,7 +21,6 @@
         <%= button_to 'Enviar solicitud', plan_travels_path(@plan), method: :post, class: "btn btn-primary" %>
         <%#= button_to 'Enviar solicitud', plan_travels_path, method: :post, params {key: value}%>
         <%= link_to 'Volver a planes', plans_path, class: "btn btn-success" %>
-        <%= link_to 'Eliminar', plan_path(@plan), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
       </div>
     </div>
     <br>
