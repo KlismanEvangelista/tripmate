@@ -1,5 +1,25 @@
 <div class="container">
-  <h1><%= @review.title %></h1>
-  <p><%= @review.rating %></p>
-  <p><%= @review.comment %></p>
+  <div>
+    <%= link_to user_reviews_path(@review.user_id), class: 'btn btn-dark' do %>
+        <i class="fa-solid fa-arrow-left"></i>
+    <% end %>
+  </div>
+  <div class="container review-details">
+    <h1><%= @review.title %></h1>
+      <p><%= @review.rating %></p>
+      <% if @current_user != @review.user %>
+        <p><i><%= "#{@review.user.first_name} #{@review.user.last_name}" %></i></p>
+      <% end %>
+      <p><i class="fa-solid fa-quote-left"></i> <%= @review.comment %></p>
+  </div>
+  <% if @current_user == @review.user %>
+    <div class="buttons">
+      <%= link_to edit_review_path(@review), class: 'btn btn-dark' do %>
+        Edit
+      <% end %>
+      <%= link_to review_path(@review), class: 'btn btn-dark', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+        Delete
+      <% end %>
+    </div>
+  <% end %>
 </div>

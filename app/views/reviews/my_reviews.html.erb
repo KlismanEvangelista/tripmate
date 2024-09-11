@@ -1,0 +1,17 @@
+<div class="container">
+  <%="User: #{current_user.first_name}" %>
+    <h4>My Reviews</h4>
+    <div class="raiting">
+      <% @reviews.each do |review| %>
+      <div>
+        <h4><%= review.travel.plan.name %></h4>
+        <p> <%= "#{review.travel.plan.user.first_name} #{review.travel.plan.user.last_name}" %></p>
+        <p><%= review.title %> <span><%= review.rating %></span></p>
+        <%= link_to user_review_path(review.user_id, review.id) do %>
+          <i class="fa-solid fa-eye"></i>
+        <% end %>
+      </div>
+    <% end %>
+
+    </div>
+  </div>
