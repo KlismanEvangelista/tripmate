@@ -1,8 +1,5 @@
-  <div id="plans" class="container mt-5">
+<div id="plans" class="container mt-5">
   <div class="plans-header">
-    <% if @plans.empty? %>
-    <p>No hay planes en este momento.</p>
-    <% else %>
       <div class="banner">
         <video autoplay loop muted>
           <source src="<%= asset_path('plans.mp4') %>" type="video/mp4">
@@ -14,35 +11,38 @@
           </div>
         </div>
       </div>
-    <% end %>
   </div>
-
   <div class="container">
     <div class="row mt-4 mb-5">
       <div class="col-12">
         <div class="search-box d-flex align-items-center justify-content-between p-3 bg-light">
-          <form id="date-filter-form" class="d-flex flex-grow-1">
+          <form id="date-filter-form" data-controller="flatpickr" data-flatpickr-target="form" class="d-flex flex-grow-1">
             <div class="form-group me-3">
-              <input type="text" id="date-picker" data-controller="search-date" class="form-control form-control-lg" placeholder="Seleccionar fecha" />
+              <input type="text" id="date-picker" data-flatpickr-target="date" class="form-control form-control-lg" placeholder="Seleccionar fecha"
+              value="<%= params[:date] %>"/>
             </div>
-            <button type="submit" class="btn btn-secondary btn-md" data-action="change->search-date#submit">Buscar</button>
+            <button type="submit" class="btn btn-secondary btn-md" data-action="flatpickr#search">Buscar</button>
           </form>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="row">
-      <div class="col-3 map" data-controller="map-filter">
-        <p>Buscar en el mapa</p>
-        <%= render "shared/map" %>
-        <div data-map-filter-target="tooltip" style="display: none; position: absolute; background: #333; color: #fff; padding: 5px; border-radius: 3px;"></div>
-      </div>
+  <div class="row">
+    <div class="col-3 map" data-controller="map-filter">
+      <p class="title"><i class="fa-solid fa-magnifying-glass"></i> Buscar en el mapa</p>
+      <%= render "shared/map" %>
+      <div data-map-filter-target="tooltip" style="display: none; position: absolute; background: #333; color: #fff; padding: 5px; border-radius: 3px;"></div>
+    </div>
 
-      <div class="col-9 container-cards">
+    <div class="col-9 container-cards">
+      <% if @plans.empty? %>
+        <p>No hay planes en este momento.</p>
+      <% else %>
         <div class="row mt-4 mb-5">
           <% @plans.each do |plan| %>
-            <div class="col-4 d-flex align-items-stretch">
-              <div class="card plan-card shadow h-100">
+            <div class="col-4 d-flex align-items-stretch mb-4">
+              <div class="card plan-card shadow h-100" data-department=<%=plan.departament%>>
                 <% if plan.photos.attached? %>
                   <%= cl_image_tag plan.photos.first.key, height: 300, width: 450, crop: :fill, class: 'img-fluid' %>
                 <% else %>
@@ -68,8 +68,11 @@
             </div>
           <% end %>
         </div>
-      </div>
+      <% end %>
     </div>
-
   </div>
+
+  <a href="#" data-controller="scroll" data-scroll-target="scrollButton" class="scroll-to-top">
+    <i class="fa fa-arrow-up"></i>
+  </a>
 </div>

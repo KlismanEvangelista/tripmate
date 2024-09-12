@@ -8,7 +8,6 @@ export default class extends Controller {
 
   filter(event) {
     const selectedDepartment = event.currentTarget.dataset.department;
-    console.log(event.currentTarget.dataset);
 
     if (this.previousTarget) {
       this.previousTarget.style.fill = "";
@@ -17,6 +16,22 @@ export default class extends Controller {
     event.currentTarget.style.fill = "#04477e";
 
     this.previousTarget = event.currentTarget;
+
+    this.filterCardsByDepartment(selectedDepartment);
+    }
+
+  filterCardsByDepartment(selectedDepartment) {
+    console.log(selectedDepartment);
+    const cards = document.querySelectorAll(".plan-card");
+
+    cards.forEach(card => {
+      const cardDepartment = card.dataset.department;
+      if (cardDepartment === selectedDepartment) {
+        card.parentNode.style.setProperty('display', 'block', 'important');
+      } else {
+        card.parentNode.style.setProperty('display', 'none', 'important');
+      }
+    });
   }
 
   mouseover(event) {

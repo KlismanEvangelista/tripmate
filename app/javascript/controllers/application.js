@@ -9,6 +9,7 @@ const application = Application.start()
 application.register('navbar', NavbarController)
 application.register('scroll', ArrowController)
 application.register('home', HomeController)
+application.register('flatpickr', FlatpickrController)
 application.register('map-filter', MapController)
 
 // Configure Stimulus development experience

@@ -46,13 +46,21 @@
     padding-right: 24px;
     border-right: 1px solid #b8b8b8;
     text-align: center;
-    margin: auto;
     background: white;
     svg {
       fill: $secondary;
       stroke: white;
       width: 290px;
       filter: drop-shadow(5px 10px 8px #4d4d4d);
+      animation: float 3s ease-in-out infinite;
+    }
+    .title {
+      font-weight: 600;
+      font-size: 24px;
+      border-bottom: 1px solid black;
+      width: fit-content;
+      text-align: center;
+      margin: auto;
     }
   }
   .container-cards {
