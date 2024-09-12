@@ -20,9 +20,12 @@
     line-height: 1.4;
     font-weight: lighter;
 
-    span .fa-solid {
-      color: $primary;
-      font-size: 1em;
+    span {
+      .fa-solid, .fa-regular {
+        color: $primary;
+        font-size: 1em;
+      }
+
     }
 
   }
