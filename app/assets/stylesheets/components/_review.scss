@@ -1,0 +1,33 @@
+.review {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  background: white;
+  padding: 8px 16px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+
+  img {
+    border-radius: 50%;
+  }
+
+  .review-details {
+    flex-grow: 1;
+    padding: 0 24px;
+  }
+
+  p {
+    margin: 0;
+    line-height: 1.4;
+    font-weight: lighter;
+
+    span .fa-solid {
+      color: $primary;
+      font-size: 1em;
+    }
+
+  }
+
+  &:hover, &:focus, &:active{
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  }
+}
