@@ -1,4 +1,9 @@
 <div class="container mt-5">
+  <% if flash[:notice] %>
+      <div class="notice p-3 mb-2 bg-success rounded text-white">
+        <strong><span><i class="fa-solid fa-check"></i> Review deleted succesfully.</span></strong>
+      </div>
+    <% end %>
     <h4>My Reviews</h4>
     <div>
       <% @reviews.each do |review| %>

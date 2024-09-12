@@ -31,7 +31,7 @@ class ReviewsController < ApplicationController
     @review.travel_id = @travel.id
     if @review.save!
       flash[:notice] = ''
-      redirect_to my_reviews_path
+      redirect_to user_review_path(@review.user_id, @review.id)
     else
       render :new, status: :unprocessable_entity
     end
