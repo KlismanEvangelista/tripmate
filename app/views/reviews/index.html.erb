@@ -1,24 +1,49 @@
 <div class="container">
-  <div class="bg-white p-3 my-4">
-    <h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
-    <% if @user == current_user %>
+  <div class="profile mt-5">
+    <%= cl_image_tag @user.photo.key, height: 150, width: 150, crop: :fill %>
+    <div>
       <div class="user-info">
+        <h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
+        <% if @user == current_user %>
         <p><i class="fa-solid fa-address-card"></i>&nbsp<%= @user.dni %></p>
         <p><i class="fa-solid fa-cake-candles"></i>&nbsp <%= @user.birth_date %></p>
         <p><i class="fa-solid fa-briefcase"></i>&nbsp<%= @user.occupation %></p>
         <p><i class="fa-solid fa-envelope"></i>&nbsp<%= @user.email %></p>
         <p><i class="fa-solid fa-mobile"></i>&nbsp<%= @user.phone %></p>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
   <hr>
   <div class="reviews">
     <h4 class="mb-3">Reviews</h4>
-    <div class="reviews bg-white rounded-3 p-2 my-2">
+    <div class="reviews">
       <% @reviews.each do |review| %>
+        <div class="review">
+          <%= cl_image_tag review.user.photo.key, height: 50, width: 50, crop: :fill %>
+          <div class="review-details">
             <p><small><i><%= "#{review.user.first_name} #{review.user.last_name}" %></i></small></p>
-            <p><span><%= review.rating %></span> <strong><%= review.title %></strong></p>
-            <p class="text-mutted"><i class="fa-solid fa-quote-left text-muted"></i> <small><%= review.comment %></small></p>
+            <p>
+              <span>
+                <% review.rating.times do %>
+                  <i class="fa-solid fa-star"></i>
+                <% end %>
+                <% (5 - review.rating).times do %>
+                  <i class="fa-regular fa-star"></i>
+                <% end %>
+              </span>
+              <strong>
+                <%= review.title %>
+                </strong>
+            </p>
+            <p class="text-mutted">
+              <i class="fa-solid fa-quote-left text-muted"></i>
+              <small>
+                <%= review.comment %>
+                </small>
+            </p>
+          </div>
+        </div>
       <% end %>
     </div>
   </div>

@@ -1,0 +1,21 @@
+.tripmates {
+  display: flex;
+  align-items: center;
+
+  .tripmate {
+    a {
+      padding: 8px;
+      img {
+        border-radius: 50%;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        border: $gray-300 3px solid;
+        margin: auto;
+
+        &:hover {
+          border: $primary 3px solid;
+          box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+        }
+      }
+    }
+  }
+}
