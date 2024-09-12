@@ -16,10 +16,11 @@
     <h4 class="mb-3">Reviews</h4>
     <div class="reviews bg-white rounded-3 p-2 my-2">
       <% @reviews.each do |review| %>
-            <p><small><i><%= "#{review.user.first_name} #{review.user.last_name}" %></i></small></p>
-            <p><span><%= review.rating %></span> <strong><%= review.title %></strong></p>
-            <p class="text-mutted"><i class="fa-solid fa-quote-left text-muted"></i> <small><%= review.comment %></small></p>
+        <p><small><i><%= "#{review.user.first_name} #{review.user.last_name}" %></i></small></p>
+        <p><span><%= review.rating %></span> <strong><%= review.title %></strong></p>
+        <p class="text-mutted"><i class="fa-solid fa-quote-left text-muted"></i> <small><%= review.comment %></small></p>
       <% end %>
     </div>
   </div>
 </div>
+<%= console %>

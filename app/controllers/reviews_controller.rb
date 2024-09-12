@@ -10,11 +10,10 @@ class ReviewsController < ApplicationController
   def index
     # reviews of a user
     if @user.present?
-      @my_reviews = @user.reviews # reviews made by the user
+      @reviews = @user.plans.map(&:travels).flatten.map(&:reviews).flatten
     else
-      @my_reviews = Review.none
+      @reviews = Review.none
     end
-    @reviews = current_user.plans.map(&:travels).flatten.map(&:reviews).flatten
   end
 
   def my_reviews
@@ -32,7 +31,7 @@ class ReviewsController < ApplicationController
     @review.travel_id = @travel.id
     if @review.save!
       flash[:notice] = ''
-      redirect_to user_review_path(@review.user_id, @review.id)
+      redirect_to my_reviews_path
     else
       render :new, status: :unprocessable_entity
     end
