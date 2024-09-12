@@ -1,0 +1,50 @@
+.steps {
+  display: flex;
+  width: 300px;
+  justify-content: space-between;
+  margin: auto;
+  &.nav-pills {
+    .nav-item {
+      max-width: 60px;
+      position: relative;
+      &:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 12px;
+        right: -95px;
+        width: 113px;
+        height: 2px;
+        background-color: #04a9dd;
+        z-index: 0;
+      }
+    }
+    .nav-link {
+      border: 1px solid #04a9dd;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      margin: auto;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: white;
+      .step-number {
+        color: $secondary;
+        font-size: 10px;
+      }
+      &.active {
+        background: $secondary;
+        .step-number {
+          color: white;
+        }
+      }
+    }
+    .step-label {
+      font-size: 10px;
+      text-align: center;
+      margin-top: 8px;
+    }
+  }
+}

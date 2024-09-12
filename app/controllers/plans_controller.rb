@@ -20,7 +20,7 @@ class PlansController < ApplicationController
 
 
   def new
-    @departament = Plan::DEPARTAMENTS
+    @departaments = Plan::DEPARTAMENTS
     @plan = Plan.new
   end
 
