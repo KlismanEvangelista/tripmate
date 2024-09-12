@@ -1,16 +1,27 @@
-<div class="container">
+<div class="container mt-5">
   <div>
-    <%= link_to user_reviews_path(@review.user_id), class: 'btn btn-dark' do %>
+    <%= link_to my_reviews_path, class: 'btn btn-dark mb-3' do %>
         <i class="fa-solid fa-arrow-left"></i>
     <% end %>
   </div>
-  <div class="container review-details">
-    <h1><%= @review.title %></h1>
-      <p><%= @review.rating %></p>
+  <div class="review">
+    <div class="review-details">
+      <h1><%= @review.title %></h1>
+      <p>
+        <span>
+          <% @review.rating.times do %>
+            <i class="fa-solid fa-star"></i>
+          <% end %>
+          <% (5 - @review.rating).times do %>
+            <i class="fa-regular fa-star"></i>
+          <% end %>
+        </span>
+        </p>
       <% if @current_user != @review.user %>
         <p><i><%= "#{@review.user.first_name} #{@review.user.last_name}" %></i></p>
       <% end %>
       <p><i class="fa-solid fa-quote-left"></i> <%= @review.comment %></p>
+    </div>
   </div>
   <% if @current_user == @review.user %>
     <div class="buttons">
