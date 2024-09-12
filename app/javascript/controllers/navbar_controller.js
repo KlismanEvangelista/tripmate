@@ -14,8 +14,10 @@ export default class extends Controller {
   handleScroll() {
     if (window.scrollY > 50) {
       this.navbarTarget.classList.add("scrolled")
+      this.navbarTarget.classList.remove("transparent")
     } else {
       this.navbarTarget.classList.remove("scrolled")
+      this.navbarTarget.classList.remove("transparent")
     }
   }
 }

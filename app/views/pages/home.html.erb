@@ -1,4 +1,4 @@
-<div id="home">
+<div id="home" data-controller="home">
   <div class="hero-section">
     <video autoplay loop muted>
       <source src="<%= asset_path('video.mp4') %>" type="video/mp4">
@@ -7,35 +7,79 @@
 
     <div class="overlay"></div>
 
-    <div class="container content d-flex align-items-start flex-column">
+    <div class="home-text container content d-flex justify-content-center text-center">
       <div>
         <h1 class="bolder">Explora</h1>
-        <p class="subtitle">Explora y conecta con personas que comparten tus mismos destinos y experiencias</p>
+        <p class="subtitle">y conecta con personas que comparten tus mismos destinos y experiencias con TripMate</p>
         <%= link_to 'Conoce más',  new_registration_path(:user), class: 'btn btn-outline btn-xl' %>
-      </div>
-      <div class="about">
-        <h4 class="bolder">NOSOTROS</h4>
-        <p>TripMate es una aplicación que conecta a personas que comparten destinos y experiencias similares. Descubre eventos locales, únete a grupos de interés y conoce a otros viajeros en tu área. ¡Explora y conecta con TripMate!.</p>
       </div>
     </div>
   </div>
 
   <section class="departament">
     <div class="container">
-      <h3 class="title text-center">Destinos</h3>
-      <p class="subtitle text-center">Selecciona un departamento y descubre lo que tenemos para ti ...</p>
-      <div class="row cards">
-        <% @locations.each do |location| %>
-          <div class="col-12  col-md-4 mb-4">
-            <div class="card-departament">
-              <img src="<%= asset_path("departaments/#{location['image']}") %>" class="card-img-top" alt="<%= location['name'] %>">
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center text-center">
+          <i class="plane fa-solid fa-plane"></i>
+          <h3 class="title text-center">Ultimos planes</h3>
+        </div>
+        <div class="d-flex align-items-center see-all">
+          <%= link_to "Ver todos", plans_path%>
+          <i class="fa-solid fa-angles-right ms-2"></i>
+        </div>
+      </div>
+      <p class="subtitle text-start">Selecciona un departamento y descubre lo planes que tienen para ti ...</p>
+      <div class="row mt-4 mb-5">
+        <% @plans.each do |plan| %>
+          <div class="col-3 d-flex align-items-stretch">
+            <div class="card plan-card shadow h-100">
+              <% if plan.photos.attached? %>
+                <%= cl_image_tag plan.photos.first.key, height: 300, width: 450, crop: :fill, class: 'img-fluid' %>
+              <% else %>
+                <%= image_tag "sinimagen.jpg", height: 300, width: 450, crop: :fill, class: 'img-fluid' %>
+              <% end %>
               <div class="card-body">
-                <h5 class="card-title"><%= location['name'] %></h5>
-                <span class="badge bg-dark"><%= location['tours'] %> tours</span>
+                <h5 class="card-title"><%= plan.name %></h5>
+                <p class="description text-start"><%= plan.description %></p>
+                <p class="card-text">
+                  <i class="fa-regular fa-clock me-2"></i>
+                  <%= (plan.end_date - plan.start_date).to_i %> Noches,
+                  <%= (plan.end_date - plan.start_date).to_i + 1 %> Días
+                </p>
+                <p class="card-text">
+                <i class="fa-regular fa-calendar me-2"></i> Fecha de partida: <%= plan.start_date.strftime('%d/%m/%Y') %>
+                </p>
+                <p class="card-text">
+                  <i class="fa-solid fa-user-group me-2"></i> <%= plan.travelers_quantity %> viajeros
+                </p>
+                <%= link_to "Ver más", plan_path(plan), class: "btn btn-secondary btn-sm mt-2"%>
               </div>
             </div>
           </div>
         <% end %>
+      </div>
+      <div class="d-flex align-items-center text-center">
+        <i class="star fa-solid fa-star"></i>
+        <h3 class="title text-center">Destinos populares</h3>
+      </div>
+      <div class="row cards">
+        <div id="carouselDepartaments" class="splide mb-4">
+          <div class="splide__track">
+            <div class="splide__list">
+              <% @locations.each do |location| %>
+                <div class="splide__slide">
+                  <div class="card-departament">
+                    <img src="<%= asset_path("departaments/#{location['image']}") %>" class="card-img-top" alt="<%= location['name'] %>">
+                    <div class="card-body">
+                      <h5 class="card-title"><%= location['name'] %></h5>
+                      <span class="badge bg-dark"><%= location['tours'] %> planes</span>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>

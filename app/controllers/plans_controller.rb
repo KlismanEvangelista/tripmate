@@ -3,7 +3,11 @@ class PlansController < ApplicationController
   before_action :set_plan, only: [:show, :edit, :update, :destroy]
 
   def index
-    @plans = Plan.all
+    if params[:date].present?
+      @plans = Plan.where("start_date <= ? AND end_date >= ?", params[:date], params[:date])
+    else
+      @plans = Plan.all
+    end
   end
 
   def new

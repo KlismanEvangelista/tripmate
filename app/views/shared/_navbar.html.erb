@@ -1,9 +1,10 @@
-<nav class="navbar navbar-expand-lg navbar-light fixed-top
-    <%= 'd-none' if (controller_name == 'sessions' && action_name == 'new') || (controller_name == 'registrations' && action_name == 'new') %>"
+<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-dark
+    <%= 'd-none' if (controller_name == 'sessions' && action_name == 'new') || (controller_name == 'registrations' && action_name == 'new') %>
+    <%= 'transparent' if(controller_name == 'pages')%>"
     data-controller="navbar" data-navbar-target="navbar">
   <div class="container">
-    <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag "logo_tripmate.png" %>
+    <%= link_to "/", class: "navbar-brand" do %>
+      <%= image_tag "logo_tripmate.png", class: "logo" %>
     <% end %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -12,18 +13,22 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
+          <li class="nav-item">
+            <%= link_to "Mensajes", "#", class: "nav-link me-4" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
+            <%= link_to "Todos los planes", plans_path, class: "btn btn-outline btn-sm me-2" %>
+          </li>
+           <li class="nav-item">
+            <%= link_to "Crear plan", new_plan_path, class: "btn btn-sm me-3" %>
           </li>
           <li class="nav-item dropdown">
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
           </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
+              <%= link_to "Mis planes", my_plans_path(@plan), class: "dropdown-item" %>
+              <%= link_to "Mis solicitudes", "#", class: "dropdown-item" %>
               <%= link_to "Another action", "#", class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>

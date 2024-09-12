@@ -1,0 +1,61 @@
+#plans {
+  .plans-header {
+    height: 350px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    color: white;
+    margin-bottom: 32px;
+    overflow: hidden;
+    border-radius: 32px;
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 2;
+    }
+
+    .content {
+      z-index: 3;
+    }
+
+    video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+    .header-text {
+      position: absolute;
+      top: 40%;
+      background-color: #2125296b;
+      h1 {
+        font-family: 'Pacifico', cursive;
+        font-size: 72px;
+      }
+    }
+  }
+  .map {
+    padding-right: 24px;
+    border-right: 1px solid #b8b8b8;
+    text-align: center;
+    margin: auto;
+    background: white;
+    svg {
+      fill: $secondary;
+      stroke: white;
+      width: 290px;
+      filter: drop-shadow(5px 10px 8px #4d4d4d);
+    }
+  }
+  .container-cards {
+    padding-left: 54px;
+  }
+}

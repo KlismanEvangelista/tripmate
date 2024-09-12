@@ -14,7 +14,15 @@
 a {
   text-decoration: none !important;
 }
-
+body {
+  padding-top: 92px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  &.transparent {
+    padding-top: 0;
+  }
+}
 p{
   padding: 0;
   margin: 0;

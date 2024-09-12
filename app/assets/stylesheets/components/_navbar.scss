@@ -15,10 +15,13 @@
   &.transparent {
     background: transparent;
   }
-  img {
+  .logo {
     width: 160px;
   }
   &.scrolled {
     background-color: #0c0c0c9e !important;
+  }
+  .nav-link {
+    color: white !important
   }
 }
