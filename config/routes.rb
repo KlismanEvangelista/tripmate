@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   # travels
   get 'my_requests', to: 'travels#my_requests', as: :my_requests
   get 'my_travels', to: 'travels#my_travels', as: :my_travels
+  get 'my_reviews', to: 'reviews#my_reviews', as: :my_reviews
+
   # Reviews routes
   resources :travels, except: %i[new create] do
     resources :reviews, only: %i[new create]

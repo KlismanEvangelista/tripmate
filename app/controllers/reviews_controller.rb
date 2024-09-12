@@ -4,16 +4,22 @@ class ReviewsController < ApplicationController
   before_action :set_review, only: %i[show edit update destroy]
 
   def show
+    @current_user = current_user
   end
 
   def index
-    # reviews of a user to improve
-    if params[:user_id].present?
-      @reviews = @user.reviews
+    # reviews of a user
+    if @user.present?
+      @my_reviews = @user.reviews # reviews made by the user
     else
-      # reviews made by the current user
-      @reviews = Review.where(user_id: current_user)
+      @my_reviews = Review.none
     end
+    @reviews = current_user.plans.map(&:travels).flatten.map(&:reviews).flatten
+  end
+
+  def my_reviews
+    # reviews made by current user
+    @reviews = Review.where(user_id: current_user)
   end
 
   def new
@@ -23,10 +29,10 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     @review.user = current_user
-    @review.travel = @travel
+    @review.travel_id = @travel.id
     if @review.save!
       flash[:notice] = ''
-      redirect_to review_path(@review)
+      redirect_to user_review_path(@review.user_id, @review.id)
     else
       render :new, status: :unprocessable_entity
     end
@@ -38,14 +44,14 @@ class ReviewsController < ApplicationController
   def update
     flash[:notice] = ''
     @review.update(review_params)
-    redirect_to reviews_path
+    redirect_to user_review_path(@review.user_id, @review.id)
   end
 
   def destroy
     if @review
       flash[:notice] = ''
       @review.destroy
-      redirect_to reviews_path, status: :see_other
+      redirect_to my_reviews_path, status: :see_other
     else
       render :index, status: :unprocessable_entity
     end

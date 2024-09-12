@@ -1,24 +1,25 @@
 <div class="container">
-  <h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
-  <% if @user == current_user %>
-    <div class="user-info">
-      <p><i class="fa-solid fa-address-card"></i>&nbsp<%= @user.dni %></p>
-      <p><i class="fa-solid fa-cake-candles"></i>&nbsp <%= @user.birth_date %></p>
-      <p><i class="fa-solid fa-briefcase"></i>&nbsp<%= @user.occupation %></p>
-      <p><i class="fa-solid fa-envelope"></i>&nbsp<%= @user.email %></p>
-      <p><i class="fa-solid fa-mobile"></i>&nbsp<%= @user.phone %></p>
-    </div>
-  <% end %>
-  <div class="user-raiting">
-    <h4>Rating </h4>
-    <div class="raiting">
-      <% @reviews.each do |review| %>
-      <%= review.title %>
-      <%= review.rating %>
-      <% link_to review_path(review) do %>
-        <i class="fa-solid fa-eye"></i>
+  <div class="bg-white p-3 my-4">
+    <h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
+    <% if @user == current_user %>
+      <div class="user-info">
+        <p><i class="fa-solid fa-address-card"></i>&nbsp<%= @user.dni %></p>
+        <p><i class="fa-solid fa-cake-candles"></i>&nbsp <%= @user.birth_date %></p>
+        <p><i class="fa-solid fa-briefcase"></i>&nbsp<%= @user.occupation %></p>
+        <p><i class="fa-solid fa-envelope"></i>&nbsp<%= @user.email %></p>
+        <p><i class="fa-solid fa-mobile"></i>&nbsp<%= @user.phone %></p>
+      </div>
     <% end %>
-  <% end %>
+  </div>
+  <hr>
+  <div class="reviews">
+    <h4 class="mb-3">Reviews</h4>
+    <div class="reviews bg-white rounded-3 p-2 my-2">
+      <% @reviews.each do |review| %>
+            <p><small><i><%= "#{review.user.first_name} #{review.user.last_name}" %></i></small></p>
+            <p><span><%= review.rating %></span> <strong><%= review.title %></strong></p>
+            <p class="text-mutted"><i class="fa-solid fa-quote-left text-muted"></i> <small><%= review.comment %></small></p>
+      <% end %>
     </div>
   </div>
 </div>

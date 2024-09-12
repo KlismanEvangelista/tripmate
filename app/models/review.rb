@@ -1,5 +1,6 @@
 class Review < ApplicationRecord
   belongs_to :user
+  belongs_to :travel
 
   validates :title, presence: true
   validates :comment, presence: true
