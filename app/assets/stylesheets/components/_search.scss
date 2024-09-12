@@ -1,0 +1,17 @@
+.search-box {
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  width: fit-content;
+  margin: auto;
+
+  .form-control {
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+    padding: 0.75rem 1.25rem;
+    font-size: 1.25rem;
+    width: 400px;
+    background: transparent;
+    border-radius: 12px;
+  }
+}

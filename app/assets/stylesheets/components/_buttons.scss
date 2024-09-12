@@ -44,4 +44,13 @@
     color: white;
     border: none;
   }
+  &.btn-secondary {
+    background-color: $secondary;
+    border-radius: $secondary;
+    color: white;
+    &:hover {
+      background-color: $secondary-600;
+      border-color: $secondary-600;
+    }
+  }
 }

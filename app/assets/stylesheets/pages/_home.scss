@@ -2,13 +2,13 @@ body {
   background: none;
 }
 
-.navbar {
+.navbar.transparent {
   background-color: transparent !important;
 }
 
 #home{
   .hero-section {
-  height: 100vh;
+  height: 500px;
   position: relative;
   z-index: 1;
   display: flex;
@@ -38,15 +38,18 @@ body {
     object-fit: cover;
     z-index: 1;
   }
-  h1 {
-    font-family: 'Pacifico', cursive;
-    font-size: 90px;
-    margin-bottom: 24px;
-  }
-  .subtitle {
-    font-size: 24px;
-    max-width: 600px;
-    margin-bottom: 24px;
+  .home-text {
+    margin-top: 72px;
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 72px;
+      margin-bottom: 24px;
+    }
+    .subtitle {
+      font-size: 16px;
+      max-width: 600px;
+      margin-bottom: 24px;
+    }
   }
 
   .about {
@@ -78,12 +81,35 @@ body {
   }
   .departament {
     text-align: center;
+    .plane,
+    .star {
+      margin-top: -8px;
+      font-size: 24px;
+      margin-right: 12px;
+    }
     .title {
       font-size: 40px;
       font-weight: 600;
     }
     .cards {
       margin-top: 32px;
+    }
+    .see-all {
+      a {
+        color: $gray;
+      }
+      &:hover,
+      a:hover {
+        color: $primary;
+      }
+    }
+  }
+  #carouselDepartaments {
+    .splide__arrow--prev {
+      left: -40px;
+    }
+    .splide__arrow--next {
+      right: -40px;
     }
   }
 }
