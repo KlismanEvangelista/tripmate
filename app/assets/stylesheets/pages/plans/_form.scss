@@ -1,0 +1,41 @@
+#formCreatePlan {
+  display: flex;
+  .image {
+    border-radius: 24px;
+    overflow: hidden;
+    width: 90%;
+  }
+  .card-form {
+    padding: 24px;
+    background-color: white;
+    border-radius: 8px;
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+  }
+  .photo-thumbnail-container {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+  }
+
+  .photo-thumbnail {
+    max-width: 100px;
+    max-height: 100px;
+    display: block;
+  }
+
+  .remove-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.7);
+    border: none;
+    cursor: pointer;
+    padding: 2px 5px;
+    font-size: 12px;
+  }
+
+}

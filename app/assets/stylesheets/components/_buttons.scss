@@ -53,4 +53,16 @@
       border-color: $secondary-600;
     }
   }
+  &.btn-outline-secondary {
+    background-color: transparent;
+    border: 1px solid $secondary;
+    box-shadow: none;
+    color: $secondary;
+    &:hover {
+      background-color: rgba(42, 91, 143, 0.427);
+      border-color: $secondary-600;
+      color: white;
+    }
+  }
+
 }
