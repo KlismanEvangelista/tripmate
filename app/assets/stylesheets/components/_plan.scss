@@ -1,0 +1,57 @@
+@import 'tripmates';
+
+.plan {
+  .plan-main {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    padding: 8px 16px;
+    .plan-description {
+      flex-grow: 1;
+      padding: 10px 24px;
+
+      h1 {
+        font-size: 2em;
+        font-weight: lighter;
+        margin-bottom: 0.5em;
+      }
+
+      p {
+        font-size: 1em;
+        line-height: 1.4;
+        margin-bottom: 0;
+        margin-top: 8px;
+        color: black;
+        opacity: 0.7;
+      }
+    }
+    img {
+      padding: auto;
+      margin: 0 24px;
+    }
+  }
+  .plan-details {
+    align-items: center;
+    margin-bottom: 8px;
+    padding: 8px 16px;
+
+    #location, #dates, #tripmates {
+      padding: 10px 24px;
+
+      h4 {
+        font-size: 1em;
+        font-weight: lighter;
+        margin-bottom: 0.5em;
+      }
+
+      p {
+        font-size: 1em;
+        line-height: 1.4;
+        margin-bottom: 0;
+        margin-top: 8px;
+        color: black;
+        opacity: 0.7;
+      }
+    }
+  }
+}
