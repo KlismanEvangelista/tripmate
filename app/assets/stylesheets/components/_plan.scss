@@ -1,11 +1,12 @@
 @import 'tripmates';
 
 .plan {
+    padding: 1em;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 3rem;
   .plan-main {
     display: flex;
     align-items: center;
-    margin-bottom: 8px;
-    padding: 8px 16px;
     .plan-description {
       flex-grow: 1;
       padding: 10px 24px;

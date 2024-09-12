@@ -1,10 +1,10 @@
 .review {
   display: flex;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 3rem;
   background: white;
-  padding: 8px 16px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  padding: 1em;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 
   img {
     border-radius: 50%;

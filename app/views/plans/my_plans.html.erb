@@ -1,31 +1,54 @@
-<div class="container">
+<div class="container mt-5">
+  <% if flash[:notice] %>
+      <div class="notice p-3 mb-2 bg-success rounded text-white">
+        <strong><span><i class="fa-solid fa-check"></i> Plan deleted succesfully.</span></strong>
+      </div>
+    <% end %>
+  <div>
+    <%= link_to plans_path, class: 'btn btn-dark mb-3' do %>
+        <i class="fa-solid fa-arrow-left"></i>
+    <% end %>
+  </div>
   <div class="d-flex justify-content-end">
     <%= link_to 'Agregar plan', new_plan_path, class: "btn btn-success" %>
   </div>
   <br>
   <br>
   <% @my_plans.each do |plan| %>
-    <div>
-      <% plan.photos.each do |photo| %>
-        <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-      <% end %>
-      <p>
-        <strong>Name:</strong>
-        <%= plan.name %>
-      </p>
-      <p>
-        <strong>description:</strong>
-        <%= plan.description %>
-      </p>
-      <p>
-        <strong>location:</strong>
-        <%= plan.location %>
-      </p>
-      <div class="d-flex gap-2">
-        <%= link_to 'Editar', edit_plan_path(plan), class: "btn btn-primary" %>
-        <%= link_to 'Eliminar', plan_path(plan),data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
-        <%= link_to 'Ver solicitudes', my_requests_path, class: "btn btn-primary" %>
-        <%= link_to 'Volver a planes', plans_path, class: "btn btn-success" %>
+    <div class="plan">
+      <div class="plan-main">
+        <div class="plan-description">
+          <h4><%= plan.name %></h4>
+          <p>
+            <% if plan.description.size > 250 %>
+              <%= plan.description[1..250] %>...
+            <% else %>
+              <%= plan.description %>
+            <% end %>
+          </p>
+          <p>
+            <span>
+              <i class="fa-solid fa-location-dot"></i>
+            </span>
+            <%= plan.departament %>
+          </p>
+        </div>
+        <div class="pic">
+          <% plan.photos.each do |photo| %>
+            <%= cl_image_tag photo.key, height: 150, width: 250, crop: :fill %>
+          <% end %>
+        </div>
+      </div>
+      <div class="d-flex gap-2 p-3 py-1 justify-content-end align-items-end">
+        <%= link_to edit_plan_path(plan), class: "btn btn-primary" do %>
+          <i class="fa-solid fa-pen-to-square"></i>
+        <% end %>
+        <%= link_to plan_path(plan),data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" do %>
+          <i class="fa-solid fa-trash-can"></i>
+        <% end %>
+        <%= link_to my_requests_path, class: "btn btn-primary" do %>
+          <i class="fa-solid fa-user-plus"></i>
+        <% end %>
       </div>
     </div>
     <br>
