@@ -28,7 +28,7 @@ class PlansController < ApplicationController
     @plan = Plan.new(plan_params)
     @plan.user = current_user
     @plan.save!
-    redirect_to plans_path, notice: 'Plan creado exitosamente.'
+    redirect_to plans_path, notice: 'success'
     # if @plan.save
     #   redirect_to my_plans_path, notice: 'Plan creado exitosamente.'
     # else
@@ -45,6 +45,8 @@ class PlansController < ApplicationController
               info_window_html:
               render_to_string(partial: "info_window", locals: {plan: @plan})
             }
+    @ticket_available = accepted_travel_limit?(@plan)
+    @applied = applied_plan?(@plan)
   end
 
   def edit
@@ -73,5 +75,16 @@ class PlansController < ApplicationController
 
   def set_plan
     @plan = Plan.find(params[:id])
+  end
+
+  def accepted_travel_limit?(plan)
+    num_acepted_travels = Travel.where(plan_id: @plan.id).count
+    travelers_quantity = plan.travelers_quantity
+
+    num_acepted_travels < travelers_quantity
+  end
+
+  def applied_plan?(plan)
+    current_user.travels.where(plan_id: plan.id).exists?
   end
 end
