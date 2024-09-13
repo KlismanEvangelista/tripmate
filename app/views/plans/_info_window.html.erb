@@ -1,2 +1,16 @@
-<h2><%= @plan.name %></h2>
-<p><%= @plan.description %></p>
+<div class="popup-content">
+  <h2 class="popup-title"><%= @plan.name %></h2>
+  <p class="popup-description"><%= @plan.description %></p>
+  <p class="popup-dates">
+    <i class="fas fa-calendar-day"></i>
+    <span>Inicio: <%= @plan.start_date %></span>
+  </p>
+  <p class="popup-dates">
+    <i class="fas fa-calendar-check"></i>
+    <span>Fin: <%= @plan.end_date %></span>
+  </p>
+  <p class="popup-travelers">
+    <i class="fas fa-users"></i>
+    <span><%= @plan.travelers_quantity %> viajeros</span>
+  </p>
+</div>
