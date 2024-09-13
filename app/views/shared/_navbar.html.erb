@@ -16,6 +16,15 @@
           <li class="nav-item">
             <%= link_to "Mensajes", "#", class: "nav-link me-4" %>
           </li>
+          <li class="nav-item d-flex">
+            <%= link_to my_requests_path, class: "notifications position-relative me-3 dropdown-item" do %>
+              <i class="fa-regular fa-bell"></i>
+              <span class="point position-absolute bg-danger border rounded-circle">
+                <span class="visually-hidden">New alerts</span>
+              </span>
+            <% end %>
+          </li>
+
           <li class="nav-item">
             <%= link_to "Todos los planes", plans_path, class: "btn btn-outline btn-sm me-2" %>
           </li>
@@ -23,9 +32,9 @@
             <%= link_to "Crear plan", new_plan_path, class: "btn btn-sm me-3" %>
           </li>
           <li class="nav-item dropdown">
-          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
-          </a>
+            <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
+            </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "Mi perfil", user_reviews_path(current_user.id), class: "dropdown-item" %>
               <%= link_to "Mis planes", my_plans_path(@plan), class: "dropdown-item" %>
