@@ -28,7 +28,7 @@ class PlansController < ApplicationController
     @plan = Plan.new(plan_params)
     @plan.user = current_user
     @plan.save!
-    redirect_to plans_path, notice: 'Plan creado exitosamente.'
+    redirect_to plan_path(@plan), notice: 'Plan creado exitosamente.'
     # if @plan.save
     #   redirect_to my_plans_path, notice: 'Plan creado exitosamente.'
     # else
@@ -53,7 +53,7 @@ class PlansController < ApplicationController
 
   def update
     @plan.update(plan_params)
-    redirect_to plans_path
+    redirect_to plan_path(@plan), notice: 'Plan actualizado exitosamente.'
   end
 
   def destroy
