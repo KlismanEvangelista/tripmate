@@ -1,0 +1,59 @@
+.popup-content {
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  padding: 20px;
+  color: #333;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  max-width: 250px;
+}
+
+.popup-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+
+.popup-description {
+  font-size: 14px;
+  margin-bottom: 15px;
+  color: #7f8c8d;
+}
+
+.popup-dates {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #2980b9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-travelers {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #27ae60;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-dates i {
+  margin-right: 8px;
+  color: #3498db; /* Color azul para íconos */
+}
+
+.popup-dates:first-child i {
+  color: #f39c12; /* Naranja para fecha de inicio */
+}
+
+.popup-dates:last-child i {
+  color: #2ecc71; /* Verde para fecha de fin */
+}
+
+.popup-travelers i {
+  margin-right: 8px;
+  color: #27ae60; /* Verde para el ícono de viajeros */
+}
