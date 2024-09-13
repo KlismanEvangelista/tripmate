@@ -88,7 +88,18 @@
             <div class="guest-value"><%= @plan.travelers_quantity%> viajeros</div>
             <i class="bi bi-chevron-down"></i>
           </div>
-          <%= button_to 'Solicitar', plan_travels_path(@plan), method: :post, class: "btn btn-primary btn-reserve" %>
+        <% if user_signed_in? %>
+          <% if current_user != @plan.user %>
+            <% if @exist_travel %>
+              <%= button_to 'Ya lo solicitaste', "#", method: :post, class: "btn btn-primary btn-reserve", disabled: true %>
+            <% else %>
+              <%= button_to 'Solicitar', plan_travels_path(@plan), method: :post, class: "btn btn-primary btn-reserve" %>
+            <% end %>
+          <% end %>
+        <% else %>
+          <%= button_to 'Solicitar', new_user_session_path, class: "btn btn-primary btn-reserve" %>
+        <% end %>
+
         </div>
 
       </div>
