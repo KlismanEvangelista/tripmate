@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div id="showPlan" data-controller="show-plan">
   <div id="flash">
     <% if flash[:notice] %>
       <div class="notice p-3 mb-2 bg-success rounded text-white">
@@ -6,86 +6,99 @@
       </div>
     <% end %>
   </div>
-  <div>
-    <%= link_to plans_path, class: 'btn btn-dark mb-3' do %>
-        <i class="fa-solid fa-arrow-left"></i>
-    <% end %>
-  </div>
-  <div class="plan">
-    <div class="plan-main">
-      <div class="plan-description">
-        <h1><%= @plan.name %></h1>
-        <p>
-          <%= @plan.description %>
-        </p>
-      </div>
-      <% @plan.photos.each do |photo| %>
-      <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-    <% end %>
-      
+  <div class="container mt-5">
+    <div>
+      <%= link_to plans_path, class: 'btn btn-secondary mb-3' do %>
+          <i class="fa-solid fa-arrow-left"></i>
+      <% end %>
     </div>
-    <div class="plan-details">
-      <div id="location">
-        <h4>
-          <span>
-            <i class="fa-solid fa-location-dot"></i>
-          </span>
-          Destino
-        </h4>
-        <p>
-          <%= @plan.location %>
-        </p>
-      </div>
-      <div id="dates">
-        <h4>
-          <span>
-            <i class="fa-regular fa-calendar-check"></i>
-          </span>
-          Fechas
-        </h4>
-        <p>
-          Inicio:
-          <%= @plan.start_date %>
-        </p>
-        <p>
-          Regreso:
-          <%= @plan.end_date %>
-        </p>
-      </div>
-      <div id="tripmates">
-        <h4>
-          <span>
-            <i class="fa-solid fa-user-group"></i>
-          </span>
-          Planner
-        </h4>
-        <div class="tripmates">
-          <div class="tripmate">
-            <%= link_to user_reviews_path(@plan.user) do %>
-              <%= cl_image_tag @plan.user.photo.key, height: 50, width: 50, crop: :fill %>
-              <p>
-                <%= @plan.user.first_name %>
+    <div class="row">
+      <div class="col-12 col-md-5">
+        <p class="title-header"><%= @plan.name %></p>
+        <hr/>
+        <div class="tripmate">
+          <%= link_to user_reviews_path(@plan.user), class:"d-flex align-items-center" do %>
+            <div class="me-3">
+              <% if @plan.user.photo.attached? %>
+                <%= cl_image_tag @plan.user.photo.key, height: 40, width: 40, crop: :fill, class: 'img-fluid' %>
+              <% else %>
+                <%= image_tag "sinimagen.jpg", height: 40, width: 40, crop: :fill, class: 'img-fluid' %>
+              <% end %>
+            </div>
+            <div class="user">
+              <p class="name">Viaja con <%= @plan.user.first_name %></p>
+              <p class="description">
+                Nuevo viajero
               </p>
-            <% end %>
+            </div>
+          <% end %>
+        </div>
+        <hr/>
+        <p class="mb-2"><%= @plan.description %></p>
+        <hr/>
+          <div class="description-plan">
+            <p class="title"><i class="fa-solid fa-plane me-2"></i>Lugares a visitar:</p>
+            <%=raw @plan.location%>
           </div>
+        <div class="d-flex gap-2">
+          <%#= link_to 'Enviar solicitud', plan_travels_path, class: "btn btn-primary" %>
+          <%#= button_to 'Enviar solicitud', plan_travels_path, method: :post, params {key: value}%>
         </div>
       </div>
+      <div class="col-12 col-md-7">
+        <div class="container-carousel">
+          <section id="main-carousel" class="splide" aria-label="My Awesome Gallery">
+            <div class="splide__track">
+              <ul class="splide__list">
+                <% @plan.photos.each do |photo| %>
+                  <li class="splide__slide">
+                    <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </section>
+          <ul id="thumbnails" class="thumbnails">
+            <% @plan.photos.each do |photo| %>
+              <li class="thumbnail">
+                <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="detail-card">
+          <div class="departament">
+            <i class="fa-solid fa-location-dot"></i>
+            <%= @plan.departament  %>
+          </div>
 
-    <div class="container">
-      <div style="width: 100%; height: 600px;"
-      data-controller="start-point"
-      data-start-point-marker-value="<%= @marker.to_json %>"
+          <div class="date-picker">
+            <div class="date-section">
+              <div class="date-label">LLEGADA</div>
+              <div class="date-value"><%= @plan.start_date.strftime('%d/%m/%Y') %></div>
+            </div>
+            <div class="date-section">
+              <div class="date-label">SALIDA</div>
+              <div class="date-value"><%= @plan.end_date  .strftime('%d/%m/%Y') %></div>
+            </div>
+          </div>
 
-      data-start-point-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-    </div>
-      
-    <div class="d-flex gap-2">
-      <%#= link_to 'Enviar solicitud', plan_travels_path, class: "btn btn-primary" %>
-      <%= button_to 'Enviar solicitud', plan_travels_path(@plan), method: :post, class: "btn btn-primary" %>
-      <%#= button_to 'Enviar solicitud', plan_travels_path, method: :post, params {key: value}%>
-      <%= link_to 'Volver a planes', plans_path, class: "btn btn-success" %>
-    </div>
+          <div class="guest-select">
+            <div class="guest-label me-2">VIAJEROS</div>
+            <div class="guest-value"><%= @plan.travelers_quantity%> viajeros</div>
+            <i class="bi bi-chevron-down"></i>
+          </div>
+          <%= button_to 'Solicitar', plan_travels_path(@plan), method: :post, class: "btn btn-primary btn-reserve" %>
+        </div>
+
+      </div>
+      <div class="container">
+        <div style="width: 100%; height: 600px;"
+        data-controller="start-point"
+        data-start-point-marker-value="<%= @marker.to_json %>"
+
+        data-start-point-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+        </div>
+      </div>
   </div>
-  <br>
-
 </div>

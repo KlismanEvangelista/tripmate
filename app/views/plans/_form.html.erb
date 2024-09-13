@@ -44,7 +44,7 @@
 
               <div class="form-group mb-3">
                 <label class="mb-2 fw-bolder">Departamento *</label>
-                <%= f.select :departament, @departaments, { prompt: 'Selecciona una departamento' }, { class: 'form-control', required: true } %>
+                <%= f.select :departament, departaments, { prompt: 'Selecciona una departamento' }, { class: 'form-control', required: true } %>
               </div>
 
               <%= f.input :start_point,

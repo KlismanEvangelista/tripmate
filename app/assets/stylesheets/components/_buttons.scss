@@ -2,7 +2,7 @@
   border-radius: 26px;
 }
 .btn {
-  background-color: $primary;
+  background: linear-gradient(45deg, $primary, $secondary);
   border: 1px solid $primary;
   border-radius: 50px;
   color: white;
@@ -24,42 +24,42 @@
     padding: 8px 14px;
   }
   &:hover, &:focus, &:active{
-    background-color: $primary-600;
+    background: linear-gradient(45deg, $secondary, $primary);
     border-color: $primary-600;
     color: $gray;
     opacity: 0.9;
   }
   &.btn-outline {
-    background-color: transparent;
+    background: transparent;
     border: 1px solid $primary-200;
     box-shadow: none;
     &:hover {
-      background-color: rgba(255, 255, 255, 0.427);
+      background: rgba(255, 255, 255, 0.427);
       border-color: $primary;
     }
   }
   &[disabled] {
-    background-color: gray;
+    background: gray;
     cursor: not-allowed;
     color: white;
     border: none;
   }
   &.btn-secondary {
-    background-color: $secondary;
+    background: $secondary;
     border-radius: $secondary;
     color: white;
     &:hover {
-      background-color: $secondary-600;
+      background: $secondary-600;
       border-color: $secondary-600;
     }
   }
   &.btn-outline-secondary {
-    background-color: transparent;
+    background: transparent;
     border: 1px solid $secondary;
     box-shadow: none;
     color: $secondary;
     &:hover {
-      background-color: rgba(42, 91, 143, 0.427);
+      background: rgba(42, 91, 143, 0.427);
       border-color: $secondary-600;
       color: white;
     }

@@ -1,0 +1,118 @@
+#showPlan {
+  .title-header {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+  .user {
+    .name {
+      color: black;
+      font-weight: 500;
+    }
+    .description {
+      color: $light-gray
+    }
+  }
+  .description-plan {
+    .title {
+      margin-bottom: 12px;
+      font-size: 18px;
+    }
+  }
+  li {
+    margin-bottom: 12px;
+  }
+
+  .detail-card {
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    padding: 20px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-top: 36px;
+
+    .departament {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .night-text {
+      font-size: 1rem;
+      font-weight: normal;
+    }
+
+    .date-picker, .guest-select {
+      display: flex;
+      justify-content: space-between;
+      border: 1px solid #e3e3e3;
+      border-radius: 8px 8px 0 0;
+      .date-section {
+        padding: 10px 14px;
+        width: 50%;
+        &:first-child {
+          border-right: 1px solid #e3e3e3;
+        }
+      }
+      .date-label, .guest-label {
+        font-weight: bold;
+        font-size: 0.8rem;
+      }
+
+      .date-value, .guest-value {
+        font-size: 1rem;
+        margin-top: 5px;
+      }
+    }
+
+    .guest-select {
+      cursor: pointer;
+      padding: 10px 14px;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      justify-content: flex-start;
+    }
+
+    .btn-reserve {
+      width: 100%;
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 24px;
+    }
+
+  }
+}
+
+.container-carousel {
+  max-width: 600px;
+  background: #ffffff;
+  padding: 48px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);;
+  border-radius: 12px;
+  margin-left: auto;
+  .splide__list {
+    .splide__slide {
+      img {
+        width: 100%;
+      }
+    }
+  }
+  .splide__arrow--next {
+    right: -38px;
+  }
+  .splide__arrow--prev {
+    left: -38px;
+  }
+  .splide__arrow {
+    background: transparent;
+     svg{
+      width: 36px;
+      height: 36px;
+    }
+  }
+}
