@@ -40,6 +40,11 @@ class PlansController < ApplicationController
   end
 
   def show
+    @marker = { lat: @plan.latitude,
+              lng: @plan.longitude,
+              info_window_html:
+              render_to_string(partial: "info_window", locals: {plan: @plan})
+            }
   end
 
   def edit

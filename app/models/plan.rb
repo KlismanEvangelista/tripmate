@@ -11,6 +11,9 @@ class Plan < ApplicationRecord
     'Puno', 'San Martín', 'Tacna', 'Tumbes', 'Ucayali'
   ]
 
+  geocoded_by :start_point
+  after_validation :geocode, if: :will_save_change_to_start_point?
+
   validates :name, :description, :location, :travelers_quantity, :start_date, :end_date, :start_point, presence: true
   validates :departament, inclusion: { in: DEPARTAMENTS, message: "%{value} no es un departamento válido" }
   validate :start_date_cannot_be_in_the_past

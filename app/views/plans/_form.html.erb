@@ -47,7 +47,10 @@
                 <%= f.select :departament, @departaments, { prompt: 'Selecciona una departamento' }, { class: 'form-control', required: true } %>
               </div>
 
-              <%= f.input :start_point, label: 'Punto de Partida', input_html: { class: 'form-control required-input' } %>
+              <%= f.input :start_point,
+                input_html: { data: { start_point_autocomplete_target: "startPoint" }, class:"d-none" },
+                wrapper_html: { data: { controller: "start-point-autocomplete", start_point_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"] } }
+              %>
 
               <div class="text-center">
                 <button type="button" class="btn btn-outline-secondary btn-md prev-step me-3" data-action="click->new-plan#prevStep">Anterior</button>
