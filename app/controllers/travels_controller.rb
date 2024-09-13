@@ -8,8 +8,11 @@ class TravelsController < ApplicationController
     @plan = Plan.find(params[:plan_id])
     @travel.user = current_user
     @travel.plan = @plan
-    @travel.save!
-    redirect_to my_travels_path
+    @ticket_available = accepted_travel_limit?(@plan)
+    if @ticket_available == false
+      @travel.save!
+      redirect_to my_travels_path
+    end
   end
 
   def my_travels
@@ -32,5 +35,12 @@ class TravelsController < ApplicationController
 
   def travel_params
     params.require(:travel).permit(:status)
+  end
+
+  def accepted_travel_limit?(plan)
+    num_acepted_travels = plan.travels.where(status: 'aceptado').count
+    travelers_quantity = plan.travelers_quantity
+
+    num_acepted_travels >= travelers_quantity
   end
 end
