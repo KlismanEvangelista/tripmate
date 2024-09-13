@@ -45,6 +45,7 @@ class PlansController < ApplicationController
               info_window_html:
               render_to_string(partial: "info_window", locals: {plan: @plan})
             }
+    @exist_travel = Travel.exists?(user: current_user, plan_id: @plan.id)
   end
 
   def edit

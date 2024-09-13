@@ -1,0 +1,38 @@
+#myTravels {
+  .header {
+    height: 350px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    color: white;
+    margin-bottom: 32px;
+    overflow: hidden;
+    border-radius: 32px;
+    .content {
+      z-index: 3;
+    }
+
+    video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+    .header-text {
+      position: absolute;
+      top: 40%;
+      background-color: #212529c2;
+      h1 {
+        font-family: 'Pacifico', cursive;
+        font-size: 72px;
+      }
+    }
+  }
+  .buttons {
+    margin-top: 12px;
+  }
+}

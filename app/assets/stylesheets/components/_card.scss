@@ -87,4 +87,21 @@
       }
     }
   }
+  &.travel-card {
+    display: flex;
+    flex-direction: row;
+    transition: none;
+    &:hover {
+      transform: none;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+    img {
+      max-height: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .description {
+      -webkit-line-clamp: 2;
+    }
+  }
 }
