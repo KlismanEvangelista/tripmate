@@ -24,4 +24,21 @@
   .nav-link {
     color: white !important
   }
+
+  .notifications {
+    display: flex;
+    align-items: center;
+    i {
+      font-size: 20px;
+      color: white;
+    }
+    .point {
+      width: 8px;
+      height: 8px;
+      border-color: transparent !important;
+      top: 9px;
+      right: 0;
+      animation: pause-vibrate 2s ease-in-out infinite;
+    }
+  }
 }

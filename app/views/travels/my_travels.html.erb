@@ -1,35 +1,60 @@
-<h1>Travels#my_travels</h1>
-<p>Find me in app/views/travels/my_travels.html.erb</p>
-
-  <% @my_travels.each do |t| %>
-    <div>
-      <p>
-        <strong>Nombre del plan:</strong>
-        <%= t.plan.name %>
-      </p>
-      <p>
-        <strong>description del plan:</strong>
-        <%= t.plan.description %>
-      </p>
-      <p>
-        <strong>Nombre del creador del plan:</strong>
-        <%= t.plan.user.first_name %>
-      </p>
-      <p>
-        <strong>Nombre del creador del plan:</strong>
-        <%= t.plan.user.dni %>
-      </p>
-      <p>
-        <strong>location del plan:</strong>
-        <%= t.plan.location %>
-      </p>
-      <p>
-        <strong>estado de la solicitud:</strong>
-        <%= t.status %>
-      </p>
-      <%= link_to new_travel_review_path(t.id), class: "btn btn-primary" do %>
-          <i class="fa-solid fa-star text-white"></i>
-        <% end %>
+<div id="myTravels" class="body container mt-5">
+  <div class="header">
+    <div class="banner">
+      <video autoplay loop muted>
+        <source src="<%= asset_path('my_travels.mp4') %>" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="header-text container content d-flex justify-content-center text-center">
+        <div>
+          <h1 class="bolder">Mis solicitudes</h1>
+        </div>
+      </div>
     </div>
-    <br>
-  <% end %>
+  </div>
+  <div class="row">
+    <% @my_travels.each do |travel| %>
+      <div class="col-12 col-md-6 d-flex align-items-stretch mb-4">
+        <div class="card plan-card travel-card shadow h-100">
+          <div class="col-6">
+            <% if travel.plan.photos.attached? %>
+              <%= cl_image_tag travel.plan.photos.first.key, height: 300, width: 450, crop: :fill, class: 'img-fluid' %>
+            <% else %>
+              <%= image_tag "sinimagen.jpg", height: 300, width: 450, crop: :fill, class: 'img-fluid' %>
+            <% end %>
+          </div>
+          <div class="col-6">
+            <div class="card-body">
+              <h5 class="card-title"><%= travel.plan.name %></h5>
+              <p class="description text-start"><%= travel.plan.description %></p>
+              <p class="card-text">
+                <i class="fa-solid fa-location-dot me-2"></i>Departamento: <%= travel.plan.departament %>
+              </p>
+              <p class="card-text">
+              <i class="fa-regular fa-calendar me-2"></i> Fecha de partida: <%= travel.plan.start_date.strftime('%d/%m/%Y') %>
+              </p>
+              <p class="card-text">
+                <i class="fa-solid fa-user-group me-2"></i> <%= travel.plan.travelers_quantity %> viajeros
+              </p>
+              <p class="card-text">
+                <i class="fa-solid fa-hourglass-half me-2"></i>
+                Estado:
+                <span class="badge ms-2 <%= travel.status == 'solicitado' ? 'text-bg-warning' : travel.status == 'aceptado' ? 'text-bg-success' : 'text-bg-danger' %>">
+                  <%= travel.status %>
+                </span>
+              </p>
+              <div class="buttons d-flex justify-content-end">
+                <%= link_to plan_path(travel.plan), class: "btn btn-primary me-2" do %>
+                  <i class="fa-solid fa-eye"></i>
+                <% end %>
+                <%= link_to new_travel_review_path(travel.id), class: "btn btn-primary" do %>
+                  <i class="fa-regular fa-comment"></i>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

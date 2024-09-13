@@ -88,18 +88,24 @@
             <div class="guest-value"><%= @plan.travelers_quantity%> viajeros</div>
             <i class="bi bi-chevron-down"></i>
           </div>
-
-          <% if @applied %>
-            <%= '' %>
-          <% elsif @ticket_available %>
-            <%= button_to 'Solicitar', plan_travels_path(@plan), method: :post, class: "btn btn-primary btn-reserve" %>
+          <% if user_signed_in? %>
+            <% if current_user != @plan.user %>
+              <% if @applied %>
+                <%= button_to 'Ya lo solicitaste', "#", method: :post, class: "btn btn-primary btn-reserve", disabled: true %>
+              <% elsif @ticket_available %>
+                <%= button_to 'Solicitar', plan_travels_path(@plan), method: :post, class: "btn btn-primary btn-reserve" %>
+              <% else %>
+                <%= button_to 'Agotado', plan_travels_path(@plan), class: "btn btn-primary btn-reserve", disabled: true %>
+              <% end %>
+            <% end %>
           <% else %>
-            <%= button_to 'Agotado', plan_travels_path(@plan), class: "btn btn-primary btn-reserve", disabled: true %>
+            <%= button_to 'Solicitar', new_user_session_path, class: "btn btn-primary btn-reserve" %>
           <% end %>
+
         </div>
 
       </div>
-      <div class="container">
+      <div class="container mt-4">
         <div style="width: 100%; height: 600px;"
         data-controller="start-point"
         data-start-point-marker-value="<%= @marker.to_json %>"
