@@ -4,9 +4,11 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static values = { apiKey: String }
 
-  static targets = ["start-point"]
+  static targets = ["startPoint"]
 
   connect() {
+    console.log("tenemos conexion")
+
     this.geocoder = new MapboxGeocoder({
       accessToken: this.apiKeyValue,
       types: "country,region,place,postcode,locality,neighborhood,address"
@@ -22,10 +24,10 @@ export default class extends Controller {
   }
 
   #setInputValue(event) {
-    this.addressTarget.value = event.result["place_name"]
+    this.startPointTarget.value = event.result["place_name"]
   }
 
   #clearInputValue() {
-    this.addressTarget.value = ""
+    this.startPointTarget.value = ""
   }
 }

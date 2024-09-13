@@ -9,9 +9,8 @@
     <%= f.input :end_date %>
     <%= f.input :departament %>
     <%= f.input :start_point,
-      input_html: {data: {start_point_autocomplete_target: "start-point"}},
-      wrapper_html: {data: {controller: "start-point-autocomplete", start_point_autocomplete_api_key_value:
-      ENV["MAPBOX_API_KEY"]}}
+      input_html: { data: { start_point_autocomplete_target: "startPoint" }, class:"d-none" },
+      wrapper_html: { data: { controller: "start-point-autocomplete", start_point_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"] } }
     %>
     <%= f.input :photos, as: :file, input_html: { multiple: true } %>
   </div>
