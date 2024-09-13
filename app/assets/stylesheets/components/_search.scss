@@ -4,7 +4,9 @@
   border-radius: 16px;
   width: fit-content;
   margin: auto;
-
+  .form-group {
+    margin: 0;
+  }
   .form-control {
     border: 1px solid #ddd;
     border-radius: 0.25rem;

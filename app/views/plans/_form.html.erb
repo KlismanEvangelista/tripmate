@@ -1,24 +1,77 @@
-<%= simple_form_for(@plan) do |f| %>
+<div id="formCreatePlan" data-controller="new-plan">
+  <div class="row w-100 align-items-center">
+    <div class="col-6 text-center">
+      <%= image_tag "https://storage.googleapis.com/gx-global-cms/mkt/4d292b5f-53b8-446e-9258-b518df72beb8.png", class: "image mx-auto" %>
+    </div>
+    <div class="col-6">
+      <div class="card-form">
+        <div class="card-body">
+          <%= simple_form_for(@plan, html: { id: 'multi-step-form', class: 'needs-validation' }) do |f| %>
+            <!-- Pasos -->
+            <ul class="steps nav nav-pills mb-4" id="step-tabs">
+              <li class="nav-item">
+                <div class="nav-link step-item active" id="step1" data-step="0">
+                  <div class="step-number">1</div>
+                </div>
+                <div class="step-label">Información Básica</div>
+              </li>
+              <li class="nav-item">
+                <div class="nav-link step-item" id="step2" data-step="1">
+                  <div class="step-number">2</div>
+                </div>
+                <div class="step-label">Detalles del Viaje</div>
+              </li>
+              <li class="nav-item">
+                <div class="nav-link step-item" id="step3" data-step="2">
+                  <div class="step-number">3</div>
+                </div>
+                <div class="step-label">Fotos</div>
+              </li>
+            </ul>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :description %>
-    <%= f.input :location %>
-    <%= f.input :travelers_quantity %>
-    <%= f.input :start_date %>
-    <%= f.input :end_date %>
-    <%= f.input :departament %>
-    <%= f.input :start_point,
-      input_html: { data: { start_point_autocomplete_target: "startPoint" }, class:"d-none" },
-      wrapper_html: { data: { controller: "start-point-autocomplete", start_point_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"] } }
-    %>
-    <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+            <div id="form-step-1" class="form-step" data-new-plan-target="step">
+              <%= f.input :name, label: 'Nombre del plan', required: true, input_html: { class: 'form-control required-input' } %>
+              <%= f.input :description, label: 'Descripción', required: true, input_html: { class: 'form-control required-input' } %>
+              <%= f.input :location, label: 'Lugares a visitar', as: :text, required: true, input_html: { class: 'form-control required-input rich-editor', 'data-new-plan-target': 'editor', 'data-richeditor': 'rich-editor' } %>
+              <div class="text-center mt-4"><button type="button" class="btn btn-secondary btn-md next-step" data-action="click->new-plan#nextStep">Siguiente</button></div>
+            </div>
+            <div id="form-step-2" class="form-step d-none" data-new-plan-target="step">
+              <%= f.input :travelers_quantity, label: 'Cantidad de Viajeros', input_html: { class: 'form-control required-input' } %>
+
+              <%= f.input :start_date, as: :string, label: 'Fecha de Inicio', input_html: { class: 'form-control required-input', 'data-new-plan-target': 'startDate'} %>
+
+              <%= f.input :end_date, as: :string, label: 'Fecha de Fin', input_html: { class: 'form-control required-input', 'data-new-plan-target': 'endDate'} %>
+
+              <div class="form-group mb-3">
+                <label class="mb-2 fw-bolder">Departamento *</label>
+                <%= f.select :departament, @departaments, { prompt: 'Selecciona una departamento' }, { class: 'form-control', required: true } %>
+              </div>
+
+              <%= f.input :start_point,
+                input_html: { data: { start_point_autocomplete_target: "startPoint" }, class:"d-none" },
+                wrapper_html: { data: { controller: "start-point-autocomplete", start_point_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"] } }
+              %>
+
+              <div class="text-center">
+                <button type="button" class="btn btn-outline-secondary btn-md prev-step me-3" data-action="click->new-plan#prevStep">Anterior</button>
+                <button type="button" class="btn btn-secondary btn-md next-step" data-action="click->new-plan#nextStep">Siguiente</button>
+              </div>
+            </div>
+
+            <div id="form-step-3" class="form-step d-none" data-new-plan-target="step">
+              <h4>Fotos</h4>
+              <div id="photo-previews" data-new-plan-target="preview" class="mb-3"></div>
+
+              <%= f.input :photos, as: :file, input_html: { multiple: true, class: 'form-control', 'data-new-plan-target': 'input' }, label: false %>
+
+              <div class="text-center">
+                <button type="button" class="btn btn-outline-secondary btn-md prev-step me-3" data-action="click->new-plan#prevStep">Anterior</button>
+                <%= f.button :submit, "Enviar", class: 'btn btn-secondary btn-md' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, class: "btn btn-primary" %>
-    <%= link_to 'Volver a planes', plans_path, class: "btn btn-success" %>
-  </div>
-
-  <br>
-<% end %>
+</div>

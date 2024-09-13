@@ -3,15 +3,24 @@ class PlansController < ApplicationController
   before_action :set_plan, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:date].present?
-      @plans = Plan.where("start_date <= ? AND end_date >= ?", params[:date], params[:date])
+    if current_user
+      if params[:date].present?
+        @plans = Plan.where(start_date: params[:date]).where.not(user_id: current_user.id)
+      else
+        @plans = Plan.where.not(user_id: current_user.id)
+      end
     else
-      @plans = Plan.all
+      if params[:date].present?
+        @plans = Plan.where(start_date: params[:date])
+      else
+        @plans = Plan.all
+      end
     end
   end
 
+
   def new
-    @departament = Plan::DEPARTAMENTS
+    @departaments = Plan::DEPARTAMENTS
     @plan = Plan.new
   end
 

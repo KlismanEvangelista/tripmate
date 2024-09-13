@@ -27,6 +27,9 @@
         <strong>estado de la solicitud:</strong>
         <%= t.status %>
       </p>
+      <%= link_to new_travel_review_path(t.id), class: "btn btn-primary" do %>
+          <i class="fa-solid fa-star text-white"></i>
+        <% end %>
     </div>
     <br>
   <% end %>

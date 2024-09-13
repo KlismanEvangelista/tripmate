@@ -1,24 +1,75 @@
-<h1>Plans#show</h1>
-<p>Find me in app/views/plans/show.html.erb</p>
-
-<div class="container">
-
+<div class="container mt-5">
+  <div id="flash">
+    <% if flash[:notice] %>
+      <div class="notice p-3 mb-2 bg-success rounded text-white">
+        <strong><span><i class="fa-solid fa-check"></i> Successful.</span></strong>
+      </div>
+    <% end %>
+  </div>
   <div>
-    <% @plan.photos.each do |photo| %>
+    <%= link_to plans_path, class: 'btn btn-dark mb-3' do %>
+        <i class="fa-solid fa-arrow-left"></i>
+    <% end %>
+  </div>
+  <div class="plan">
+    <div class="plan-main">
+      <div class="plan-description">
+        <h1><%= @plan.name %></h1>
+        <p>
+          <%= @plan.description %>
+        </p>
+      </div>
+      <% @plan.photos.each do |photo| %>
       <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
     <% end %>
-    <p>
-      <strong>Name:</strong>
-      <%= @plan.name %>
-    </p>
-    <p>
-      <strong>description:</strong>
-      <%= @plan.description %>
-    </p>
-    <p>
-      <strong>location:</strong>
-      <%= @plan.location %>
-    </p>
+      
+    </div>
+    <div class="plan-details">
+      <div id="location">
+        <h4>
+          <span>
+            <i class="fa-solid fa-location-dot"></i>
+          </span>
+          Destino
+        </h4>
+        <p>
+          <%= @plan.location %>
+        </p>
+      </div>
+      <div id="dates">
+        <h4>
+          <span>
+            <i class="fa-regular fa-calendar-check"></i>
+          </span>
+          Fechas
+        </h4>
+        <p>
+          Inicio:
+          <%= @plan.start_date %>
+        </p>
+        <p>
+          Regreso:
+          <%= @plan.end_date %>
+        </p>
+      </div>
+      <div id="tripmates">
+        <h4>
+          <span>
+            <i class="fa-solid fa-user-group"></i>
+          </span>
+          Planner
+        </h4>
+        <div class="tripmates">
+          <div class="tripmate">
+            <%= link_to user_reviews_path(@plan.user) do %>
+              <%= cl_image_tag @plan.user.photo.key, height: 50, width: 50, crop: :fill %>
+              <p>
+                <%= @plan.user.first_name %>
+              </p>
+            <% end %>
+          </div>
+        </div>
+      </div>
 
     <div class="container">
       <div style="width: 100%; height: 600px;"
@@ -27,7 +78,7 @@
 
       data-start-point-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
     </div>
-
+      
     <div class="d-flex gap-2">
       <%#= link_to 'Enviar solicitud', plan_travels_path, class: "btn btn-primary" %>
       <%= button_to 'Enviar solicitud', plan_travels_path(@plan), method: :post, class: "btn btn-primary" %>

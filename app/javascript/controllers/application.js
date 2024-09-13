@@ -4,12 +4,15 @@ import ArrowController from "./arrow_controller"
 import HomeController from "./home_controller"
 import FlatpickrController from "./flatpickr_controller"
 import MapController from "./map_controller"
+import NewPlanController from "./new_plan_controller"
 
 const application = Application.start()
 application.register('navbar', NavbarController)
 application.register('scroll', ArrowController)
 application.register('home', HomeController)
+application.register('flatpickr', FlatpickrController)
 application.register('map-filter', MapController)
+application.register('new-plan', NewPlanController)
 
 // Configure Stimulus development experience
 application.debug = false
