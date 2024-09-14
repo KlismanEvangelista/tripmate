@@ -1,6 +1,7 @@
 class PlansController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_plan, only: [:show, :edit, :update, :destroy]
+  before_action :set_travels, only: %i[show]
 
   def index
     if current_user
@@ -17,7 +18,6 @@ class PlansController < ApplicationController
       end
     end
   end
-
 
   def new
     @departaments = Plan::DEPARTAMENTS
@@ -45,7 +45,7 @@ class PlansController < ApplicationController
               info_window_html:
               render_to_string(partial: "info_window", locals: {plan: @plan})
             }
-    @ticket_available = accepted_travel_limit?(@plan)
+    @ticket_available = accepted_travel_limit?(@travels, @plan)
     @applied = applied_plan?(@plan)
   end
 
@@ -77,8 +77,12 @@ class PlansController < ApplicationController
     @plan = Plan.find(params[:id])
   end
 
-  def accepted_travel_limit?(plan)
-    num_acepted_travels = Travel.where(plan_id: @plan.id).count
+  def set_travels
+    @travels = Travel.where(plan_id: @plan.id)
+  end
+
+  def accepted_travel_limit?(travels, plan)
+    num_acepted_travels = travels.count
     travelers_quantity = plan.travelers_quantity
 
     num_acepted_travels < travelers_quantity
