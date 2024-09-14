@@ -1,21 +1,29 @@
 .tripmates {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 16px;
 
   .tripmate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     a {
       padding: 8px;
+
       img {
         border-radius: 50%;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         border: $gray-300 3px solid;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         margin: auto;
+        transition: 0.3s;
 
         &:hover {
           border: $primary 3px solid;
           box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
         }
       }
+
     }
   }
 }

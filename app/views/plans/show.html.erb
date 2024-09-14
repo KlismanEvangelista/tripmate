@@ -40,6 +40,29 @@
             <p class="title"><i class="fa-solid fa-plane me-2"></i>Lugares a visitar:</p>
             <%=raw @plan.location%>
           </div>
+        <hr>
+          <div id="tripmates">
+            <p class="title">
+                <i class="fa-solid fa-user-group"></i>
+              Tripmates
+            </h4>
+            <div class="tripmates">
+              <% if @travels %>
+                <% @travels.each do |travel| %>
+                  <% if travel.status == 'aceptado' %>
+                    <div class="tripmate">
+                      <%= link_to user_reviews_path(travel.user) do %>
+                        <%= cl_image_tag travel.user.photo.key, height: 50, width: 50, crop: :fill, alt: travel.user.first_name %>
+                        <p>
+                          <%= travel.user.first_name %>
+                        </p>
+                      <% end %>
+                    </div>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
         <div class="d-flex gap-2">
           <%#= link_to 'Enviar solicitud', plan_travels_path, class: "btn btn-primary" %>
           <%#= button_to 'Enviar solicitud', plan_travels_path, method: :post, params {key: value}%>
