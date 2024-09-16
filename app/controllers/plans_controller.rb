@@ -83,7 +83,7 @@ class PlansController < ApplicationController
   end
 
   def available_tickets(travels, plan)
-    num_acepted_travels = travels.count
+    num_acepted_travels = travels.where(status: 'aceptado').count
     travelers_quantity = plan.travelers_quantity
 
     available = travelers_quantity - num_acepted_travels
