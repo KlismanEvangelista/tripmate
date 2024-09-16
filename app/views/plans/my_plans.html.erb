@@ -1,55 +1,79 @@
-<div class="container mt-5" data-controller="my-plans">
+<div id="myTravels" class="container body mt-5" data-controller="my-plans">
+  <div class="header">
+    <div class="banner">
+      <video autoplay loop muted>
+        <source src="<%= asset_path('my_travels.mp4') %>" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="header-text container content d-flex justify-content-center text-center">
+        <div>
+          <h1 class="bolder">Mis Viajes</h1>
+        </div>
+      </div>
+    </div>
+  </div>
   <% if flash[:notice] %>
       <div class="notice p-3 mb-2 bg-success rounded text-white">
         <strong><span><i class="fa-solid fa-check"></i> Plan deleted succesfully.</span></strong>
       </div>
     <% end %>
-  <div>
-    <%= link_to plans_path, class: 'btn btn-dark mb-3' do %>
-        <i class="fa-solid fa-arrow-left"></i>
+  <div class="row">
+    <% @my_plans.each do |plan| %>
+      <div class="col-12 col-lg-6 carousel-card">
+        <div class="card plan-card travel-card shadow h-100">
+          <div class="row">
+            <div class="col-7">
+              <div class="card-body">
+                <h4><%= plan.name %></h4>
+                <p class="description text-start"><%= plan.description %></p>
+                <p class="card-text">
+                  <i class="fa-solid fa-location-dot me-2"></i><%= plan.departament %>
+                </p>
+                <p class="card-text">
+                <i class="fa-regular fa-calendar me-2"></i> Fecha de partida: <%= plan.start_date.strftime('%d/%m/%Y') %>
+                </p>
+                <p class="card-text">
+                  <i class="fa-solid fa-user-group me-2"></i> <%= plan.travelers_quantity %> viajeros
+                </p>
+                <div class="d-flex flex-column gap-3 align-items-end">
+                  <div class="d-flex gap-2 justify-content-end align-items-end">
+                    <%= link_to plan_path(plan), class: "btn btn-primary" do %>
+                      <i class="fa-regular fa-eye"></i>
+                    <% end %>
+                    <%= link_to edit_plan_path(plan), class: "btn btn-primary" do %>
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    <% end %>
+                    <%= link_to plan_path(plan),data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" do %>
+                      <i class="fa-solid fa-trash-can"></i>
+                    <% end %>
+                  </div>
+                    <%= link_to my_requests_path, class: "btn btn-primary" do %>
+                      Ver solicitudes
+                    <% end %>
+                </div>
+              </div>
+            </div>
+            <div class="col-5 h-100">
+            <% if plan.photos.attached? %>
+              <div class="carousel-plan splide h-100" aria-label="My Awesome Gallery">
+                <div class="splide__track h-100">
+                  <ul class="splide__list">
+                    <% plan.photos.each do |photo| %>
+                      <li class="splide__slide">
+                        <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+                      </li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            <% else %>
+              <%= image_tag "sinimagen.jpg", height: 300, width: 250, crop: :fill %>
+            <%end%>
+            </div>
+          </div>
+        </div>
+      </div>
     <% end %>
   </div>
-  <br>
-  <br>
-  <% @my_plans.each do |plan| %>
-    <div class="plan">
-      <div class="plan-main">
-        <div class="plan-description">
-          <h4><%= plan.name %></h4>
-          <p>
-            <% if plan.description.size > 250 %>
-              <%= plan.description[1..250] %>...
-            <% else %>
-              <%= plan.description %>
-            <% end %>
-          </p>
-          <p>
-            <span>
-              <i class="fa-solid fa-location-dot"></i>
-            </span>
-            <%= plan.departament %>
-          </p>
-        </div>
-        <div class="pic">
-          <% if plan.photos.attached? %>
-            <%= cl_image_tag plan.photos.first.key, height: 300, width: 250, crop: :fill %>
-          <% else %>
-            <%= image_tag "sinimagen.jpg", height: 300, width: 250, crop: :fill %>
-          <%end%>
-        </div>
-      </div>
-      <div class="d-flex gap-2 p-3 py-1 justify-content-end align-items-end">
-        <%= link_to edit_plan_path(plan), class: "btn btn-primary" do %>
-          <i class="fa-solid fa-pen-to-square"></i>
-        <% end %>
-        <%= link_to plan_path(plan),data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" do %>
-          <i class="fa-solid fa-trash-can"></i>
-        <% end %>
-        <%= link_to my_requests_path, class: "btn btn-primary" do %>
-          <i class="fa-solid fa-user-plus"></i>
-        <% end %>
-      </div>
-    </div>
-    <br>
-  <% end %>
+
 </div>
