@@ -107,9 +107,16 @@
           </div>
 
           <div class="guest-select">
-            <div class="guest-label me-2">VIAJEROS</div>
-            <div class="guest-value"><%= @plan.travelers_quantity%> viajeros</div>
-            <i class="bi bi-chevron-down"></i>
+            <div class="date-section">
+              <div class="guest-label">VIAJEROS</div>
+              <div class="guest-value"><%= @plan.travelers_quantity%> viajeros</div>
+              <i class="bi bi-chevron-down"></i>
+            </div>
+            <div class="date-section">
+              <div class="guest-label">DISPONIBLES</div>
+              <div class="guest-value"><%= @available %> tickets</div>
+              <i class="bi bi-chevron-down"></i>
+            </div>
           </div>
           <% if user_signed_in? %>
             <% if current_user != @plan.user %>
