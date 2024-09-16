@@ -3,9 +3,9 @@
   <div class="row mt-5">
     <% @my_requests.each do |r| %>
       <div class="col-12 col-md-4">
-        <div class="card profile-card h-100"> <!-- Clase h-100 asegura que todas las cards tengan la misma altura -->
+        <div class="card profile-card h-100">
           <div class="card-header p-0">
-            <%= image_tag "user_back.jpg", class: 'card-img-top img-fluid' %> <!-- Imagen de encabezado responsiva -->
+            <%= image_tag "user_back.jpg", class: 'card-img-top img-fluid' %>
             <div class="profile-img">
               <% if r.user.photo.attached? %>
                 <%= cl_image_tag r.user.photo.key, height: 40, width: 40, crop: :fill, class: 'img-fluid rounded-circle' %>
@@ -22,7 +22,7 @@
               <% end %>
             </div>
             <p class="card-text"><%= r.user.occupation%></p>
-            <div class="plan-details text-start flex-grow-1"> <!-- flex-grow-1 para que el contenido ocupe el máximo espacio -->
+            <div class="plan-details text-start flex-grow-1">
               <p>Plan solicitado:</p>
               <h5 class="card-title"><%= r.plan.name %></h5>
               <p class="description text-start"><%= r.plan.description %></p>
