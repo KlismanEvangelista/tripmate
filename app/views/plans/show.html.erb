@@ -52,7 +52,11 @@
                   <% if travel.status == 'aceptado' %>
                     <div class="tripmate">
                       <%= link_to user_reviews_path(travel.user) do %>
-                        <%= cl_image_tag travel.user.photo.key, height: 50, width: 50, crop: :fill, alt: travel.user.first_name %>
+                        <% if travel.user.photo.attached? %>
+                          <%= cl_image_tag travel.user.photo.key, height: 50, width: 50, crop: :fill, alt: travel.user.first_name %>
+                        <% else %>
+                          <%= image_tag 'sinimagen.jpg', height: 50, width: 50, alt: travel.user.first_name %>
+                        <% end %>
                         <p>
                           <%= travel.user.first_name %>
                         </p>
@@ -112,6 +116,11 @@
             <i class="bi bi-chevron-down"></i>
           </div>
           <% if user_signed_in? %>
+              <% plan_users_accepted = @plan.travels.where(status: "aceptado").pluck(:user_id) %>
+              <% user_plan = @plan.user_id %>
+              <% if plan_users_accepted.include?(current_user.id) || user_plan == current_user.id %>
+                  <%= link_to "Iniciar Conversación", new_plan_message_path(@plan), class: "btn btn-primary btn-reserve" %>
+              <% end %>
             <% if current_user != @plan.user %>
               <% if @applied %>
                 <%= button_to 'Ya lo solicitaste', "#", method: :post, class: "btn btn-primary btn-reserve", disabled: true %>
@@ -128,13 +137,14 @@
         </div>
 
       </div>
-      <div class="container mt-4">
-        <div style="width: 100%; height: 600px;"
-        data-controller="start-point"
-        data-start-point-marker-value="<%= @marker.to_json %>"
 
-        data-start-point-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+        <div class="container mt-4">
+          <div style="width: 100%; height: 600px;"
+          data-controller="start-point"
+          data-start-point-marker-value="<%= @marker.to_json %>"
+
+          data-start-point-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+          </div>
         </div>
-      </div>
   </div>
 </div>
