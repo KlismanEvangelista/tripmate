@@ -9,9 +9,11 @@ export default class extends Controller {
 
     flatpickr(this.dateTarget, {
       enableTime: false,
-      dateFormat: "Y-m-d",
+      dateFormat: "d-m-Y",
       minDate: "today",
       defaultDate: initialDate,
+      locale: "es",
+      allowInput: true,
     });
   }
 

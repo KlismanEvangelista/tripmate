@@ -38,4 +38,13 @@
     font-size: 12px;
   }
 
+  .mapboxgl-ctrl-geocoder {
+    width: 100%;
+    box-shadow: none !important;
+    border-radius: 12px;
+    background-color: white;
+    font-size: 14px;
+    border: 1px solid #dfdfdf;
+    max-width: none !important;;
+  }
 }

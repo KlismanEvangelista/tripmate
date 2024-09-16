@@ -44,11 +44,16 @@
 
               <div class="form-group mb-3">
                 <label class="mb-2 fw-bolder">Departamento *</label>
-                <%= f.select :departament, departaments, { prompt: 'Selecciona una departamento' }, { class: 'form-control', required: true } %>
+                <%= f.text_field :departament, list: 'departments_list', class: 'form-control', required: true, placeholder: 'Selecciona un departamento' %>
+                <datalist id="departments_list">
+                  <% departaments.each do |department| %>
+                    <option value="<%= department %>"></option>
+                  <% end %>
+                </datalist>
               </div>
 
               <%= f.input :start_point,
-                input_html: { data: { start_point_autocomplete_target: "startPoint" }, class:"d-none" },
+                input_html: { data: { start_point_autocomplete_target: "Punto de partida" }, class:"d-none" },
                 wrapper_html: { data: { controller: "start-point-autocomplete", start_point_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"] } }
               %>
 
