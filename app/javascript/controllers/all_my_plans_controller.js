@@ -3,7 +3,6 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="all-my-plans"
 export default class extends Controller {
   connect() {
-    console.log('mostrar todos los planes');
     document.querySelectorAll(".carousel-plan").forEach((plan)=> {
       new Splide(plan, {
         type: 'loop',

@@ -7,7 +7,6 @@ export default class extends Controller {
   static targets = ["startPoint"]
 
   connect() {
-    console.log("tenemos conexion")
 
     this.geocoder = new MapboxGeocoder({
       accessToken: this.apiKeyValue,
