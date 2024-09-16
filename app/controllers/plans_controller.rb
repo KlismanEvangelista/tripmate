@@ -46,7 +46,7 @@ class PlansController < ApplicationController
               render_to_string(partial: "info_window", locals: {plan: @plan})
             }
     @ticket_available = accepted_travel_limit?(@travels, @plan)
-    @applied = applied_plan?(@plan)
+    @applied = applied_plan?(@plan) if current_user
   end
 
   def edit
