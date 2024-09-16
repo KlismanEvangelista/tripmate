@@ -6,6 +6,8 @@
 
   img {
     border-radius: 50%;
+    border: $primary 3px solid;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
     padding: auto;
     margin: 0 24px;
   }

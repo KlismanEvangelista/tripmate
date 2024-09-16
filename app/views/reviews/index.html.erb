@@ -1,30 +1,38 @@
 <div class="container body">
   <div class="profile mt-5">
     <% if @user.photo.attached? %>
-      <%= cl_image_tag @user.photo.key, height: 40, width: 40, crop: :fill, class: 'img-fluid' %>
+      <%= cl_image_tag @user.photo.key, height: 120, width: 120, crop: :fill, class: 'img-fluid' %>
     <% else %>
       <%= image_tag "sinimagen.jpg", height: 40, width: 40, crop: :fill, class: 'img-fluid' %>
     <% end %>
     <div>
       <div class="user-info">
+        <!-- user public info -->
         <h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
         <% age = ((Time.zone.now - @user.birth_date.to_time) / 1.year.seconds).floor %>
         <h6><strong><%= age %> años</strong></h6>
         <% match_data = @user.address.match(/[0-9]+\s*,?\s*(.*)$/) %>
         <% public_address = match_data ? match_data[1].strip : '' %>
         <p><i class="fa-solid fa-location-dot"></i>&nbsp<%= public_address %></p>
+
+        <!-- user private info -->
         <% if @user == current_user %>
-        <p><i class="fa-solid fa-address-card"></i>&nbsp<%= @user.dni %></p>
-        <p><i class="fa-solid fa-briefcase"></i>&nbsp<%= @user.occupation %></p>
-        <p><i class="fa-solid fa-envelope"></i>&nbsp<%= @user.email %></p>
-        <p><i class="fa-solid fa-mobile"></i>&nbsp<%= @user.phone %></p>
+          <p><i class="fa-solid fa-briefcase"></i>&nbsp<%= @user.occupation %></p>
+          <p><i class="fa-solid fa-address-card"></i>&nbsp<%= @user.dni %></p>
+          <p><i class="fa-solid fa-envelope"></i>&nbsp<%= @user.email %></p>
+          <p><i class="fa-solid fa-mobile"></i>&nbsp<%= @user.phone %></p>
+          <div class="my-3">
+            <%= link_to edit_user_registration_path, class: "btn btn-primary" do %>
+              <i class="fa-solid fa-pen-to-square"></i> Editar
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>
   </div>
   <hr>
   <div class="reviews">
-    <h4 class="mb-3">Reviews</h4>
+    <h4 class="mb-3">Reseñas</h4>
     <div class="reviews">
       <% @reviews.each do |review| %>
         <div class="review">
