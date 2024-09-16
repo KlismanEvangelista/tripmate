@@ -64,8 +64,7 @@ class PlansController < ApplicationController
   end
 
   def my_plans
-    @plan = Plan.find(params[:id])
-    @my_plans = Plan.all.select { |plan| plan.user_id == current_user.id }
+    @my_plans = Plan.where(user: current_user)
   end
 
   private

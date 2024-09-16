@@ -30,11 +30,12 @@
             <%= plan.departament %>
           </p>
         </div>
-        <% plan_users_accepted = @plan.travels.where(status: "aceptado").pluck(:user_id) %>
-        <% user_plan = @plan.user_id %>
-        <% if plan_users_accepted.include?(current_user.id) || user_plan == current_user.id %>
-            <%= link_to "Iniciar Conversación", new_plan_message_path(@plan), class: "btn btn-primary btn-reserve" %>
+
+        <% user_plan = plan.user_id %>
+        <% if user_plan == current_user.id %>
+            <%= link_to "Iniciar Conversación", new_plan_message_path(plan), class: "btn btn-primary btn-reserve" %>
         <% end %>
+
         <div class="pic">
           <% if plan.photos.attached? %>
             <%= cl_image_tag plan.photos.first.key, height: 300, width: 250, crop: :fill %>
