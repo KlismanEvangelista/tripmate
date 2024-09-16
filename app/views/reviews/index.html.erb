@@ -8,9 +8,13 @@
     <div>
       <div class="user-info">
         <h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
+        <% age = ((Time.zone.now - @user.birth_date.to_time) / 1.year.seconds).floor %>
+        <h6><strong><%= age %> años</strong></h6>
+        <% match_data = @user.address.match(/[0-9]+\s+(.*)$/) %>
+        <% public_address = match_data ? match_data[1].strip : '' %>
+        <p><i class="fa-solid fa-location-dot"></i>&nbsp<%= public_address %></p>
         <% if @user == current_user %>
         <p><i class="fa-solid fa-address-card"></i>&nbsp<%= @user.dni %></p>
-        <p><i class="fa-solid fa-cake-candles"></i>&nbsp <%= @user.birth_date %></p>
         <p><i class="fa-solid fa-briefcase"></i>&nbsp<%= @user.occupation %></p>
         <p><i class="fa-solid fa-envelope"></i>&nbsp<%= @user.email %></p>
         <p><i class="fa-solid fa-mobile"></i>&nbsp<%= @user.phone %></p>
