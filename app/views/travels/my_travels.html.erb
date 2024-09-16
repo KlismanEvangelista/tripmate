@@ -43,12 +43,31 @@
                   <%= travel.status %>
                 </span>
               </p>
+              <p class="card-text">
+                <i class="fa-solid fa-hourglass-half me-2"></i>
+                Reseña:
+                <span class="badge ms-2 <%= travel.status == 'solicitado' ? 'text-bg-warning' : travel.status == 'aceptado' ? 'text-bg-success' : 'text-bg-danger' %>">
+                  <% if travel.reviews.exists? %>
+                    <i class="fa-solid fa-check"></i>
+                  <% else %>
+                    <i class="fa-solid fa-xmark"></i>
+                  <% end %>
+
+                </span>
+              </p>
               <div class="buttons d-flex justify-content-end">
                 <%= link_to plan_path(travel.plan), class: "btn btn-primary me-2" do %>
                   <i class="fa-solid fa-eye"></i>
                 <% end %>
-                <%= link_to new_travel_review_path(travel.id), class: "btn btn-primary" do %>
-                  <i class="fa-regular fa-comment"></i>
+
+                <% if travel.status == 'aceptado' && travel.reviews.exists? %>
+                  <%= link_to user_review_path(travel.user.id, travel.reviews[0].id), class: "btn btn-primary" do %>
+                    <i class="fa-regular fa-comment-dots"></i>
+                  <% end %>
+                <% elsif travel.status == 'aceptado' %>
+                  <%= link_to new_travel_review_path(travel.id), class: "btn btn-primary" do %>
+                    <i class="fa-regular fa-comment"></i>
+                  <% end %>
                 <% end %>
               </div>
             </div>
