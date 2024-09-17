@@ -79,11 +79,21 @@
                             input_html: { placeholder: "Ocupación", class: "form-control", id: "occupation" },
                             label: false %>
               </div>
+              <p>Dirección</p>
               <div>
                 <%= f.input :address,
-                            required: true,
-                            input_html: { placeholder: "Dirección", class: "form-control", id: "address" },
-                            label: false %>
+                            label: false,
+                            input_html: {
+                              required: true,
+                              "data-autocomplete-address-target" => "address",
+                              class: "d-none",
+                              id: "address"
+                              },
+                            wrapper_html: {
+                              class: "form-control required-input",
+                              "data-controller" => "autocomplete-address", "data-autocomplete-address-apikey-value" => ENV["MAPBOX_API_KEY"]
+                            } %>
+
               </div>
               <p>Fecha de nacimiento</p>
               <div>

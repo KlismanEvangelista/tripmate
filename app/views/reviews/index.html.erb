@@ -27,7 +27,12 @@
       </div>
     </div>
     <div class="user-info">
-      <p class="name">Acerca de <%= "#{@user.first_name}" %></p>
+      <div class="d-flex align-items-start">
+        <p class="name">Acerca de <%= "#{@user.first_name}" %></p>
+        <%= link_to edit_user_registration_path, class: "btn btn-primary mt-2 ms-3" do %>
+          <i class="fa-solid fa-pen-to-square"></i>
+        <% end %>
+      </div>
       <div class="row">
         <p class="info col-6">
           <% age = ((Time.zone.now - @user.birth_date.to_time) / 1.year.seconds).floor %>
@@ -39,10 +44,9 @@
           Me dedico a: <%= @user.occupation%>
         </p>
         <p class="info col-6">
-           <% match_data = @user.address.match(/[0-9]+\s+(.*)$/) %>
+          <% match_data = @user.address.match(/[0-9]+\s*,?\s*(.*)$/) %>
           <% public_address = match_data ? match_data[1].strip : '' %>
-          <i class="bi bi-geo-alt"></i>
-          Vive en <%= public_address %>
+          <i class="bi bi-geo-alt"></i>Vive en <%= public_address %>
         </p>
         <p class="description">He recorrido varios países de Europa y Asia, incluyendo Francia, Italia, Tailandia y Vietnam. Me encanta explorar rutas de senderismo y probar la comida callejera en cada destino.</p>
       </div>
