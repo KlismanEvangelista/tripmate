@@ -1,10 +1,7 @@
 <%= simple_form_for [travel, review] do |f| %>
   <%= f.error_notification %>
-  <%= f.input :title %>
-  <%= f.input :comment, as: :text %>
-  <%= f.input :rating, input_html: {
-    min: 0,
-    máx: 5
-     } %>
-  <%= f.submit 'Crear', class: 'btn btn-dark' %>
+  <%= f.input :title, label: 'Titulo de la reseña', required: true, input_html: { class: 'form-control required-input' } %>
+  <%= f.input :comment, label: 'Comentario', as: :text, required: true, input_html: { class: 'form-control required-input rich-editor', 'data-new-review-target': 'editor', 'data-richeditor': 'rich-editor' } %>
+  <%= f.input :rating, collection: (1..5).to_a, label: "Califica a el usuario", input_html: {data: {controller: "star-rating"}} %>
+  <div class="text-end"><%= f.submit 'Crear', class: 'btn btn-primary btn-md' %></div>
 <% end %>
