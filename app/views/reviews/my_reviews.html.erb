@@ -1,33 +1,42 @@
-<div class="container mt-5">
+<div class="body container mt-5">
   <% if flash[:notice] %>
       <div class="notice p-3 mb-2 bg-success rounded text-white">
         <strong><span><i class="fa-solid fa-check"></i> Review deleted succesfully.</span></strong>
       </div>
     <% end %>
-    <h4>My Reviews</h4>
     <div>
-      <% @reviews.each do |review| %>
-      <div  class="review">
-        <div class="review-details">
-          <h4><%= review.travel.plan.name %></h4>
-          <p> <%= "#{review.travel.plan.user.first_name} #{review.travel.plan.user.last_name}" %></p>
-          <p>
-                <span>
-                  <% review.rating.times do %>
-                    <i class="fa-solid fa-star"></i>
+      <%= link_to my_travels_path, class: 'btn btn-dark mb-3' do %>
+          <i class="fa-solid fa-arrow-left"></i>
+      <% end %>
+    </div>
+    <h4>My Reviews</h4>
+    <div class="row d-flex justify-content-between col-12 col-md-6 mb-4">
+            <% @reviews.each do |review| %>
+            <div class="col-6">
+              <div  class="review shadow h-100">
+                <div class="review-details">
+                  <h4><%= review.travel.plan.name %></h4>
+                  <p> <%= "#{review.travel.plan.user.first_name} #{review.travel.plan.user.last_name}" %></p>
+                  <p>
+                        <span>
+                          <% review.rating.times do %>
+                            <i class="fa-solid fa-star"></i>
+                          <% end %>
+                          <% (5 - review.rating).times do %>
+                            <i class="fa-regular fa-star"></i>
+                          <% end %>
+                        </span>
+                          <%= review.title %>
+                      </p>
+                  <%= link_to user_review_path(review.user_id, review.id) do %>
+                    <i class="fa-solid fa-eye"></i>
                   <% end %>
-                  <% (5 - review.rating).times do %>
-                    <i class="fa-regular fa-star"></i>
-                  <% end %>
-                </span>
-                  <%= review.title %>
-              </p>
-          <%= link_to user_review_path(review.user_id, review.id) do %>
-            <i class="fa-solid fa-eye"></i>
-          <% end %>
+                </div>
+              </div>
+            </div>
+            <% end %>
+          </div>
         </div>
       </div>
-    <% end %>
-
     </div>
   </div>

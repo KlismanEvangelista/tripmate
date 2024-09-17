@@ -35,7 +35,7 @@
       <%= link_to edit_review_path(@review), class: 'btn btn-dark' do %>
         Edit
       <% end %>
-      <%= link_to review_path(@review), class: 'btn btn-dark', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+      <%= link_to review_path(@review) || my_reviews_path, class: 'btn btn-dark', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
         Delete
       <% end %>
     </div>
