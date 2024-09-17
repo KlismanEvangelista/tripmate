@@ -187,3 +187,18 @@
     }
   }
 }
+
+.info-profile {
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  width: 302px;
+  border: transparent;
+}
+
+.profile-plans {
+  img {
+    max-height: 140px !important;
+    min-height: 140px;
+  }
+}

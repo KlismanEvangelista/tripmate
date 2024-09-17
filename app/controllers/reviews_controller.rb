@@ -11,6 +11,13 @@ class ReviewsController < ApplicationController
     # reviews of a user
     if @user.present?
       @reviews = @user.plans.map(&:travels).flatten.map(&:reviews).flatten
+      @reviews = @reviews.sort_by(&:created_at).reverse
+
+      total_reviews = @reviews.size
+      total_rating = @reviews.sum(&:rating)
+      @rating = total_reviews > 0 ? (total_rating.to_f / total_reviews).round(2) : 0
+
+      @plans = @user.plans.limit(4)
     else
       @reviews = Review.none
     end
