@@ -39,21 +39,16 @@
               <p class="card-text">
                 <i class="fa-solid fa-hourglass-half me-2"></i>
                 Estado:
-                <span class="badge ms-2 <%= travel.status == 'solicitado' ? 'text-bg-warning' : travel.status == 'aceptado' ? 'text-bg-success' : 'text-bg-danger' %>">
-                  <%= travel.status %>
+                <span class="badge ms-2 <%= travel.status == 'solicitado' ? 'text-bg-warning text-white' : travel.status == 'aceptado' ? 'text-bg-primary  text-white' : 'text-bg-danger  text-white' %>">
+                  <%= travel.status.capitalize %>
                 </span>
               </p>
-
-              <% user_travel = travel.user_id %>
-              <% if user_travel == current_user.id && travel.status == "aceptado" %>
-                  <%= link_to "Iniciar Conversación", new_plan_message_path(travel.plan), class: "btn btn-primary btn-reserve" %>
-              <% end %>
 
               <% if travel.status == 'aceptado' %>
                 <p class="card-text">
                   <i class="fa-solid fa-hourglass-half me-2"></i>
                   Reseña:
-                  <span class="badge ms-2 <%= travel.reviews.exists? == false ? 'text-bg-warning' : travel.reviews.exists? == true ? 'text-bg-success' : 'text-bg-danger' %>">
+                  <span class="badge ms-2 <%= travel.reviews.exists? == false ? 'text-bg-warning text-white' : travel.reviews.exists? == true ? 'text-bg-primary text-white' : 'text-bg-danger text-white' %>">
                     <% if travel.reviews.exists? %>
                       <i class="fa-solid fa-check"></i>
                     <% else %>
@@ -62,21 +57,31 @@
                   </span>
                 </p>
               <% end %>
+
               <div class="buttons d-flex justify-content-end">
+
                 <%= link_to plan_path(travel.plan), class: "btn btn-primary me-2" do %>
                   <i class="fa-solid fa-eye"></i>
                 <% end %>
 
+                <% user_travel = travel.user_id %>
+                <% if user_travel == current_user.id && travel.status == "aceptado" %>
+                    <%= link_to new_plan_message_path(travel.plan), class: "btn btn-primary btn-reserve me-2" do %>
+                      <i class="fa-regular fa-comment"></i>
+                    <% end %>
+                <% end %>
+
                 <% if travel.status == 'aceptado' && travel.reviews.exists? %>
                   <%= link_to user_review_path(travel.user.id, travel.reviews[0].id), class: "btn btn-primary" do %>
-                    <i class="fa-regular fa-comment-dots"></i>
+                    <i class="fa-solid fa-star"></i>
                   <% end %>
                 <% elsif travel.status == 'aceptado' %>
                   <%= link_to new_travel_review_path(travel.id), class: "btn btn-primary" do %>
-                    <i class="fa-regular fa-comment"></i>
+                    <i class="fa-regular fa-star"></i>
                   <% end %>
                 <% end %>
               </div>
+
             </div>
           </div>
         </div>
