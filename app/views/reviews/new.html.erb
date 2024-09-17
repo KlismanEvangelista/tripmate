@@ -1,4 +1,46 @@
-<div class="container mt-5">
-  <h1>New Review</h1>
-  <%= render 'form', travel: @travel, review: @review %>
+<div id="newReview" class="container body mt-5">
+  <div class="row">
+    <div class="col-5">
+      <div class="travel card plan-card shadow h-100">
+        <% if @travel.plan.photos.attached? %>
+          <%= cl_image_tag @travel.plan.photos.first.key, height: 300, width: 450, crop: :fill, class: 'img-fluid' %>
+        <% else %>
+          <%= image_tag "sinimagen.jpg", height: 300, width: 450, crop: :fill, class: 'img-fluid' %>
+        <% end %>
+        <div class="card-body d-flex flex-column justify-content-between">
+          <h5 class="card-title"><%= @travel.plan.name %></h5>
+          <p class="description text-start"><%= @travel.plan.description %></p>
+          <p class="card-text">
+            <i class="fa-regular fa-clock me-2"></i>
+            <%= (@travel.plan.end_date - @travel.plan.start_date).to_i %> Noches,
+            <%= (@travel.plan.end_date - @travel.plan.start_date).to_i + 1 %> Días
+          </p>
+          <p class="card-text">
+          <i class="fa-regular fa-calendar me-2"></i> Fecha de partida: <%= @travel.plan.start_date.strftime('%d/%m/%Y') %>
+          </p>
+          <p class="card-text">
+            <i class="fa-solid fa-user-group me-2"></i> <%= @travel.plan.travelers_quantity %> viajeros
+          </p>
+          <div class="card-text flex-column align-items-start justify-content-center">
+            <p class="my-2"><strong>Creador del viaje</strong></p>
+            <div class="d-flex card-user">
+              <% if @travel.plan.user.photo.attached? %>
+                <%= cl_image_tag @travel.plan.user.photo.key, height: 48, width: 48, crop: :fill, class: 'avatar img-fluid rounded-circle' %>
+              <% else %>
+                <%= image_tag "sinimagen.jpg", height: 48, width: 48, crop: :fill, class: 'avatar img-fluid rounded-circle' %>
+              <% end %>
+              <div>
+                <p><strong><%= @travel.plan.user.first_name %></strong></p>
+                <p class="traveler">Viajera</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-7 form-section" data-controller="new-review">
+      <h2>¿Cómo te fue en tu aventura? Deja tu reseña</h2>
+      <%= render 'form', travel: @travel, review: @review %>
+    </div>
+  </div>
 </div>

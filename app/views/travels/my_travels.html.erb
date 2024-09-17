@@ -43,7 +43,6 @@
                   <%= travel.status.capitalize %>
                 </span>
               </p>
-
               <% if travel.status == 'aceptado' %>
                 <p class="card-text">
                   <i class="fa-solid fa-hourglass-half me-2"></i>
@@ -57,20 +56,16 @@
                   </span>
                 </p>
               <% end %>
-
               <div class="buttons d-flex justify-content-end">
-
                 <%= link_to plan_path(travel.plan), class: "btn btn-primary me-2" do %>
                   <i class="fa-solid fa-eye"></i>
                 <% end %>
-
                 <% user_travel = travel.user_id %>
                 <% if user_travel == current_user.id && travel.status == "aceptado" %>
                     <%= link_to new_plan_message_path(travel.plan), class: "btn btn-primary btn-reserve me-2" do %>
                       <i class="fa-regular fa-comment"></i>
                     <% end %>
                 <% end %>
-
                 <% if travel.status == 'aceptado' && travel.reviews.exists? %>
                   <%= link_to user_review_path(travel.user.id, travel.reviews[0].id), class: "btn btn-primary" do %>
                     <i class="fa-solid fa-star"></i>
@@ -81,7 +76,6 @@
                   <% end %>
                 <% end %>
               </div>
-
             </div>
           </div>
         </div>

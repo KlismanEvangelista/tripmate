@@ -51,11 +51,10 @@
                       Ver solicitudes
                     <% end %>
 
-                  <% user_plan = plan.user_id %>
-                  <% if user_plan == current_user.id %>
-                      <%= link_to "Iniciar Conversación", new_plan_message_path(plan), class: "btn btn-primary btn-reserve" %>
-                  <% end %>
-
+                    <% user_plan = plan.user_id %>
+                    <% if user_plan == current_user.id %>
+                        <%= link_to "Iniciar Conversación", new_plan_message_path(plan), class: "btn btn-primary btn-reserve" %>
+                    <% end %>
                 </div>
               </div>
             </div>
