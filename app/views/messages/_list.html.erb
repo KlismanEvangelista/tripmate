@@ -1,0 +1,10 @@
+<div class="list-group">
+  <% plans.each do |plan| %>
+    <div class="list-group-item">
+      <%= link_to plan.name,
+                  new_plan_message_path(plan),
+                  class: "list-group-item list-group-item-action",
+                  data: { turbo_frame: :message_details } %>
+      </div>
+  <% end %>
+</div>

@@ -14,7 +14,7 @@
       <ul class="navbar-nav ms-auto">
         <% if user_signed_in? %>
           <li class="nav-item">
-            <%= link_to "Mensajes", "#", class: "nav-link me-4" %>
+            <%= link_to "Mensajes", messages_path, class: "nav-link me-4" %>
           </li>
           <li class="nav-item d-flex">
             <%= link_to my_requests_path, class: "notifications position-relative me-3 dropdown-item" do %>
