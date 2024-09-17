@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'my_plans', to: 'plans#my_plans', as: :my_plans
   resources :plans do
     resources :travels, only: %i[create]
+    resources :messages, only: %i[new create]
   end
   # patch 'plans/:id/travels/', to: 'travels#rejected'
   # travels

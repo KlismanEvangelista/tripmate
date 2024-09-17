@@ -43,6 +43,12 @@
                   <%= travel.status %>
                 </span>
               </p>
+
+              <% user_travel = travel.user_id %>
+              <% if user_travel == current_user.id && travel.status == "aceptado" %>
+                  <%= link_to "Iniciar Conversación", new_plan_message_path(travel.plan), class: "btn btn-primary btn-reserve" %>
+              <% end %>
+
               <% if travel.status == 'aceptado' %>
                 <p class="card-text">
                   <i class="fa-solid fa-hourglass-half me-2"></i>

@@ -2,6 +2,7 @@ class Plan < ApplicationRecord
   belongs_to :user
   has_many :travels, dependent: :destroy
   has_many_attached :photos
+  has_many :messages
   # has_one_attached :photo
 
   DEPARTAMENTS = [
