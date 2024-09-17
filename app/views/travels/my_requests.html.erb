@@ -2,49 +2,51 @@
   <h1 class="bold mb-2">Mis solicitudes</h1>
   <div class="row mt-5">
     <% @my_requests.each do |r| %>
-      <div class="col-12 col-md-4">
-        <div class="card profile-card h-100">
-          <div class="card-header p-0">
-            <%= image_tag "user_back.jpg", class: 'card-img-top img-fluid' %>
-            <div class="profile-img">
-              <% if r.user.photo.attached? %>
-                <%= cl_image_tag r.user.photo.key, height: 40, width: 40, crop: :fill, class: 'img-fluid rounded-circle' %>
-              <% else %>
-                <%= image_tag "sinimagen.jpg", height: 40, width: 40, crop: :fill, class: 'img-fluid rounded-circle' %>
-              <% end %>
-            </div>
-          </div>
-          <div class="card-body text-center d-flex flex-column">
-            <div class="d-flex justify-content-center align-items-center">
-              <h5 class="card-title"><%= r.user.first_name%></h5>
-              <%= link_to user_reviews_path(r.user.id), class: "icon-see ms-2" do %>
-                <i class="fa-regular fa-eye"></i>
-              <% end %>
-            </div>
-            <p class="card-text"><%= r.user.occupation%></p>
-            <div class="plan-details text-start flex-grow-1">
-              <p>Plan solicitado:</p>
-              <h5 class="card-title"><%= r.plan.name %></h5>
-              <p class="description text-start"><%= r.plan.description %></p>
-              <p class="card-text">
-                <i class="fa-regular fa-calendar me-2"></i> Fecha de partida: <%= r.plan.start_date.strftime('%d/%m/%Y') %>
-              </p>
-              <p class="card-text">
-                <i class="fa-solid fa-user-group me-2"></i> <%= r.plan.travelers_quantity %> viajeros
-              </p>
-              <p class="card-text">
-                <i class="fa-solid fa-hourglass-half me-2"></i>Estado: <%= r.status %>
-              </p>
-            </div>
-            <% if r.status == "solicitado" %>
-              <div class="d-flex justify-content-around container-btns">
-                <%= button_to 'Aceptar', travel_path(r), method: :patch, class: "btn btn-secondary btn-sm mb-2" %>
-                <%= button_to 'Rechazar', travel_path(r), method: :patch, class: "btn btn-outline-secondary btn-sm mb-2" %>
+      <% if r.plan_id == @plan.to_i %>
+        <div class="col-12 col-md-4">
+          <div class="card profile-card h-100">
+            <div class="card-header p-0">
+              <%= image_tag "user_back.jpg", class: 'card-img-top img-fluid' %>
+              <div class="profile-img">
+                <% if r.user.photo.attached? %>
+                  <%= cl_image_tag r.user.photo.key, height: 40, width: 40, crop: :fill, class: 'img-fluid rounded-circle' %>
+                <% else %>
+                  <%= image_tag "sinimagen.jpg", height: 40, width: 40, crop: :fill, class: 'img-fluid rounded-circle' %>
+                <% end %>
               </div>
-            <% end %>
+            </div>
+            <div class="card-body text-center d-flex flex-column">
+              <div class="d-flex justify-content-center align-items-center">
+                <h5 class="card-title"><%= r.user.first_name%></h5>
+                <%= link_to user_reviews_path(r.user.id), class: "icon-see ms-2" do %>
+                  <i class="fa-regular fa-eye"></i>
+                <% end %>
+              </div>
+              <p class="card-text"><%= r.user.occupation%></p>
+              <div class="plan-details text-start flex-grow-1">
+                <p>Plan solicitado:</p>
+                <h5 class="card-title"><%= r.plan.name %></h5>
+                <p class="description text-start"><%= r.plan.description %></p>
+                <p class="card-text">
+                  <i class="fa-regular fa-calendar me-2"></i> Fecha de partida: <%= r.plan.start_date.strftime('%d/%m/%Y') %>
+                </p>
+                <p class="card-text">
+                  <i class="fa-solid fa-user-group me-2"></i> <%= r.plan.travelers_quantity %> viajeros
+                </p>
+                <p class="card-text">
+                  <i class="fa-solid fa-hourglass-half me-2"></i>Estado: <%= r.status %>
+                </p>
+              </div>
+              <% if r.status == "solicitado" %>
+                <div class="d-flex justify-content-around container-btns">
+                  <%= button_to 'Aceptar', travel_path(r), method: :patch, class: "btn btn-secondary btn-sm mb-2" %>
+                  <%= button_to 'Rechazar', travel_path(r), method: :patch, class: "btn btn-outline-secondary btn-sm mb-2" %>
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 </div>
