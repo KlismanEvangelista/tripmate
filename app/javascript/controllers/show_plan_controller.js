@@ -3,7 +3,6 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="show-plan"
 export default class extends Controller {
   connect() {
-    console.log('show plan');
 
     // Inicializa el carrusel principal
     this.splide = new Splide('#main-carousel', {

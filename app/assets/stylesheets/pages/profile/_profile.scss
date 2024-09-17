@@ -1,0 +1,138 @@
+#myProfile {
+  .container-info {
+    gap: 80px;
+  }
+  .info-profile {
+    position: sticky;
+    top: 97px;
+    padding: 16px 0;
+    min-width: 340px
+  }
+  .image {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    img {
+      margin-bottom: 16px;
+      border-radius: 50%;
+    }
+    .name {
+      font-size: 24px;
+      font-weight: 600;
+    }
+  }
+  .details {
+    margin-left: auto;
+    small {
+      font-size: 10px;
+      font-weight: 500;
+    }
+    p {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 24px;
+    }
+    .detail {
+      padding: 10px 8px;
+    }
+    .detail:not(:last-child) {
+      border-bottom: 1px solid #cfcfcf;
+    }
+  }
+  .reviews {
+    max-width: 914px;
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      .title {
+        font-size: 18px;
+        font-weight: normal;
+        margin-bottom: 12px;
+      }
+      .description {
+        font-style: italic;
+        margin-bottom: 24px;
+        font-size: 14px;
+      }
+      img {
+        border: 1px solid #c5c5c5
+      }
+      .user {
+        margin-left: 16px;
+        .stars {
+          font-size: 10px;
+          color: $primary;
+        }
+        &-name {
+          font-size: 16px;
+          font-weight: 600;
+        }
+      }
+    }
+    .splide__arrows {
+      display: flex;
+      position: absolute;
+      right: 18px;
+      top: -87px;
+      gap: 12px;
+      .splide__arrow {
+        position: initial;
+        transform: none;
+      }
+    }
+    .title {
+      margin-bottom: 50px;
+      font-size: 24px;
+      font-weight: 600;
+    }
+  }
+  .user-info {
+    max-width: 800px;
+    margin: auto;
+    .name {
+      font-size: 40px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    .info {
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+      margin-bottom: 16px;
+      i {
+        font-size: 24px;
+        margin-right: 16px;
+      }
+    }
+    .description {
+      font-size: 18px;
+      max-width: 800px;
+      margin-top: 16px;
+    }
+    hr {
+      margin: 42px 0;
+      border-color: #a0a0a0;
+    }
+  }
+  .travels {
+    .title {
+      margin-bottom: 50px;
+      font-size: 24px;
+      font-weight: 600;
+    }
+  }
+  .plan-card {
+    .card-title {
+      font-size: 16px;
+    }
+    .description {
+      font-size: 12px;
+      color: #848484;
+      margin-top: 0;
+    }
+  }
+}

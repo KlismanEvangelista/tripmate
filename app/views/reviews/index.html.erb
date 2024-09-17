@@ -1,58 +1,121 @@
-<div class="container body">
-  <div class="profile mt-5">
-    <% if @user.photo.attached? %>
-      <%= cl_image_tag @user.photo.key, height: 40, width: 40, crop: :fill, class: 'img-fluid' %>
-    <% else %>
-      <%= image_tag "sinimagen.jpg", height: 40, width: 40, crop: :fill, class: 'img-fluid' %>
-    <% end %>
-    <div>
-      <div class="user-info">
-        <h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
-        <% if @user == current_user %>
-        <p><i class="fa-solid fa-address-card"></i>&nbsp<%= @user.dni %></p>
-        <p><i class="fa-solid fa-cake-candles"></i>&nbsp <%= @user.birth_date %></p>
-        <p><i class="fa-solid fa-briefcase"></i>&nbsp<%= @user.occupation %></p>
-        <p><i class="fa-solid fa-envelope"></i>&nbsp<%= @user.email %></p>
-        <p><i class="fa-solid fa-mobile"></i>&nbsp<%= @user.phone %></p>
+<div id="myProfile" class="container body mt-5" data-controller="profile">
+  <div class="container-info d-flex align-items-start">
+    <div class="card info-profile d-flex flex-row">
+      <div class="image">
+        <% if @user.photo.attached? %>
+          <%= cl_image_tag @user.photo.key, height: 104, width: 104, crop: :fill, class: 'img-fluid' %>
+        <% else %>
+          <%= image_tag "sinimagen.jpg", height: 104, width: 104, crop: :fill, class: 'img-fluid' %>
         <% end %>
+        <p class="name"><%= "#{@user.first_name} #{@user.last_name}" %></p>
+        <p>TripMater</p>
+      </div>
+      <div class="d-flex flex-column details">
+        <div class="detail">
+          <p><%=@reviews.count%><p>
+          <small>Evaluaciones</small>
+        </div>
+        <div class="detail">
+          <p><%=@rating%><p>
+          <small>Calificación</small>
+        </div>
+        <div class="detail">
+          <% days = (Time.zone.now.to_date - @user.created_at.to_date).to_i %>
+          <p><%= days %></p>
+          <small>días como viajero</small>
+        </div>
       </div>
     </div>
-  </div>
-  <hr>
-  <div class="reviews">
-    <h4 class="mb-3">Reviews</h4>
-    <div class="reviews">
-      <% @reviews.each do |review| %>
-        <div class="review">
-          <% if review.user.photo.attached? %>
-            <%= cl_image_tag review.user.photo.key, height: 40, width: 40, crop: :fill, class: 'img-fluid' %>
-          <% else %>
-            <%= image_tag "sinimagen.jpg", height: 40, width: 40, crop: :fill, class: 'img-fluid' %>
-          <% end %>
-          <div class="review-details">
-            <p><small><i><%= "#{review.user.first_name} #{review.user.last_name}" %></i></small></p>
-            <p>
-              <span>
-                <% review.rating.times do %>
-                  <i class="fa-solid fa-star"></i>
+    <div class="user-info">
+      <div class="d-flex align-items-start">
+        <p class="name">Acerca de <%= "#{@user.first_name}" %></p>
+        <%= link_to edit_user_registration_path, class: "btn btn-primary mt-2 ms-3" do %>
+          <i class="fa-solid fa-pen-to-square"></i>
+        <% end %>
+      </div>
+      <div class="row">
+        <p class="info col-6">
+          <% age = ((Time.zone.now - @user.birth_date.to_time) / 1.year.seconds).floor %>
+          <i class="bi bi-cake2"></i>
+          Tiene <%= age %> años
+        </p>
+        <p class="info col-6">
+          <i class="bi bi-briefcase"></i>
+          Me dedico a: <%= @user.occupation%>
+        </p>
+        <p class="info col-6">
+          <% match_data = @user.address.match(/[0-9]+\s*,?\s*(.*)$/) %>
+          <% public_address = match_data ? match_data[1].strip : '' %>
+          <i class="bi bi-geo-alt"></i>Vive en <%= public_address %>
+        </p>
+        <p class="description">Descripción</p>
+      </div>
+      <hr/>
+      <div class="reviews">
+        <p class="title">Lo que dicen los tripmater sobre <%= @user.first_name %></p>
+        <div class="">
+          <div class="carousel-reviews splide h-100">
+            <div class="splide__track h-100">
+              <ul class="splide__list">
+                <% @reviews.each do |review| %>
+                  <div class="splide__slide">
+                    <div class="card">
+                      <div>
+                        <p class="title"><%=review.title%></p>
+                        <p class="description">"... <%=review.comment%>"</p>
+                      </div>
+                      <div class="d-flex align-items-start">
+                        <% if review.user.photo.attached? %>
+                          <%= cl_image_tag review.user.photo.key, height: 48, width: 48, crop: :fill, class: 'img-fluid rounded-circle' %>
+                        <% else %>
+                          <%= image_tag "sinimagen.jpg", height: 48, width: 48, crop: :fill, class: 'img-fluid rounded-circle' %>
+                        <% end %>
+                        <div class="user">
+                          <p class="user-name"><%= "#{review.user.first_name} #{review.user.last_name}" %></p>
+                          <p class="stars">
+                            <span>
+                              <% review.rating.times do %>
+                                <i class="fa-solid fa-star"></i>
+                              <% end %>
+                              <% (5 - review.rating).times do %>
+                                <i class="fa-regular fa-star"></i>
+                              <% end %>
+                            </span>
+                          </p>
+                          <p><%= review.created_at.strftime('%d/%m/%Y') %></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 <% end %>
-                <% (5 - review.rating).times do %>
-                  <i class="fa-regular fa-star"></i>
-                <% end %>
-              </span>
-              <strong>
-                <%= review.title %>
-                </strong>
-            </p>
-            <p class="text-mutted">
-              <i class="fa-solid fa-quote-left text-muted"></i>
-              <small>
-                <%= review.comment %>
-                </small>
-            </p>
+              </ul>
+            </div>
           </div>
         </div>
-      <% end %>
+      </div>
+      <hr/>
+      <div class="travels">
+        <p class="title">Viajes de <%= @user.first_name %></p>
+        <div class="row mt-4 mb-5">
+          <% @plans.each do |plan| %>
+              <div class="col-4 d-flex align-items-stretch">
+            <%= link_to plan_path(plan), class: "" do %>
+                <div class="card plan-card profile-plans shadow h-100">
+                  <% if plan.photos.attached? %>
+                    <%= cl_image_tag plan.photos.first.key, height: 300, width: 450, crop: :fill, class: 'img-fluid' %>
+                  <% else %>
+                    <%= image_tag "sinimagen.jpg", height: 300, width: 450, crop: :fill, class: 'img-fluid' %>
+                  <% end %>
+                  <div class="card-body d-flex flex-column justify-content-between">
+                    <h5 class="card-title"><%= plan.name %></h5>
+                    <p class="description text-start"><%= plan.description %></p>
+                  </div>
+                </div>
+            <% end %>
+              </div>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -45,8 +45,9 @@ class PlansController < ApplicationController
               info_window_html:
               render_to_string(partial: "info_window", locals: {plan: @plan})
             }
-    @ticket_available = accepted_travel_limit?(@travels, @plan)
-    @applied = applied_plan?(@plan)
+    @ticket_available = available_tickets(@travels, @plan).positive?
+    @available = available_tickets(@travels, @plan)
+    @applied = applied_plan?(@plan) if current_user
   end
 
   def edit
@@ -81,11 +82,12 @@ class PlansController < ApplicationController
     @travels = Travel.where(plan_id: @plan.id)
   end
 
-  def accepted_travel_limit?(travels, plan)
-    num_acepted_travels = travels.count
+  def available_tickets(travels, plan)
+    num_acepted_travels = travels.where(status: 'aceptado').count
     travelers_quantity = plan.travelers_quantity
 
-    num_acepted_travels < travelers_quantity
+    available = travelers_quantity - num_acepted_travels
+    return available
   end
 
   def applied_plan?(plan)
