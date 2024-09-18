@@ -2,6 +2,17 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="map"
 export default class extends Controller {
+
+  connect() {
+    console.log("Connecting to data-controller");
+    const urlParams = new URLSearchParams(window.location.search);
+    const department = urlParams.get('department');
+
+    if(department) {
+      this.filterCardsByDepartment(department);
+      this.activeDepartment(department)
+    }
+  }
   initialize() {
     this.previousTarget = null;
   }
@@ -21,7 +32,6 @@ export default class extends Controller {
     }
 
   filterCardsByDepartment(selectedDepartment) {
-    console.log(selectedDepartment);
     const cards = document.querySelectorAll(".plan-card");
 
     cards.forEach(card => {
@@ -45,6 +55,19 @@ export default class extends Controller {
 
     if (svg !== this.previousTarget) {
       svg.style.fill = "";
+    }
+  }
+
+  activeDepartment(department) {
+    const departmentElement = document.querySelector(`[data-department='${department}']`);
+
+    if (departmentElement) {
+      if (this.previousTarget) {
+        this.previousTarget.style.fill = "";
+      }
+
+      departmentElement.style.fill = "#04477e";
+      this.previousTarget = departmentElement;
     }
   }
 }
