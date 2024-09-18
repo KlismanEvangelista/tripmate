@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
+  get 'messages', to: 'messages#index'
+  get 'messages/:id', to: 'messages#show'
   # plans
   get 'my_plans', to: 'plans#my_plans', as: :my_plans
   resources :plans do
