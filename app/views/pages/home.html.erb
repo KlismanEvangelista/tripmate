@@ -68,7 +68,7 @@
             <div class="splide__list">
               <% @locations.each do |location| %>
                 <div class="splide__slide">
-                  <div class="card-departament">
+                  <div class="card-departament" data-department="<%= location['name'] %>" data-action="click->home#filter" data-home-target="department">
                     <img src="<%= asset_path("departaments/#{location['image']}") %>" class="card-img-top" alt="<%= location['name'] %>">
                     <div class="card-body">
                       <h5 class="card-title"><%= location['name'] %></h5>
