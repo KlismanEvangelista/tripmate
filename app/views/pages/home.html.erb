@@ -11,7 +11,11 @@
       <div>
         <h1 class="bolder">Explora</h1>
         <p class="subtitle">y conecta con personas que comparten tus mismos destinos y experiencias con TripMate</p>
+        <% if user_signed_in? %>
+        <%= link_to 'Conoce más', plans_path, class: 'btn btn-outline btn-xl' %>
+        <% else %>
         <%= link_to 'Conoce más',  new_registration_path(:user), class: 'btn btn-outline btn-xl' %>
+        <% end %>
       </div>
     </div>
   </div>
