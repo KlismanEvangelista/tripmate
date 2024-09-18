@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_16_162150) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_18_180524) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -87,6 +87,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_16_162150) do
     t.string "status", default: "solicitado"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "viewed"
+    t.string "default"
+    t.string "false"
     t.index ["plan_id"], name: "index_travels_on_plan_id"
     t.index ["user_id"], name: "index_travels_on_user_id"
   end

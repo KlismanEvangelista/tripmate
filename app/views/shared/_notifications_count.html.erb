@@ -1,0 +1,11 @@
+<span id="notifications_count">
+  <%= link_to "#", class: "notifications position-relative me-3 nav-link dropdown-toggle", data: { bs_toggle: "dropdown" }, id: "notificationsDropdown", aria: { expanded: "false" }, data: { action: "click->navbar#toggleDropdown" } do %>
+    <i class="bi bi-bell-fill"></i>
+    <% if count.to_i.positive? %>
+      <span class="point position-absolute bg-danger border rounded-circle">
+        <%= count %>
+        <span class="visually-hidden">New alerts</span>
+      </span>
+    <% end %>
+  <% end %>
+</span>
