@@ -81,3 +81,5 @@ gem "cloudinary"
 gem "devise"
 
 gem "geocoder"
+
+gem "actioncable-enhanced-postgresql-adapter"
