@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-5 body">
   <div id="flash">
     <% if flash[:notice] %>
       <div class="notice p-3 mb-2 bg-success rounded text-white">
@@ -6,38 +6,45 @@
       </div>
     <% end %>
   </div>
-  <div>
-    <%= link_to my_reviews_path, class: 'btn btn-dark mb-3' do %>
-        <i class="fa-solid fa-arrow-left"></i>
-    <% end %>
-  </div>
-  <div class="review">
-    <div class="review-details">
-      <h1><%= @review.title %></h1>
-      <p>
-        <span>
-          <% @review.rating.times do %>
-            <i class="fa-solid fa-star"></i>
+  <div class="row">
+    <div class="col-5">
+      <%= render partial: 'card_travel', locals: { travel: @review.travel } %>
+    </div>
+    <div class="col-7">
+      <div>
+        <%= link_to my_reviews_path, class: 'btn btn-dark mb-3' do %>
+            <i class="fa-solid fa-arrow-left"></i>
+        <% end %>
+      </div>
+      <div class="review">
+        <div class="review-details">
+          <h1><%= @review.title %></h1>
+          <p>
+            <span>
+              <% @review.rating.times do %>
+                <i class="fa-solid fa-star"></i>
+              <% end %>
+              <% (5 - @review.rating).times do %>
+                <i class="fa-regular fa-star"></i>
+              <% end %>
+            </span>
+            </p>
+          <% if @current_user != @review.user %>
+            <p><i><%= "#{@review.user.first_name} #{@review.user.last_name}" %></i></p>
           <% end %>
-          <% (5 - @review.rating).times do %>
-            <i class="fa-regular fa-star"></i>
+          <p><i class="fa-solid fa-quote-left"></i> <%= @review.comment %></p>
+        </div>
+      </div>
+      <% if @current_user == @review.user %>
+        <div class="buttons">
+          <%= link_to edit_review_path(@review), class: 'btn btn-dark' do %>
+            Edit
           <% end %>
-        </span>
-        </p>
-      <% if @current_user != @review.user %>
-        <p><i><%= "#{@review.user.first_name} #{@review.user.last_name}" %></i></p>
+          <%= link_to review_path(@review) || my_reviews_path, class: 'btn btn-dark', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+            Delete
+          <% end %>
+        </div>
       <% end %>
-      <p><i class="fa-solid fa-quote-left"></i> <%= @review.comment %></p>
     </div>
   </div>
-  <% if @current_user == @review.user %>
-    <div class="buttons">
-      <%= link_to edit_review_path(@review), class: 'btn btn-dark' do %>
-        Edit
-      <% end %>
-      <%= link_to review_path(@review) || my_reviews_path, class: 'btn btn-dark', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
-        Delete
-      <% end %>
-    </div>
-  <% end %>
 </div>
