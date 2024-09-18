@@ -4,19 +4,13 @@
   <%= turbo_stream_from "plan_#{plan.id}_messages" %>
   <div id="messages" class="messages">
     <% plan.messages.each do |message| %>
-      <div id="message-<%= message.id %>">
-        <small>
-          <strong><%= message.user.first_name %> <%= message.user.last_name %></strong>
-          <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
-        </small>
-        <p><%= message.content %></p>
-      </div>
+      <%= render "messages/message", message: message %>
     <% end %>
   </div>
 
 
   <%= simple_form_for [plan, new_message], url: plan_messages_path(plan),
-    html: {class: "d-flex"} do |f|
+    html: {class: "d-flex", data: {controller: "reset-message", action: "turbo:submit-end->reset-message#reset"}} do |f|
   %>
     <%# other_user = current_user == @plan.restaurant.user ? @plan.user : @plan.restaurant.user %>
     <%= f.input :content,

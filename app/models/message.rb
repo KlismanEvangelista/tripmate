@@ -8,7 +8,7 @@ class Message < ApplicationRecord
 
   def broadcast_message
     broadcast_append_to "plan_#{plan.id}_messages",
-                        partial: "messages/chanel",
-                        locals: { plan: plan, new_message: self }
+                        partial: "messages/message",
+                        locals: { message: self }
   end
 end
