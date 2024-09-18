@@ -194,11 +194,81 @@
   background-color: white;
   width: 302px;
   border: transparent;
+  padding: 16px 0;
+  .details {
+    margin-left: auto;
+    small {
+      font-size: 10px;
+      font-weight: 500;
+    }
+    p {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 24px;
+    }
+    .detail {
+      padding: 10px 8px;
+    }
+    .detail:not(:last-child) {
+      border-bottom: 1px solid #cfcfcf;
+    }
+  }
+  .image {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    img {
+      margin-bottom: 16px;
+      border-radius: 50%;
+    }
+    .name {
+      font-size: 24px;
+      font-weight: 600;
+    }
+  }
 }
 
 .profile-plans {
   img {
     max-height: 140px !important;
     min-height: 140px;
+  }
+}
+
+.review-card {
+  padding: 24px;
+  border-radius: 16px;
+  .user {
+    margin-bottom: 16px;
+  }
+  .user-image {
+    margin-right: 12px;
+  }
+  .stars {
+    color: $info;
+  }
+  .card-text {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    text-align: start;
+    margin-bottom: 4px;
+    i {
+      width: 16px;
+      margin-right: 10px;
+      margin-top: 3px;
+    }
+  }
+  .review {
+    .title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+  .review-text {
+    margin-left: 24px;
   }
 }

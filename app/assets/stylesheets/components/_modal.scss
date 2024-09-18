@@ -1,0 +1,10 @@
+.modal {
+  &-content {
+    background: white;
+    border-radius: 16px;
+  }
+  &-header,
+  &-body {
+    padding: 24px 32px;
+  }
+}
