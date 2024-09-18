@@ -1,7 +1,7 @@
 class TravelsController < ApplicationController
-  before_action :query_params, only: %i[my_requests]
+  before_action :query_params, only: %i[my_requests update]
   def my_requests
-    @plan = @query_params
+    @plan = @plan_id
     @my_requests = current_user.plans.map(&:travels).flatten
   end
 
@@ -22,9 +22,10 @@ class TravelsController < ApplicationController
   end
 
   def update
+    @plan = @plan_id
     @travel = Travel.find(params[:id])
-    @travel.update(status: "aceptado")
-    redirect_to my_requests_path
+    @travel.update(status: @status)
+    redirect_to my_requests_path(query: { plan_id: @plan })
   end
 
   def destroy
@@ -36,7 +37,8 @@ class TravelsController < ApplicationController
   private
 
   def query_params
-    @query_params = params[:query]
+    @plan_id = params[:query][:plan_id]
+    @status = params[:query][:status]
   end
 
   def travel_params
