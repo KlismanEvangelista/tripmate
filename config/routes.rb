@@ -27,6 +27,12 @@ Rails.application.routes.draw do
     resources :reviews, only: %i[new create]
   end
 
+  resources :travels, only: [] do
+    member do
+      patch :mark_as_viewed
+    end
+  end
+
   resources :users do
     resources :reviews, only: %i[index show]
   end

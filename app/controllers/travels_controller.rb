@@ -33,6 +33,12 @@ class TravelsController < ApplicationController
     redirect_to my_requests_path
   end
 
+  def mark_as_viewed
+    travel = Travel.find(params[:id])
+    travel.update(viewed: true)
+    redirect_to my_requests_path(query:travel.plan.id)
+  end
+
   private
 
   def query_params
