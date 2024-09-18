@@ -1,33 +1,119 @@
-<div class="container mt-5">
-  <% if flash[:notice] %>
-      <div class="notice p-3 mb-2 bg-success rounded text-white">
-        <strong><span><i class="fa-solid fa-check"></i> Review deleted succesfully.</span></strong>
+<div id="myReviews" class="container mt-5" data-controller="edit-review">
+  <div class="video-header">
+    <div class="banner">
+      <video autoplay loop muted>
+        <source src="<%= asset_path('reviews.mp4') %>" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="header-text d-flex justify-content-center text-center">
+        <h1 class="bolder">Mis Reviews</h1>
       </div>
-    <% end %>
-    <h4>My Reviews</h4>
-    <div>
-      <% @reviews.each do |review| %>
-      <div  class="review">
-        <div class="review-details">
-          <h4><%= review.travel.plan.name %></h4>
-          <p> <%= "#{review.travel.plan.user.first_name} #{review.travel.plan.user.last_name}" %></p>
-          <p>
-                <span>
-                  <% review.rating.times do %>
-                    <i class="fa-solid fa-star"></i>
-                  <% end %>
-                  <% (5 - review.rating).times do %>
-                    <i class="fa-regular fa-star"></i>
-                  <% end %>
-                </span>
-                  <%= review.title %>
-              </p>
-          <%= link_to user_review_path(review.user_id, review.id) do %>
-            <i class="fa-solid fa-eye"></i>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-
     </div>
   </div>
+
+  <% if flash[:notice] %>
+    <div class="p-3 mb-2 rounded text-white <%= flash[:notice] ? 'bg-success' : 'bg-danger' %>">
+      <strong>
+        <span>
+          <i class="fa-solid <%= flash[:notice] ? 'fa-check' : 'fa-exclamation-triangle' %>"></i>
+          <%= flash[:notice] %>
+        </span>
+      </strong>
+    </div>
+  <% end %>
+
+
+  <div class="row">
+    <div class="col-3">
+      <div class="card info-profile d-flex flex-row">
+        <div class="image">
+          <% if @user.photo.attached? %>
+            <%= cl_image_tag @user.photo.key, height: 104, width: 104, crop: :fill, class: 'img-fluid' %>
+          <% else %>
+            <%= image_tag "sinimagen.jpg", height: 104, width: 104, class: 'img-fluid' %>
+          <% end %>
+          <p class="name"><%= "#{@user.first_name} #{@user.last_name}" %></p>
+          <p>TripMater</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-9">
+      <%= link_to my_travels_path, class: 'd-flex align-items-center back' do %>
+        <button class="btn btn-primary me-2"><i class="fa-solid fa-arrow-left"></i></button>
+        Volver a mis solicitudes
+      <% end %>
+
+      <div class="row d-flex justify-content-between">
+        <% @reviews.each do |review| %>
+          <div class="col-6 col-card">
+            <div class="review-card shadow h-100 d-flex flex-column">
+              <div class="review-details flex-grow-1">
+                <div class="d-flex align-items-center user">
+                  <div class="d-flex align-items-center flex-grow-1">
+                    <div class="user-image">
+                      <% if review.user.photo.attached? %>
+                        <%= cl_image_tag review.user.photo.key, height: 60, width: 60, crop: :fill, class: 'img-fluid rounded-circle' %>
+                      <% else %>
+                        <%= image_tag "sinimagen.jpg", height: 60, width: 60, class: 'img-fluid rounded-circle' %>
+                      <% end %>
+                    </div>
+                    <p><%= "#{review.travel.plan.user.first_name} #{review.travel.plan.user.last_name}" %></p>
+                  </div>
+                  <p class="stars">
+                    <span>
+                      <% review.rating.times do %>
+                        <i class="fa-solid fa-star"></i>
+                      <% end %>
+                      <% (5 - review.rating).times do %>
+                        <i class="fa-regular fa-star"></i>
+                      <% end %>
+                    </span>
+                  </p>
+                </div>
+                <p class="card-text">
+                  <i class="bi bi-globe-americas"></i> <strong class="me-2">Viaje realizado: </strong> <%= review.travel.plan.name %>
+                </p>
+                <div class="review">
+                  <p class="card-text"><i class="bi bi-chat-quote"></i> <strong>Comentario:</strong></p>
+                  <div class="review-text">
+                    <p class="title"><%= review.title %></p>
+                    <div class="comment"><%= raw review.comment %></div>
+                  </div>
+                </div>
+              </div>
+              <% if @current_user == review.user %>
+              <div class="mt-auto text-end">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editReviewModal" data-action="click->edit-review#open" data-review-id="<%= review.id %>">
+                  <i class="fa-regular fa-pen-to-square"></i>
+                </button>
+                <%= link_to review_path(review) || my_reviews_path, class: 'btn btn-primary', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+                  <i class="bi bi-trash3"></i>
+                <% end %>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="editReviewModal" tabindex="-1" aria-labelledby="editReviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editReviewModalLabel">Editar Reseña</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" data-edit-review-target="form">
+          <div class="text-center">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Cargando...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

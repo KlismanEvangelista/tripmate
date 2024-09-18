@@ -1,5 +1,7 @@
 class TravelsController < ApplicationController
+  before_action :query_params, only: %i[my_requests]
   def my_requests
+    @plan = @query_params
     @my_requests = current_user.plans.map(&:travels).flatten
   end
 
@@ -32,6 +34,10 @@ class TravelsController < ApplicationController
   end
 
   private
+
+  def query_params
+    @query_params = params[:query]
+  end
 
   def travel_params
     params.require(:travel).permit(:status)

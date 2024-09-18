@@ -1,0 +1,28 @@
+#myReviews {
+  .col-card {
+    margin-bottom: 24px;
+  }
+  .header-text {
+    z-index: 1;
+    width: 100%;
+  }
+  .info-profile {
+    position: sticky;
+    top: 97px;
+    padding: 16px 0;
+    width: fit-content;
+    margin: auto;
+    .image {
+      width: 100%;
+    }
+  }
+  .back {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+    width: fit-content;
+    button {
+      margin-right: 12px;
+    }
+  }
+}

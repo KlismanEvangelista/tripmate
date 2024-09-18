@@ -1,0 +1,38 @@
+#newReview {
+  .travel {
+    max-width: 400px;
+    margin: auto !important;
+    &:hover {
+      transform: none;
+    }
+    .avatar {
+      border: 2px solid #bababa;
+      margin-right: 10px;
+    }
+    .traveler {
+      color: #bababa;
+      margin-top: -2px;
+      font-size: 10px;
+    }
+    .card-user {
+      cursor: pointer;
+      &:hover {
+        img {
+          border-color: $primary;
+        }
+        .traveler {
+          color: $primary;
+        }
+      }
+    }
+  }
+  .form-section {
+    h2 {
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 24px;
+      color: #090909;
+      font-weight: 600;
+    }
+  }
+}

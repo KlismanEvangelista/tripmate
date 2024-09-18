@@ -114,12 +114,16 @@
             <div class="date-section">
               <div class="guest-label">VIAJEROS</div>
               <div class="guest-value"><%= @plan.travelers_quantity%> viajeros</div>
-              <i class="bi bi-chevron-down"></i>
             </div>
             <div class="date-section">
               <div class="guest-label">DISPONIBLES</div>
-              <div class="guest-value"><%= @available %> tickets</div>
-              <i class="bi bi-chevron-down"></i>
+              <div class="guest-value">
+                <% if @available == 0 %>
+                  <span class='text-bg-primary text-white'>&nbsp;Completado&nbsp;</span>
+                <% else %>
+                <%= @available %> tickets
+                <% end %>
+              </div>
             </div>
           </div>
           <% if user_signed_in? %>

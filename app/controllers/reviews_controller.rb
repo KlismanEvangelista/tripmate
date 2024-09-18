@@ -26,6 +26,7 @@ class ReviewsController < ApplicationController
   def my_reviews
     # reviews made by current user
     @reviews = Review.where(user_id: current_user)
+    @user = current_user
   end
 
   def new
@@ -50,13 +51,15 @@ class ReviewsController < ApplicationController
   def update
     flash[:notice] = ''
     @review.update(review_params)
-    redirect_to user_review_path(@review.user_id, @review.id)
+    flash[:notice] = "Reseña actualizada exitosamente."
+    redirect_to my_reviews_path
   end
 
   def destroy
     if @review
       flash[:notice] = ''
       @review.destroy
+      flash[:notice] = "Reseña eliminada exitosamente."
       redirect_to my_reviews_path, status: :see_other
     else
       render :index, status: :unprocessable_entity

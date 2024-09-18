@@ -9,6 +9,8 @@ import ShowPlanController from "./show_plan_controller"
 import AllMyPlansController from "./all_my_plans_controller"
 import ProfileController from "./profile_controller"
 import AutocompleteAddressController from "./autocomplete_address_controller"
+import NewReviewController from "./new_review_controller"
+import EditReviewController from "./edit_review_controller"
 
 const application = Application.start()
 application.register('navbar', NavbarController)
@@ -21,6 +23,8 @@ application.register('show-plan', ShowPlanController)
 application.register('my-plans', AllMyPlansController)
 application.register('profile', ProfileController)
 application.register('autocomplete-address', AutocompleteAddressController)
+application.register('new-review', NewReviewController)
+application.register('edit-review', EditReviewController)
 
 // Configure Stimulus development experience
 application.debug = false

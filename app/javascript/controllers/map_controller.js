@@ -2,6 +2,16 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="map"
 export default class extends Controller {
+
+  connect() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const department = urlParams.get('department');
+
+    if(department) {
+      this.filterCardsByDepartment(department);
+      this.activeDepartment(department)
+    }
+  }
   initialize() {
     this.previousTarget = null;
   }
@@ -18,10 +28,11 @@ export default class extends Controller {
     this.previousTarget = event.currentTarget;
 
     this.filterCardsByDepartment(selectedDepartment);
-    }
+
+    document.querySelector('.department-name').innerHTML = `${selectedDepartment} <i class="bi bi-trash3" data-action="click->map-filter#delete"></i>`
+  }
 
   filterCardsByDepartment(selectedDepartment) {
-    console.log(selectedDepartment);
     const cards = document.querySelectorAll(".plan-card");
 
     cards.forEach(card => {
@@ -45,6 +56,32 @@ export default class extends Controller {
 
     if (svg !== this.previousTarget) {
       svg.style.fill = "";
+    }
+  }
+
+  activeDepartment(department) {
+    const departmentElement = document.querySelector(`[data-department='${department}']`);
+
+    if (departmentElement) {
+      if (this.previousTarget) {
+        this.previousTarget.style.fill = "";
+      }
+
+      departmentElement.style.fill = "#04477e";
+      this.previousTarget = departmentElement;
+    }
+  }
+
+  delete() {
+    const cards = document.querySelectorAll(".plan-card");
+
+    cards.forEach(card => {
+      card.parentNode.style.setProperty('display', 'block', 'important');
+    });
+    document.querySelector('.department-name').innerHTML = '';
+
+    if (this.previousTarget) {
+      this.previousTarget.style.fill = "";
     }
   }
 }

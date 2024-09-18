@@ -47,6 +47,8 @@
     border-right: 1px solid #b8b8b8;
     text-align: center;
     background: white;
+    position: sticky;
+    top: 120px;
     svg {
       fill: $secondary;
       stroke: white;
@@ -62,8 +64,23 @@
       text-align: center;
       margin: auto;
     }
+    .department-name {
+      margin-top: 14px;
+      font-size: 24px;
+      color: #04477E;
+      font-weight: 600;
+      i {
+        cursor: pointer;
+      }
+    }
   }
   .container-cards {
     padding-left: 54px;
+  }
+
+  .plan-card {
+    .description {
+      height: 84px;
+    }
   }
 }
