@@ -4,7 +4,6 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
 
   connect() {
-    console.log("Connecting to data-controller");
     const urlParams = new URLSearchParams(window.location.search);
     const department = urlParams.get('department');
 
@@ -29,7 +28,9 @@ export default class extends Controller {
     this.previousTarget = event.currentTarget;
 
     this.filterCardsByDepartment(selectedDepartment);
-    }
+
+    document.querySelector('.department-name').innerHTML = `${selectedDepartment} <i class="bi bi-trash3" data-action="click->map-filter#delete"></i>`
+  }
 
   filterCardsByDepartment(selectedDepartment) {
     const cards = document.querySelectorAll(".plan-card");
@@ -68,6 +69,19 @@ export default class extends Controller {
 
       departmentElement.style.fill = "#04477e";
       this.previousTarget = departmentElement;
+    }
+  }
+
+  delete() {
+    const cards = document.querySelectorAll(".plan-card");
+
+    cards.forEach(card => {
+      card.parentNode.style.setProperty('display', 'block', 'important');
+    });
+    document.querySelector('.department-name').innerHTML = '';
+
+    if (this.previousTarget) {
+      this.previousTarget.style.fill = "";
     }
   }
 }
