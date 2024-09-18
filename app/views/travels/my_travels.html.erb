@@ -12,6 +12,18 @@
       </div>
     </div>
   </div>
+
+  <% if flash[:notice] %>
+    <div class="p-3 mb-2 rounded text-white <%= flash[:notice] ? 'bg-success' : 'bg-danger' %>">
+      <strong>
+        <span>
+          <i class="fa-solid <%= flash[:notice] ? 'fa-check' : 'fa-exclamation-triangle' %>"></i>
+          <%= "Solicitud eliminada con éxito." %>
+        </span>
+      </strong>
+    </div>
+  <% end %>
+
   <div class="row">
     <% @my_travels.each do |travel| %>
       <div class="col-12 col-md-6 d-flex align-items-stretch mb-4">
@@ -67,14 +79,17 @@
                     <% end %>
                 <% end %>
                 <% if travel.status == 'aceptado' && travel.reviews.exists? %>
-                  <%= link_to user_review_path(travel.user.id, travel.reviews[0].id), class: "btn btn-primary" do %>
+                  <%= link_to user_review_path(travel.user.id, travel.reviews[0].id), class: "btn btn-primary  me-2" do %>
                     <i class="fa-solid fa-star"></i>
                   <% end %>
                 <% elsif travel.status == 'aceptado' %>
-                  <%= link_to new_travel_review_path(travel.id), class: "btn btn-primary" do %>
+                  <%= link_to new_travel_review_path(travel.id), class: "btn btn-primary  me-2" do %>
                     <i class="fa-regular fa-star"></i>
                   <% end %>
                 <% end %>
+                <%= link_to travel_path(travel), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-primary" do %>
+                      <i class="fa-solid fa-trash-can"></i>
+                    <% end %>
               </div>
             </div>
           </div>

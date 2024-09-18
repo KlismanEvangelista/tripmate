@@ -30,8 +30,13 @@ class TravelsController < ApplicationController
 
   def destroy
     @travel = Travel.find(params[:id])
-    @travel.destroy
-    redirect_to my_requests_path
+    if @travel
+      flash[:notice] = ''
+      @travel.destroy
+      redirect_to my_travels_path, status: :see_other
+    else
+      render my_travels_path, status: :unprocessable_entity
+    end
   end
 
   private
