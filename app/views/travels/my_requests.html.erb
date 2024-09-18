@@ -39,8 +39,8 @@
               </div>
               <% if r.status == "solicitado" %>
                 <div class="d-flex justify-content-around container-btns">
-                  <%= button_to 'Aceptar', travel_path(r), method: :patch, class: "btn btn-secondary btn-sm mb-2" %>
-                  <%= button_to 'Rechazar', travel_path(r), method: :patch, class: "btn btn-outline-secondary btn-sm mb-2" %>
+                  <%= button_to 'Aceptar', travel_path(r, query: { plan_id:  @plan, status: 'aceptado'}), method: :patch, class: "btn btn-secondary btn-sm mb-2" %>
+                  <%= button_to 'Rechazar', travel_path(r, query: { plan_id:  @plan, status: 'rechazado'}), method: :patch, class: "btn btn-secondary btn-sm mb-2" %>
                 </div>
               <% end %>
             </div>
