@@ -1,0 +1,23 @@
+<div class="dropdown-menu dropdown-notifications dropdown-menu-right" aria-labelledby="notificationsDropdown" data-navbar-target="menu">
+  <div class="header d-flex align-items-center">
+    <p class="title flex-grow-1">Solicitudes de viajes</p>
+    <%= link_to "Ver todos", my_requests_path, class: "nav-link" %>
+  </div>
+  <% requests.each do |request| %>
+    <%= button_to mark_as_viewed_travel_path(request), method: :patch, remote: true, class: "dropdown-item" do %>
+      <% if request.user.photo.attached? %>
+        <%= cl_image_tag request.user.photo.key, class: "avatar", alt: "dropdown menu" %>
+      <% else %>
+        <%= image_tag "user.png", class: "avatar", alt: "dropdown menu" %>
+      <% end %>
+      <div>
+        <p><%= request.user.first_name %> <%= request.user.last_name %> quiere unirse a tu plan:</p>
+        <%= request.plan.name %>
+      </div>
+    <% end %>
+  <% end %>
+  <% if requests.empty? %>
+    <i class="bi bi-x-circle"></i>
+    <a class="dropdown-item" href="#">No tienes nuevas solicitudes</a>
+  <% end %>
+</div>

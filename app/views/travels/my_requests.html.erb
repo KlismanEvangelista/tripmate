@@ -2,7 +2,6 @@
   <h1 class="bold mb-2">Mis solicitudes</h1>
   <div class="row mt-5">
     <% @my_requests.each do |r| %>
-      <% if r.plan_id == @plan.to_i %>
         <div class="col-12 col-md-4">
           <div class="card profile-card h-100">
             <div class="card-header p-0">
@@ -46,7 +45,6 @@
             </div>
           </div>
         </div>
-      <% end %>
     <% end %>
   </div>
 </div>
