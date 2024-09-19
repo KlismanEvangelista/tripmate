@@ -3,7 +3,7 @@ class Plan < ApplicationRecord
   has_many :travels, dependent: :destroy
   has_many_attached :photos
   has_many :messages
-  # has_one_attached :photo
+  has_one_attached :photo
 
   DEPARTAMENTS = [
     'Amazonas', 'Áncash', 'Apurímac', 'Arequipa', 'Ayacucho', 'Cajamarca',

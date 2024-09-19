@@ -73,7 +73,13 @@
               </div>
             </div>
 
+
             <div id="form-step-3" class="form-step d-none" data-new-plan-target="step">
+              <div>
+                <h4>Icono</h4>
+                <%= f.input :photo, as: :file, label: false %>
+              </div>
+
               <h4>Fotos</h4>
               <% if @plan.photos.attached? %>
                   <% @plan.photos.each do |photo| %>
@@ -101,6 +107,7 @@
                 <%= f.button :submit, "Enviar", class: 'btn btn-secondary btn-md' %>
               </div>
             </div>
+
           <% end %>
         </div>
       </div>
