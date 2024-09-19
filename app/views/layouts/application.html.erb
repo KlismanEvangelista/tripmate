@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="https://ga.jspm.io/npm:star-rating.js@4.3.0/dist/star-rating.css">
   </head>
 
-  <body class="<%='background-deg' if (controller_name == 'sessions' && action_name == 'new') || (controller_name == 'registrations' && action_name == 'new') %><%='transparent' if(controller_name == 'pages') %>">
+  <body class="<%='background-deg' if (controller_name == 'sessions' && action_name == 'new') || (controller_name == 'registrations' && action_name == 'new') %><%='transparent' if(controller_name == 'pages') %>" data-current-user-id="<%= current_user ? current_user.id : "" %>">
     <%= render "shared/navbar" %>
     <%= yield %>
 
