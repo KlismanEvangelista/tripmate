@@ -90,21 +90,16 @@
                               id: "address"
                               },
                             wrapper_html: {
-                              class: "form-control required-input",
+                              class: "required-input",
                               "data-controller" => "autocomplete-address", "data-autocomplete-address-apikey-value" => ENV["MAPBOX_API_KEY"]
                             } %>
 
               </div>
               <p>Fecha de nacimiento</p>
               <div>
-                  <%= f.input :birth_date, as: :date,
-                              start_year: Date.today.year - 40,
-                              end_year: Date.today.year - 18,
-                              order: [:day, :month, :year],
-                              input_html: { class: "form-control", id: "birth_date" },
-                              label: false %>
+                  <%= f.input :birth_date, as: :string, label: false, input_html: { class: 'form-control required-input', "data-controller": "flatpickr", 'data-flatpickr-target': 'date'} %>
               </div>
-              <p>Ingrese una foto de perfil</p>
+              <p>Foto de perfil</p>
               <div>
                   <%= f.input :photo, as: :file,
                               label: false %>

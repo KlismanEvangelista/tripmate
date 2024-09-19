@@ -45,6 +45,11 @@
       justify-content: center;
     }
   }
+
+  .menu-user {
+    top: 122%;
+  }
+
   .dropdown-menu {
     background: #212529;
     border-radius: 16px;
@@ -53,6 +58,9 @@
     .dropdown-item {
       cursor: pointer;
       color: white;
+      &:hover {
+        background-color: #343a40;
+      }
     }
 
     &.dropdown-notifications {

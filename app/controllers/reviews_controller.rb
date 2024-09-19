@@ -17,7 +17,7 @@ class ReviewsController < ApplicationController
       total_rating = @reviews.sum(&:rating)
       @rating = total_reviews > 0 ? (total_rating.to_f / total_reviews).round(2) : 0
 
-      @plans = @user.plans.limit(4)
+      @plans = @user.plans.limit(3)
     else
       @reviews = Review.none
     end

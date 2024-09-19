@@ -59,8 +59,12 @@
         border-radius: 4px;
         color: white;
         display: inline-block;
-        &:hover {
+        &:hover,
+        &:focus {
           background: transparent;
+        }
+        img {
+          margin-right: 10px;
         }
       }
     }
@@ -77,6 +81,9 @@
     border-left: 1px solid #525252;
     .header {
       padding: 10px 20px;
+      img {
+        margin-right: 10px;
+      }
     }
     .chat-box {
       padding: 0px 3px 0px 16px;
@@ -90,7 +97,7 @@
         }
       }
       .messages {
-        max-height: calc(100vh - 247px);
+        max-height: calc(100vh - 255px);
         overflow-y: scroll;
         margin-bottom: 20px;
         .box {

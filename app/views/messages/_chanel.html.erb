@@ -1,5 +1,12 @@
 <div class="container-chat h-100 d-flex flex-column">
-  <p class="header"><%= plan.name %></p>
+  <div class="header d-flex align-items-center">
+    <% if plan.photo.attached? %>
+      <%= cl_image_tag plan.photo.key, height: 30, width: 30, crop: :fill, class: 'img-fluid rounded-circle' %>
+    <% else %>
+      <%= image_tag "sinicono.jpg", height: 30, width: 30, crop: :fill, class: 'img-fluid rounded-circle' %>
+    <% end %>
+    <p><%= plan.name %></p>
+  </div>
 
   <div class="chat-box flex-grow-1 d-flex flex-column">
     <%= turbo_stream_from "plan_#{plan.id}_messages" %>

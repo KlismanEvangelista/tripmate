@@ -48,38 +48,40 @@
             <% end %>
           </div>
           <div class="col-6">
-            <div class="card-body">
-              <h5 class="card-title"><%= travel.plan.name %></h5>
-              <p class="description text-start"><%= travel.plan.description %></p>
-              <p class="card-text departament">
-                <i class="fa-solid fa-location-dot me-2"></i>Departamento: <%= travel.plan.departament %>
-              </p>
-              <p class="card-text departure-date">
-              <i class="fa-regular fa-calendar me-2"></i> Fecha de partida: <%= travel.plan.start_date.strftime('%d/%m/%Y') %>
-              </p>
-              <p class="card-text travelers">
-                <i class="fa-solid fa-user-group me-2"></i> <%= travel.plan.travelers_quantity %> viajeros
-              </p>
-              <p class="card-text state">
-                <i class="fa-solid fa-hourglass-half me-2"></i>
-                Estado:
-                <span data-travels-filters-status-value=<%= travel.status %> class="badge ms-2 <%= travel.status == 'solicitado' ? 'text-bg-warning text-white' : travel.status == 'aceptado' ? 'text-bg-primary  text-white' : 'text-bg-danger  text-white' %>">
-                  <%= travel.status.capitalize %>
-                </span>
-              </p>
-              <% if travel.status == 'aceptado' %>
-                <p class="card-text">
+            <div class="card-body h-100 d-flex flex-column">
+              <div class="flex-grow-1">
+                <h5 class="card-title"><%= travel.plan.name %></h5>
+                <p class="description text-start"><%= travel.plan.description %></p>
+                <p class="card-text departament">
+                  <i class="fa-solid fa-location-dot me-2"></i>Departamento: <%= travel.plan.departament %>
+                </p>
+                <p class="card-text departure-date">
+                <i class="fa-regular fa-calendar me-2"></i> Fecha de partida: <%= travel.plan.start_date.strftime('%d/%m/%Y') %>
+                </p>
+                <p class="card-text travelers">
+                  <i class="fa-solid fa-user-group me-2"></i> <%= travel.plan.travelers_quantity %> viajeros
+                </p>
+                <p class="card-text state">
                   <i class="fa-solid fa-hourglass-half me-2"></i>
-                  Reseña:
-                  <span class="badge ms-2 <%= travel.reviews.exists? == false ? 'text-bg-warning text-white' : travel.reviews.exists? == true ? 'text-bg-primary text-white' : 'text-bg-danger text-white' %>">
-                    <% if travel.reviews.exists? %>
-                      <i class="fa-solid fa-check"></i>
-                    <% else %>
-                      <i class="fa-solid fa-xmark"></i>
-                    <% end %>
+                  Estado:
+                  <span data-travels-filters-status-value=<%= travel.status %> class="badge ms-2 <%= travel.status == 'solicitado' ? 'text-bg-warning text-white' : travel.status == 'aceptado' ? 'text-bg-primary  text-white' : 'text-bg-danger  text-white' %>">
+                    <%= travel.status.capitalize %>
                   </span>
                 </p>
-              <% end %>
+                <% if travel.status == 'aceptado' %>
+                  <p class="card-text">
+                    <i class="fa-solid fa-hourglass-half me-2"></i>
+                    Reseña:
+                    <span class="badge ms-2 <%= travel.reviews.exists? == false ? 'text-bg-warning text-white' : travel.reviews.exists? == true ? 'text-bg-primary text-white' : 'text-bg-danger text-white' %>">
+                      <% if travel.reviews.exists? %>
+                        <i class="fa-solid fa-check"></i>
+                      <% else %>
+                        <i class="fa-solid fa-xmark"></i>
+                      <% end %>
+                    </span>
+                  </p>
+                <% end %>
+              </div>
               <div class="buttons d-flex justify-content-end">
                 <%= link_to plan_path(travel.plan), class: "btn btn-primary me-2" do %>
                   <i class="fa-solid fa-eye"></i>

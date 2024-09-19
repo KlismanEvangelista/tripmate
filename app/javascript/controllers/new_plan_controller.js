@@ -15,10 +15,6 @@ export default class extends Controller {
       toolbar_mode: 'sliding',
       height: 250,
       setup: (editor) => {
-        editor.on('init', () => {
-          editor.setContent('<ul><li>...</li></ul>');
-        });
-
         editor.on('change', () => {
           editor.save();
         });

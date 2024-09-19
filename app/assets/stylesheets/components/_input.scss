@@ -17,3 +17,13 @@
     font-size: 10px;
   }
 }
+
+.mapboxgl-ctrl-geocoder {
+  width: 100% !important;
+  box-shadow: none !important;
+  border-radius: 20px !important;
+  background-color: white !important;
+  font-size: 14px !important;
+  border: 1px solid #dfdfdf !important;
+  max-width: none !important;;
+}
