@@ -136,7 +136,7 @@
               <% if @applied %>
                 <%= button_to 'Ya lo solicitaste', "#", method: :post, class: "btn btn-primary btn-reserve", disabled: true %>
               <% elsif @ticket_available %>
-                <%= button_to 'Solicitar', plan_travels_path(@plan), method: :post, class: "btn btn-primary btn-reserve" %>
+                <%= button_to 'Solicitar', plan_travels_path(@plan), method: :post, class: "btn btn-primary btn-reserve", data:{turbo:false} %>
               <% else %>
                 <%= button_to 'Agotado', plan_travels_path(@plan), class: "btn btn-primary btn-reserve", disabled: true %>
               <% end %>

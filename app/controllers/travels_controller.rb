@@ -13,8 +13,20 @@ class TravelsController < ApplicationController
     @ticket_available = accepted_travel_limit?(@plan)
     if @ticket_available == false
       @travel.save!
-      redirect_to my_travels_path
+      owner = @travel.plan.user
+      new_requests_count = owner.plans.map(&:travels).flatten.select { |t| !t.viewed }.count
+
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace("counter_for_user_#{owner.id}", partial: "shared/notifications_count",
+            locals: { count: new_requests_count  })
+        end
+        format.html do
+          redirect_to my_travels_path and return
+        end
+      end
     end
+
   end
 
   def my_travels
@@ -42,7 +54,7 @@ class TravelsController < ApplicationController
   def mark_as_viewed
     travel = Travel.find(params[:id])
     travel.update(viewed: true)
-    redirect_to my_requests_path(query:travel.plan.id)
+    redirect_to my_requests_path(query: {plan_id:travel.plan.id} )
   end
 
   private
