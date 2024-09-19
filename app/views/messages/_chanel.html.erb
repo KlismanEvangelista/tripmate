@@ -5,14 +5,14 @@
     <% else %>
       <%= image_tag "sinicono.jpg", height: 30, width: 30, crop: :fill, class: 'img-fluid rounded-circle' %>
     <% end %>
-    <p><%= plan.name %></p>
+    <%= link_to plan.name, plan_path(plan), class: "", data:{turbo:false} %>
   </div>
 
   <div class="chat-box flex-grow-1 d-flex flex-column">
     <%= turbo_stream_from "plan_#{plan.id}_messages" %>
     <div id="messages" class="messages flex-grow-1">
       <% plan.messages.each do |message| %>
-        <%= render "messages/message", message: message %>
+        <%= render "messages/message", message: message, user: current_user %>
       <% end %>
     </div>
     <%= simple_form_for [plan, new_message], url: plan_messages_path(plan),

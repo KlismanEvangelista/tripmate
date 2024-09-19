@@ -38,7 +38,7 @@
           <% num_accepted = Travel.where(plan_id: plan.id, status: 'aceptado').count %>
           <% available = plan.travelers_quantity - num_accepted %>
           <% if available > 0 && plan.start_date > Date.today %>
-            <div class="col-3 d-flex align-items-stretch">
+            <div class="col-12 col-md-6 col-lg-3 d-flex align-items-stretch">
               <div class="card plan-card shadow h-100">
                 <% if plan.photos.attached? %>
                   <%= cl_image_tag plan.photos.first.key, height: 300, width: 450, crop: :fill, class: 'img-fluid' %>

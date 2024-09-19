@@ -1,8 +1,21 @@
-<div class="container mt-5">
-  <h1 class="bold mb-2">Mis solicitudes</h1>
+<div class="container mt-5" data-controller="travels-filters">
+  <h1 class="bold mb-2 text-center text-md-start">Solicitudes recibidas</h1>
+  <div id="filters" class="d-flex justify-content-center flex-wrap mb-3">
+    <a href="" class="btn btn-outline-secondary my-4 mx-2 w-100" style="max-width: 150px;" data-action="click->travels-filters#filter"
+      data-travels-filters-target="todos">
+      <i class="bi bi-emoji-sunglasses"></i>
+      Todos
+    </a>
+    <a href="" class="btn btn-outline-secondary my-4 mx-2 w-100" style="max-width: 150px;" data-action="click->travels-filters#filter"
+      data-travels-filters-target="aceptado"> <i class="bi bi-emoji-heart-eyes"></i> Aceptado</a>
+    <a href="" class="btn btn-outline-secondary my-4 mx-2 w-100" style="max-width: 150px;" data-action="click->travels-filters#filter"
+      data-travels-filters-target="solicitado"><i class="bi bi-emoji-neutral me-1"></i>Solicitado</a>
+    <a href="" class="btn btn-outline-secondary my-4 mx-2 w-100" style="max-width: 150px;" data-action="click->travels-filters#filter"
+      data-travels-filters-target="rechazado"><i class="bi bi-emoji-tear"></i> Rechazado</a>
+  </div>
   <div class="row mt-5">
     <% @my_requests.each do |r| %>
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-md-6 col-lg-4 mb-4 travel-container">
           <div class="card profile-card h-100">
             <div class="card-header p-0">
               <%= image_tag "user_back.jpg", class: 'card-img-top img-fluid' %>
@@ -33,12 +46,22 @@
                   <i class="fa-solid fa-user-group me-2"></i> <%= r.plan.travelers_quantity %> viajeros
                 </p>
                 <p class="card-text">
-                  <i class="fa-solid fa-hourglass-half me-2"></i>Estado: <%= r.status %>
+                  <i class="fa-solid fa-hourglass-half me-2"></i>Estado: <span data-travels-filters-status-value=<%= r.status %>><%= r.status %></span>
                 </p>
               </div>
               <% if r.status == "solicitado" %>
                 <div class="d-flex justify-content-around container-btns">
                   <%= button_to 'Aceptar', travel_path(r, query: { plan_id:  @plan, status: 'aceptado'}), method: :patch, class: "btn btn-secondary btn-sm mb-2" %>
+                  <%= button_to 'Rechazar', travel_path(r, query: { plan_id:  @plan, status: 'rechazado'}), method: :patch, class: "btn btn-secondary btn-sm mb-2" %>
+                </div>
+              <% end %>
+              <% if r.status == "rechazado" %>
+                <div class="d-flex justify-content-around container-btns">
+                  <%= button_to 'Aceptar', travel_path(r, query: { plan_id:  @plan, status: 'aceptado'}), method: :patch, class: "btn btn-secondary btn-sm mb-2" %>
+                </div>
+              <% end %>
+              <% if r.status == "aceptado" %>
+                <div class="d-flex justify-content-around container-btns">
                   <%= button_to 'Rechazar', travel_path(r, query: { plan_id:  @plan, status: 'rechazado'}), method: :patch, class: "btn btn-secondary btn-sm mb-2" %>
                 </div>
               <% end %>
