@@ -26,7 +26,6 @@ export default class extends Controller {
       enableTime: false,
       minDate: "today",
       locale: "es",
-      onChange: this.updateEndDate.bind(this)
     });
 
     flatpickr(this.endDateTarget, {

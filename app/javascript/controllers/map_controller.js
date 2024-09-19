@@ -34,16 +34,33 @@ export default class extends Controller {
 
   filterCardsByDepartment(selectedDepartment) {
     const cards = document.querySelectorAll(".plan-card");
+    const container = document.querySelector(".container-cards");
+
+    let visibleCards = 0;
 
     cards.forEach(card => {
       const cardDepartment = card.dataset.department;
-      if (cardDepartment === selectedDepartment) {
+      if (cardDepartment === selectedDepartment || selectedDepartment === 'all') {
         card.parentNode.style.setProperty('display', 'block', 'important');
+        visibleCards++;
       } else {
         card.parentNode.style.setProperty('display', 'none', 'important');
       }
     });
+
+    const noPlansMessage = container.querySelector('.no-plans-message');
+    if (noPlansMessage) {
+      noPlansMessage.remove();
+    }
+
+    if (visibleCards === 0) {
+      const noPlansDiv = document.createElement('div');
+      noPlansDiv.classList.add('text-center', 'no-plans-message', 'd-flex', 'flex-column');
+      noPlansDiv.innerHTML = '<i class="bi bi-emoji-tear fs-1"></i> No hay planes disponibles para este departamento.';
+      container.appendChild(noPlansDiv);
+    }
   }
+
 
   mouseover(event) {
     const svg = event.currentTarget;
