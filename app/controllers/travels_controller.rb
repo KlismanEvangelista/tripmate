@@ -1,8 +1,14 @@
 class TravelsController < ApplicationController
   before_action :query_params, only: %i[my_requests update]
   def my_requests
-    @plan = @plan_id
-    @my_requests = current_user.plans.map(&:travels).flatten
+    if @plan_id.present?
+      # Encuentra el plan por ID y obtén sus solicitudes; usa un array vacío si no se encuentra el plan
+      @plan = @plan_id
+      @my_requests = current_user.plans.find_by(id: @plan_id)&.travels || []
+    else
+      # Obtén todas las solicitudes de todos los planes del usuario
+      @my_requests = current_user.plans.map(&:travels).flatten
+    end
   end
 
   def create
@@ -14,15 +20,22 @@ class TravelsController < ApplicationController
     if @ticket_available == false
       @travel.save!
       owner = @travel.plan.user
-      new_requests_count = owner.plans.map(&:travels).flatten.select { |t| !t.viewed }.count
+      new_requests = owner.plans.map(&:travels).flatten.select { |t| !t.viewed && t.status == "solicitado"}
 
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace("counter_for_user_#{owner.id}", partial: "shared/notifications_count",
-            locals: { count: new_requests_count  })
+            locals: { count: new_requests.count  })
         end
         format.html do
           redirect_to my_travels_path and return
+        end
+      end
+
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.append("notifications_for_user_##{owner.id}", partial: "shared/modal_notifications",
+            locals: { requests: new_requests  })
         end
       end
     end
@@ -60,8 +73,8 @@ class TravelsController < ApplicationController
   private
 
   def query_params
-    @plan_id = params[:query][:plan_id]
-    @status = params[:query][:status]
+    @plan_id = params.dig(:query, :plan_id)
+    @status = params.dig(:query, :status)
   end
 
   def travel_params

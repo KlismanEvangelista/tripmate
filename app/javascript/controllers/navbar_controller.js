@@ -25,23 +25,4 @@ export default class extends Controller {
     event.preventDefault();
     this.menuTarget.classList.toggle("show");
   }
-
-  markViewed(event) {
-    event.preventDefault();
-    const link = event.currentTarget;
-    const parent = link.closest(".dropdown-item");
-
-    fetch(link.href, {
-      method: "PATCH",
-      headers: {
-        "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content,
-        "Accept": "application/json"
-      }
-    })
-    .then(response => {
-      if (response.ok) {
-        parent.remove();
-      }
-    });
-  }
 }
