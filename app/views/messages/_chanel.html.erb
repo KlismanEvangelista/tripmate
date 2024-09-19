@@ -1,23 +1,24 @@
-<div class="container chat">
-  <h1>Your plan for <%= plan.name %></h1>
+<div class="container-chat h-100 d-flex flex-column">
+  <p class="header"><%= plan.name %></p>
 
-  <%= turbo_stream_from "plan_#{plan.id}_messages" %>
-  <div id="messages" class="messages">
-    <% plan.messages.each do |message| %>
-      <%= render "messages/message", message: message %>
+  <div class="chat-box flex-grow-1 d-flex flex-column">
+    <%= turbo_stream_from "plan_#{plan.id}_messages" %>
+    <div id="messages" class="messages flex-grow-1">
+      <% plan.messages.each do |message| %>
+        <%= render "messages/message", message: message %>
+      <% end %>
+    </div>
+    <%= simple_form_for [plan, new_message], url: plan_messages_path(plan),
+      html: {class: "d-flex align-items-center", data: {controller: "reset-message", action: "turbo:submit-end->reset-message#reset"}} do |f|
+    %>
+      <%# other_user = current_user == @plan.restaurant.user ? @plan.user : @plan.restaurant.user %>
+      <%= f.input :content,
+        label: false,
+        placeholder: "Escribe tu mensaje",
+        wrapper_html: {class: "flex-grow-1"}
+      %>
+      <%= f.submit "Send", class: "btn btn-primary mb-3" %>
+
     <% end %>
   </div>
-
-
-  <%= simple_form_for [plan, new_message], url: plan_messages_path(plan),
-    html: {class: "d-flex", data: {controller: "reset-message", action: "turbo:submit-end->reset-message#reset"}} do |f|
-  %>
-    <%# other_user = current_user == @plan.restaurant.user ? @plan.user : @plan.restaurant.user %>
-    <%= f.input :content,
-      label: false,
-      placeholder: "Message ",
-      wrapper_html: {class: "flex-grow-1"}
-    %>
-    <%= f.submit "Send", class: "btn btn-primary mb-3" %>
-  <% end %>
 </div>
