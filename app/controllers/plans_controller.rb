@@ -28,7 +28,7 @@ class PlansController < ApplicationController
     @plan = Plan.new(plan_params)
     @plan.user = current_user
     @plan.save!
-    redirect_to plans_path, notice: 'success'
+    redirect_to my_plans_path, notice: 'success'
     # if @plan.save
     #   redirect_to my_plans_path, notice: 'Plan creado exitosamente.'
     # else

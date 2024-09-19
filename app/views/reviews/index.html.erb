@@ -48,50 +48,56 @@
           <% public_address = match_data ? match_data[1].strip : '' %>
           <i class="bi bi-geo-alt"></i>Vive en <%= public_address %>
         </p>
-        <p class="description">Descripción</p>
+        <%# <p class="description">Descripción</p> %>
       </div>
       <hr/>
       <div class="reviews">
         <p class="title">Lo que dicen los tripmater sobre <%= @user.first_name %></p>
-        <div class="">
-          <div class="carousel-reviews splide h-100">
-            <div class="splide__track h-100">
-              <ul class="splide__list">
-                <% @reviews.each do |review| %>
-                  <div class="splide__slide">
-                    <div class="card">
-                      <div>
-                        <p class="title"><%=review.title%></p>
-                        <p class="description">"... <%=review.comment%>"</p>
-                      </div>
-                      <div class="d-flex align-items-start">
-                        <% if review.user.photo.attached? %>
-                          <%= cl_image_tag review.user.photo.key, height: 48, width: 48, crop: :fill, class: 'img-fluid rounded-circle' %>
-                        <% else %>
-                          <%= image_tag "sinimagen.jpg", height: 48, width: 48, crop: :fill, class: 'img-fluid rounded-circle' %>
-                        <% end %>
-                        <div class="user">
-                          <p class="user-name"><%= "#{review.user.first_name} #{review.user.last_name}" %></p>
-                          <p class="stars">
-                            <span>
-                              <% review.rating.times do %>
-                                <i class="fa-solid fa-star"></i>
-                              <% end %>
-                              <% (5 - review.rating).times do %>
-                                <i class="fa-regular fa-star"></i>
-                              <% end %>
-                            </span>
-                          </p>
-                          <p><%= review.created_at.strftime('%d/%m/%Y') %></p>
+        <% if @reviews.any? %>
+          <div class="">
+            <div class="carousel-reviews splide h-100">
+              <div class="splide__track h-100">
+                <ul class="splide__list">
+                  <% @reviews.each do |review| %>
+                    <div class="splide__slide">
+                      <div class="card">
+                        <div>
+                          <p class="title"><%=review.title%></p>
+                          <p class="description">"... <%=review.comment%>"</p>
+                        </div>
+                        <div class="d-flex align-items-start">
+                          <% if review.user.photo.attached? %>
+                            <%= cl_image_tag review.user.photo.key, height: 48, width: 48, crop: :fill, class: 'img-fluid rounded-circle' %>
+                          <% else %>
+                            <%= image_tag "sinimagen.jpg", height: 48, width: 48, crop: :fill, class: 'img-fluid rounded-circle' %>
+                          <% end %>
+                          <div class="user">
+                            <p class="user-name"><%= "#{review.user.first_name} #{review.user.last_name}" %></p>
+                            <p class="stars">
+                              <span>
+                                <% review.rating.times do %>
+                                  <i class="fa-solid fa-star"></i>
+                                <% end %>
+                                <% (5 - review.rating).times do %>
+                                  <i class="fa-regular fa-star"></i>
+                                <% end %>
+                              </span>
+                            </p>
+                            <p><%= review.created_at.strftime('%d/%m/%Y') %></p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                <% end %>
-              </ul>
+                  <% end %>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
+        <% else %>
+          <div>
+            <p>Aún no tienes reviews</p>
+          </div>
+        <% end %>
       </div>
       <hr/>
       <div class="travels">
