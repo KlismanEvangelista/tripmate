@@ -1,8 +1,10 @@
-<div class="messages-grid">
-  <%= render 'messages/list', plans: @plans %>
-  <%= turbo_frame_tag :message_details do %>
-    <div>
+<div class="container body mt-5">
+  <div id="chat" class="row">
+    <%= render 'messages/list', plans: @plans %>
+    <div class="col-8 p-0">
+      <%= turbo_frame_tag :message_details do %>
       <%= render 'messages/chanel', plan: @plan, new_message: Message.new %>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="container mt-5 body">
+<div id="editReview" class="container mt-5 body">
   <div id="flash">
     <% if flash[:notice] %>
       <div class="notice p-3 mb-2 bg-success rounded text-white">
@@ -19,7 +19,7 @@
       <div class="review">
         <div class="review-details">
           <h1><%= @review.title %></h1>
-          <p>
+          <p class="text-info mb-2">
             <span>
               <% @review.rating.times do %>
                 <i class="fa-solid fa-star"></i>
@@ -32,16 +32,16 @@
           <% if @current_user != @review.user %>
             <p><i><%= "#{@review.user.first_name} #{@review.user.last_name}" %></i></p>
           <% end %>
-          <p><i class="fa-solid fa-quote-left"></i> <%= @review.comment %></p>
+          <p class="mb-4 bg-white rounded shadow p-3"><i class="fa-solid fa-quote-left"></i> <%=raw @review.comment %></p>
         </div>
       </div>
       <% if @current_user == @review.user %>
         <div class="buttons">
-          <%= link_to edit_review_path(@review), class: 'btn btn-dark' do %>
-            Edit
+          <%= link_to edit_review_path(@review), class: 'btn btn-primary' do %>
+            Editar
           <% end %>
-          <%= link_to review_path(@review) || my_reviews_path, class: 'btn btn-dark', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
-            Delete
+          <%= link_to review_path(@review) || my_reviews_path, class: 'btn btn-primary ms-2', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+            Eliminar
           <% end %>
         </div>
       <% end %>

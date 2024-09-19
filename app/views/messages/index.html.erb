@@ -1,5 +1,15 @@
-<div class="messages-grid">
-  <%= render 'messages/list', plans: @plans %>
-  <div class="text-secondary">Selecciona un grupo para chatear</div>
-  <%#= render 'messages/details' %>
+<div class="container body mt-5">
+  <div id="chat" class="row">
+    <%= render 'messages/list', plans: @plans %>
+    <div class="col-8 text-secondary">
+      <div class="d-flex flex-column align-items-center select-message py-5">
+        <h3 class="mb-3">¡Bienvenido al chat!</h3>
+        <%= image_tag "chat.png", height: 300, width: 450, crop: :fill, class: 'img-fluid mb-4' %>
+        <p class="lead mb-3">Selecciona un grupo para iniciar la conversación.</p>
+        <small class="text-white text-center">Comparte experiencias, haz nuevos amigos y planifica tus próximos viajes. <br/> Aquí es donde la aventura comienza. 🚀</small>
+      </div>
+    </div>
+
+    <%#= render 'messages/details' %>
+  </div>
 </div>

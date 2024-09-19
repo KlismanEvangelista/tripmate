@@ -54,16 +54,16 @@
       <div class="reviews">
         <p class="title">Lo que dicen los tripmater sobre <%= @user.first_name %></p>
         <% if @reviews.any? %>
-          <div class="">
+          <% if @reviews.count > 2%>
             <div class="carousel-reviews splide h-100">
               <div class="splide__track h-100">
                 <ul class="splide__list">
                   <% @reviews.each do |review| %>
                     <div class="splide__slide">
-                      <div class="card">
-                        <div>
+                      <div class="card h-100 d-flex">
+                        <div class="flex-grow-1">
                           <p class="title"><%=review.title%></p>
-                          <p class="description">"... <%=review.comment%>"</p>
+                          <div class="description d-flex"><i class="fa-solid fa-quote-left me-2"></i><%=raw review.comment%></div>
                         </div>
                         <div class="d-flex align-items-start">
                           <% if review.user.photo.attached? %>
@@ -92,7 +92,39 @@
                 </ul>
               </div>
             </div>
+          <%else%>
+          <div class="d-flex gap-2">
+            <% @reviews.each do |review| %>
+                <div class="card w-50 d-flex shadow-sm">
+                  <div class="flex-grow-1">
+                    <p class="title"><%=review.title%></p>
+                    <div class="description d-flex"><i class="fa-solid fa-quote-left me-2"></i> <%=raw review.comment%></div>
+                  </div>
+                  <div class="d-flex align-items-start">
+                    <% if review.user.photo.attached? %>
+                      <%= cl_image_tag review.user.photo.key, height: 48, width: 48, crop: :fill, class: 'img-fluid rounded-circle' %>
+                    <% else %>
+                      <%= image_tag "sinimagen.jpg", height: 48, width: 48, crop: :fill, class: 'img-fluid rounded-circle' %>
+                    <% end %>
+                    <div class="user">
+                      <p class="user-name"><%= "#{review.user.first_name} #{review.user.last_name}" %></p>
+                      <p class="stars">
+                        <span>
+                          <% review.rating.times do %>
+                            <i class="fa-solid fa-star"></i>
+                          <% end %>
+                          <% (5 - review.rating).times do %>
+                            <i class="fa-regular fa-star"></i>
+                          <% end %>
+                        </span>
+                      </p>
+                      <small><%= review.created_at.strftime('%d/%m/%Y') %></small>
+                    </div>
+                  </div>
+                </div>
+            <% end %>
           </div>
+          <% end %>
         <% else %>
           <div>
             <p>Aún no tienes reviews</p>
