@@ -39,22 +39,28 @@
                   <div class="d-flex gap-2 justify-content-end align-items-end">
                     <%= link_to plan_path(plan), class: "btn btn-primary" do %>
                       <i class="fa-regular fa-eye"></i>
+
+                    <% user_plan = plan.user_id %>
+                    <% if user_plan == current_user.id && plan.travels.where(status: "aceptado").exists? %>
+                        <%#= link_to "Iniciar Conversación", new_plan_message_path(plan), class: "btn btn-primary btn-reserve" %>
+                        <%= link_to new_plan_message_path(plan), class: "btn btn-primary btn-reserve me-2" do %>
+                          <i class="fa-regular fa-comment"></i>
+                        <% end %>
+                    <% end %>
                     <% end %>
                     <%= link_to edit_plan_path(plan), class: "btn btn-primary" do %>
                       <i class="fa-solid fa-pen-to-square"></i>
                     <% end %>
-                    <%= link_to plan_path(plan),data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" do %>
-                      <i class="fa-solid fa-trash-can"></i>
+                    <% unless plan.travels.where(status: "aceptado").exists? %>
+                      <%= link_to plan_path(plan),data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" do %>
+                        <i class="fa-solid fa-trash-can"></i>
+                      <% end %>
                     <% end %>
                   </div>
                     <%= link_to my_requests_path(query: { plan_id: plan }), class: "btn btn-primary" do %>
                       Ver solicitudes
                     <% end %>
 
-                    <% user_plan = plan.user_id %>
-                    <% if user_plan == current_user.id %>
-                        <%= link_to "Iniciar Conversación", new_plan_message_path(plan), class: "btn btn-primary btn-reserve" %>
-                    <% end %>
                 </div>
               </div>
             </div>
