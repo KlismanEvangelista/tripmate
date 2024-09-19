@@ -1,0 +1,5 @@
+ meta_product_name: "Trip Mate"
+ meta_title: "Trip Mate your travelers page"
+ meta_description: "It is a friendly page for people who do not want to travel alone"
+ meta_image: "cover.png" # should exist in `app/assets/images/`
+ twitter_account: "@product_twitter_account" # required for Twitter Cards
