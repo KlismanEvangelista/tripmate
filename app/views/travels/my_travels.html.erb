@@ -24,9 +24,16 @@
     </div>
   <% end %>
 
-  <div class="row">
+  <div class="row" data-controller="travels-filters">
+    <div id="filters d-inline justify-content-center w-100">
+      <a href="" class="btn btn-primary my-4" data-action="click->travels-filters#filter"
+      data-travels-filters-target="todos">Todos</a>
+      <a href="" class="btn btn-primary my-4" data-action="click->travels-filters#filter" data-travels-filters-target="aceptado">Aceptado</a>
+      <a href="" class="btn btn-primary" data-action="click->travels-filters#filter" data-travels-filters-target="solicitado">Solicitado</a>
+      <a href="" class="btn btn-primary" data-action="click->travels-filters#filter" data-travels-filters-target="rechazado">Rechazado</a>
+    </div>
     <% @my_travels.each do |travel| %>
-      <div class="col-12 col-md-6 d-flex align-items-stretch mb-4">
+      <div class="col-12 col-md-6 d-flex align-items-stretch mb-4 travel-container">
         <div class="card plan-card travel-card shadow h-100">
           <div class="col-6">
             <% if travel.plan.photos.attached? %>
@@ -39,19 +46,19 @@
             <div class="card-body">
               <h5 class="card-title"><%= travel.plan.name %></h5>
               <p class="description text-start"><%= travel.plan.description %></p>
-              <p class="card-text">
+              <p class="card-text departament">
                 <i class="fa-solid fa-location-dot me-2"></i>Departamento: <%= travel.plan.departament %>
               </p>
-              <p class="card-text">
+              <p class="card-text departure-date">
               <i class="fa-regular fa-calendar me-2"></i> Fecha de partida: <%= travel.plan.start_date.strftime('%d/%m/%Y') %>
               </p>
-              <p class="card-text">
+              <p class="card-text travelers">
                 <i class="fa-solid fa-user-group me-2"></i> <%= travel.plan.travelers_quantity %> viajeros
               </p>
-              <p class="card-text">
+              <p class="card-text state">
                 <i class="fa-solid fa-hourglass-half me-2"></i>
                 Estado:
-                <span class="badge ms-2 <%= travel.status == 'solicitado' ? 'text-bg-warning text-white' : travel.status == 'aceptado' ? 'text-bg-primary  text-white' : 'text-bg-danger  text-white' %>">
+                <span data-travels-filters-status-value=<%= travel.status %> class="badge ms-2 <%= travel.status == 'solicitado' ? 'text-bg-warning text-white' : travel.status == 'aceptado' ? 'text-bg-primary  text-white' : 'text-bg-danger  text-white' %>">
                   <%= travel.status.capitalize %>
                 </span>
               </p>
