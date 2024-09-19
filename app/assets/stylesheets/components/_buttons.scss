@@ -63,6 +63,11 @@
       border-color: $secondary-600;
       color: white;
     }
+    &.active {
+      color: $secondary-600;
+      background: rgba(42, 91, 143, 0.427);
+      border-color: $secondary-600;
+    }
   }
 
 }

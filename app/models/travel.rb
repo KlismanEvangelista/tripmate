@@ -10,7 +10,7 @@ class Travel < ApplicationRecord
 
   def broadcast_notifications_count
     owner = self.plan.user
-    new_requests_count = owner.plans.map(&:travels).flatten.select { |t| !t.viewed }.count
+    new_requests_count = owner.plans.map(&:travels).flatten.select { |t| !t.viewed && t.status == "solicitado" }.count
 
     broadcast_prepend_to "counter_for_user_#{owner.id}",
                         target: "counter",

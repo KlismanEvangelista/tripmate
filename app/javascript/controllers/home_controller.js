@@ -12,6 +12,20 @@ export default class extends Controller {
       pagination: false,
       arrows: true,
       gap: '1rem',
+      breakpoints: {
+        640: {
+            perPage: 1,
+            perMove: 1,
+          },
+        768: {
+            perPage: 2,
+            perMove: 1,
+          },
+        1024: {
+            perPage: 3,
+            perMove: 1,
+          }
+      }
     }).mount();
   }
 
