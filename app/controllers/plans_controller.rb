@@ -71,7 +71,7 @@ class PlansController < ApplicationController
   private
 
   def plan_params
-    params.require(:plan).permit(:name, :description, :travelers_quantity, :location, :start_date, :end_date, :departament, :start_point, photos: [])
+    params.require(:plan).permit(:name, :description, :travelers_quantity, :location, :start_date, :end_date, :departament, :start_point, :photo, photos: [] )
   end
 
   def set_plan
