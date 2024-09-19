@@ -8,10 +8,15 @@ export default class extends Controller {
 
   filter(event){
     event.preventDefault()
+    const allFilters = this.element.querySelectorAll('[data-travels-filters-target]');
+    allFilters.forEach(filter => filter.classList.remove('active'));
+
     const all = this.todosTarget.dataset["travelsFiltersTarget"];
     const travelCards = this.element.querySelectorAll('.travel-container');
 
     const activeFilter = event.currentTarget.dataset.travelsFiltersTarget;
+
+    event.currentTarget.classList.add('active');
 
     travelCards.forEach(card => {
       const data = card.querySelector('[data-travels-filters-status-value]');

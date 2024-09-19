@@ -17,7 +17,9 @@
     <% end %>
   <% end %>
   <% if requests.empty? %>
-    <i class="bi bi-x-circle"></i>
-    <a class="dropdown-item" href="#">No tienes nuevas solicitudes</a>
+    <div class="not-requests">
+      <i class="bi bi-x-circle"></i>
+      <p>No tienes nuevas solicitudes</p>
+    </div>
   <% end %>
 </div>
