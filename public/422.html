@@ -1,4 +1,234 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Page not found (404)</title>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,700&display=swap');
+
+    :root{
+      --body-color: black;
+      --primary:    #48C0BE;
+      --primary-600:    #399492;
+      --primary-200:    #51d5d2;
+      --secondary:    #04a9dd;
+      --grey: #343434;
+
+      --f: "Work Sans", "Helvetica", "sans-serif";
+      --p: 3em;
+
+      --easeOutExpo: cubic-bezier(0.190, 1.000, 0.220, 1.000);
+    }
+
+    *, *:before, *:after {
+      box-sizing: border-box;
+    }
+
+    * {
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      transform-style: preserve-3d;
+      text-decoration: none !important;
+    }
+
+    *:focus {
+        outline: none!important;
+    }
+
+    body, html {
+        height: 100%;
+        margin: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      align-content: center;
+      justify-content: center;
+      background: var(--white);
+      color: var(--grey);
+      font-family: var(--f);
+      font-size: var(--p);
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background: none;
+    }
+
+    img {
+      padding: 2em;
+      height: 50vh;
+    }
+
+    a {
+      margin-top: 0.5em;
+      display: block;
+      cursor: pointer;
+      animation: pulseColor 1000ms linear 3100ms forwards;
+      font-weight: 800;
+      background-color: var(--primary);
+      color: white;
+    }
+
+    a:hover, a:focus {
+      background-color: var(--primary-600);
+
+    }
+
+    a:active {
+      background-color: var(--primary-200);
+    }
+
+    svg {
+      width: auto;
+      height: 100%;
+    }
+
+    .crack {
+      position: relative;
+      z-index: 4;
+      margin-left: -50px;
+    }
+
+    .crack polyline {
+      fill: none;
+      stroke: var(--secondary);
+      stroke-width: 10px;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 1649.099;
+      stroke-dashoffset: 1649.099;
+      animation: drawStroke 1500ms ease-out 500ms forwards;
+    }
+
+    main {
+      display: flex;
+      align-items: center;
+      align-content: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    main > div {
+      display: flex;
+      align-items: center;
+      align-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    main > div svg {
+      position: relative;
+      z-index: 1;
+    }
+
+    main > div svg polygon {
+      fill: var(--secondary);
+      opacity: 1;
+      stroke: var(--secondary-600);
+      stroke-width: 2px;
+    }
+
+    main > div span {
+      display: block;
+      position: relative;
+      z-index: 0;
+      font-size: 0.8em;
+      padding: 0 var(--p);
+      line-height: 1.7;
+    }
+
+    main {
+      text-align: right;
+    }
+
+    main > div:first-child {
+      z-index: 1;
+    }
+
+    main > div:first-child span:first-child {
+      color: var(--secondary-600);
+      transform: translateX(-100%);
+      animation: moveRight 500ms ease-out 2250ms forwards;
+    }
+
+    main > div:first-child span:last-child {
+      transform: translateX(-100%);
+      animation: moveRight 500ms ease-out 2450ms forwards;
+    }
+
+    main > div:last-child {
+      z-index: 0;
+      margin-left: -50px;
+    }
+
+    main > div:last-child span:first-child {
+      color: var(--secondary);
+      font-size: 1em;
+      font-weight: 800;
+      transform: translateX(-100%);
+      animation: moveRight 500ms ease-out 2650ms forwards;
+    }
+
+    main > div:last-child span:last-child {
+      transform: translateX(-100%);
+      animation: moveRight 500ms ease-out 2850ms forwards;
+    }
+
+    @keyframes drawStroke {
+      0% {
+        stroke-dashoffset: 1649.099;
+      }
+      100% {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    @keyframes moveRight {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(20px);
+      }
+    }
+  </style>
+</head>
+<body>
+    <main>
+      <div>
+        <img src="./images/logo_tripmate.png" alt="logo_tripmate">
+      </div>
+      <div>
+        <div>
+          <svg viewBox="0 0 100 600" width="150px" height="500px">
+            <polygon points="50,0 70,100 30,200 70,300 30,400 70,500 50,600"/>
+          </svg>
+        </div>
+      </div>
+      <div>
+        <div>
+          <span>404 error</span>
+          <span>página no encontrada</span>
+          <span>lo sentimos</span>
+          <span>
+            <a href="/">&nbsp;<i class="fa-solid fa-shoe-prints fa-rotate-by" style="--fa-rotate-angle: -135deg;"></i> volver a inicio? &nbsp;</a>
+          </span>
+        </div>
+      </div>
+    </main>
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
 <html>
 <head>
   <title>The change you wanted was rejected (422)</title>
@@ -55,8 +285,8 @@
 </head>
 
 <body class="rails-default-error-page">
-  <!-- This file lives in public/422.html -->
-  <div class="dialog">
+  This file lives in public/422.html -->
+  <!-- <div class="dialog">
     <div>
       <h1>The change you wanted was rejected.</h1>
       <p>Maybe you tried to change something you didn't have access to.</p>
@@ -64,4 +294,4 @@
     <p>If you are the application owner check the logs for more information.</p>
   </div>
 </body>
-</html>
+</html> -->
