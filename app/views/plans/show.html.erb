@@ -66,6 +66,15 @@
                 <% end %>
               <% end %>
             </div>
+
+            <div>
+              <% if @plan.photos.attached? %>
+                <%= cl_image_tag @plan.photo.key %>
+              <% else %>
+                <%= image_tag "sinicono.jpg", height: 300, width: 450, crop: :fill, class: 'img-fluid' %>
+              <% end %>
+            </div>
+
           </div>
         <div class="d-flex gap-2">
           <%#= link_to 'Enviar solicitud', plan_travels_path, class: "btn btn-primary" %>

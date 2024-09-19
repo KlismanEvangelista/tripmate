@@ -25,13 +25,18 @@
   <% end %>
 
   <div class="row" data-controller="travels-filters">
-    <div id="filters d-inline justify-content-center w-100">
-      <a href="" class="btn btn-primary my-4" data-action="click->travels-filters#filter"
-      data-travels-filters-target="todos">Todos</a>
-      <a href="" class="btn btn-primary my-4" data-action="click->travels-filters#filter" data-travels-filters-target="aceptado">Aceptado</a>
-      <a href="" class="btn btn-primary" data-action="click->travels-filters#filter" data-travels-filters-target="solicitado">Solicitado</a>
-      <a href="" class="btn btn-primary" data-action="click->travels-filters#filter" data-travels-filters-target="rechazado">Rechazado</a>
+
+    <div id="filters" class="d-flex justify-content-center flex-wrap mb-3">
+      <a href="" class="btn btn-primary my-4 mx-2 w-100" style="max-width: 150px;" data-action="click->travels-filters#filter"
+        data-travels-filters-target="todos">Todos</a>
+      <a href="" class="btn btn-primary my-4 mx-2 w-100" style="max-width: 150px;" data-action="click->travels-filters#filter"
+        data-travels-filters-target="aceptado">Aceptado</a>
+      <a href="" class="btn btn-primary my-4 mx-2 w-100" style="max-width: 150px;" data-action="click->travels-filters#filter"
+        data-travels-filters-target="solicitado">Solicitado</a>
+      <a href="" class="btn btn-primary my-4 mx-2 w-100" style="max-width: 150px;" data-action="click->travels-filters#filter"
+        data-travels-filters-target="rechazado">Rechazado</a>
     </div>
+
     <% @my_travels.each do |travel| %>
       <div class="col-12 col-md-6 d-flex align-items-stretch mb-4 travel-container">
         <div class="card plan-card travel-card shadow h-100">
