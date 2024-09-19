@@ -11,6 +11,7 @@ import ProfileController from "./profile_controller"
 import AutocompleteAddressController from "./autocomplete_address_controller"
 import NewReviewController from "./new_review_controller"
 import EditReviewController from "./edit_review_controller"
+import TravelsFiltersController from "./travels_filters_controller";
 
 const application = Application.start()
 application.register('navbar', NavbarController)
@@ -25,6 +26,7 @@ application.register('profile', ProfileController)
 application.register('autocomplete-address', AutocompleteAddressController)
 application.register('new-review', NewReviewController)
 application.register('edit-review', EditReviewController)
+application.register('travels-filters', TravelsFiltersController)
 
 // Configure Stimulus development experience
 application.debug = false
