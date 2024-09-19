@@ -17,7 +17,9 @@ export default class extends Controller {
       this.navbarTarget.classList.remove("transparent")
     } else {
       this.navbarTarget.classList.remove("scrolled")
-      this.navbarTarget.classList.remove("transparent")
+      if(window.location.pathname == "/") {
+        this.navbarTarget.classList.add("transparent")
+      }
     }
   }
 

@@ -55,6 +55,13 @@
     border-radius: 16px;
     color: white;
     box-shadow: 0px 0px 6px 1px #1a1a1a;
+
+    .not-requests {
+      text-align: center;
+      i {
+        font-size: 36px;
+      }
+    }
     .dropdown-item {
       cursor: pointer;
       color: white;
