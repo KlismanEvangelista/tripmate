@@ -1,67 +1,228 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>The page you were looking for doesn't exist (404)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Page not found (404)</title>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css">
+
   <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
+    @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,700&display=swap');
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
+    :root{
+      --body-color: black;
+      --primary:    #48C0BE;
+      --primary-600:    #399492;
+      --primary-200:    #51d5d2;
+      --secondary:    #04a9dd;
+      --grey: #343434;
 
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+      --f: "Work Sans", "Helvetica", "sans-serif";
+      --p: 3em;
 
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
+      --easeOutExpo: cubic-bezier(0.190, 1.000, 0.220, 1.000);
+    }
 
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+    *, *:before, *:after {
+      box-sizing: border-box;
+    }
+
+    * {
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      transform-style: preserve-3d;
+      text-decoration: none !important;
+    }
+
+    *:focus {
+        outline: none!important;
+    }
+
+    body, html {
+        height: 100%;
+        margin: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      align-content: center;
+      justify-content: center;
+      background: var(--white);
+      color: var(--grey);
+      font-family: var(--f);
+      font-size: var(--p);
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background: none;
+    }
+
+    img {
+      padding: 2em;
+      height: 50vh;
+    }
+
+    a {
+      margin-top: 0.5em;
+      display: block;
+      cursor: pointer;
+      animation: pulseColor 1000ms linear 3100ms forwards;
+      font-weight: 800;
+      background-color: var(--primary);
+      color: white;
+    }
+
+    a:hover, a:focus {
+      background-color: var(--primary-600);
+
+    }
+
+    a:active {
+      background-color: var(--primary-200);
+    }
+
+    svg {
+      width: auto;
+      height: 100%;
+    }
+
+    .crack {
+      position: relative;
+      z-index: 4;
+      margin-left: -50px;
+    }
+
+    .crack polyline {
+      fill: none;
+      stroke: var(--secondary);
+      stroke-width: 10px;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 1649.099;
+      stroke-dashoffset: 1649.099;
+      animation: drawStroke 1500ms ease-out 500ms forwards;
+    }
+
+    main {
+      display: flex;
+      align-items: center;
+      align-content: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    main > div {
+      display: flex;
+      align-items: center;
+      align-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    main > div svg {
+      position: relative;
+      z-index: 1;
+    }
+
+    main > div svg polygon {
+      fill: var(--secondary);
+      opacity: 1;
+      stroke: var(--secondary-600);
+      stroke-width: 2px;
+    }
+
+    main > div span {
+      display: block;
+      position: relative;
+      z-index: 0;
+      font-size: 0.8em;
+      padding: 0 var(--p);
+      line-height: 1.7;
+    }
+
+    main {
+      text-align: right;
+    }
+
+    main > div:first-child {
+      z-index: 1;
+    }
+
+    main > div:first-child span:first-child {
+      color: var(--secondary-600);
+      transform: translateX(-100%);
+      animation: moveRight 500ms ease-out 2250ms forwards;
+    }
+
+    main > div:first-child span:last-child {
+      transform: translateX(-100%);
+      animation: moveRight 500ms ease-out 2450ms forwards;
+    }
+
+    main > div:last-child {
+      z-index: 0;
+      margin-left: -50px;
+    }
+
+    main > div:last-child span:first-child {
+      color: var(--secondary);
+      font-size: 1em;
+      font-weight: 800;
+      transform: translateX(-100%);
+      animation: moveRight 500ms ease-out 2650ms forwards;
+    }
+
+    main > div:last-child span:last-child {
+      transform: translateX(-100%);
+      animation: moveRight 500ms ease-out 2850ms forwards;
+    }
+
+    @keyframes drawStroke {
+      0% {
+        stroke-dashoffset: 1649.099;
+      }
+      100% {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    @keyframes moveRight {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(20px);
+      }
+    }
   </style>
 </head>
-
-<body class="rails-default-error-page">
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <div>
-      <h1>The page you were looking for doesn't exist.</h1>
-      <p>You may have mistyped the address or the page may have moved.</p>
-    </div>
-    <p>If you are the application owner check the logs for more information.</p>
-  </div>
+<body>
+    <main>
+      <div>
+        <img src="./images/logo_tripmate.png" alt="logo_tripmate">
+      </div>
+      <div>
+        <div>
+          <svg viewBox="0 0 100 600" width="150px" height="500px">
+            <polygon points="50,0 70,100 30,200 70,300 30,400 70,500 50,600"/>
+          </svg>
+        </div>
+      </div>
+      <div>
+        <div>
+          <span>404 error</span>
+          <span>página no encontrada</span>
+          <span>lo sentimos</span>
+          <span>
+            <a href="/">&nbsp;<i class="fa-solid fa-shoe-prints fa-rotate-by" style="--fa-rotate-angle: -135deg;"></i> volver a inicio? &nbsp;</a>
+          </span>
+        </div>
+      </div>
+    </main>
 </body>
 </html>
