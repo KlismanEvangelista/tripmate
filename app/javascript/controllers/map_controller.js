@@ -91,6 +91,7 @@ export default class extends Controller {
 
   delete() {
     const cards = document.querySelectorAll(".plan-card");
+    const container = document.querySelector(".container-cards");
 
     cards.forEach(card => {
       card.parentNode.style.setProperty('display', 'block', 'important');
@@ -99,6 +100,10 @@ export default class extends Controller {
 
     if (this.previousTarget) {
       this.previousTarget.style.fill = "";
+    }
+    const noPlansMessage = container.querySelector('.no-plans-message');
+    if (noPlansMessage) {
+      noPlansMessage.remove();
     }
   }
 }
